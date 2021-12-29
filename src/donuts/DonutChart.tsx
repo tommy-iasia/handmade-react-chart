@@ -1,6 +1,7 @@
 import { ReactNode, useMemo, useState } from "react";
 import Chart from "../utilities/Chart";
 import { DonutChartContext } from "./DonutChartContext";
+import { DonutItem } from "./DonutItem";
 
 export function DonutChart({
   width,
@@ -12,8 +13,6 @@ export function DonutChart({
   transitionDuration,
   children,
 }: Props) {
-  const [items, setItems] = useState<{ index: number; value: number }[]>([]);
-
   const centerX = inputCenterX ?? width / 2;
   const centerY = inputCenterY ?? height / 2;
 
@@ -23,12 +22,12 @@ export function DonutChart({
 
   const innerRadius = inputInnerRadius ?? outerRadius * 0.6;
 
+  const [items, setItems] = useState<DonutItem[]>([]);
+
   return (
     <DonutChartContext.Provider
       value={useMemo(
         () => ({
-          width,
-          height,
           centerX,
           centerY,
           innerRadius,
@@ -37,16 +36,7 @@ export function DonutChart({
           items,
           setItems,
         }),
-        [
-          width,
-          height,
-          centerX,
-          centerY,
-          innerRadius,
-          outerRadius,
-          transitionDuration,
-          items,
-        ]
+        [centerX, centerY, innerRadius, outerRadius, transitionDuration, items]
       )}
     >
       <Chart width={width} height={height}>
