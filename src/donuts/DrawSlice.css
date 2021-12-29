@@ -1,0 +1,11 @@
+.handmadeReactChart-donuts-DrawSlice:nth-child(3n + 1) {
+  fill: #f88;
+}
+
+.handmadeReactChart-donuts-DrawSlice:nth-child(3n + 2) {
+  fill: #8f8;
+}
+
+.handmadeReactChart-donuts-DrawSlice:nth-child(3n + 3) {
+  fill: #88f;
+}
