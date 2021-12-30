@@ -1,9 +1,10 @@
 import { ReactNode, useMemo, useRef } from "react";
-import { ChartContext } from "./ChartContext";
+import "./MouseZone.css";
+import { MouseZoneContext } from "./MouseZoneContext";
 import { useMouseEvent } from "./useMouseEvent";
 
-export default function Chart({ width, height, children }: Props) {
-  const ref = useRef<SVGSVGElement>(null);
+export function MouseZone({ children }: { children?: ReactNode }) {
+  const ref = useRef<HTMLSpanElement>(null);
 
   const {
     call: callMouseMove,
@@ -42,11 +43,9 @@ export default function Chart({ width, height, children }: Props) {
   } = useMouseEvent(ref);
 
   return (
-    <ChartContext.Provider
+    <MouseZoneContext.Provider
       value={useMemo(
         () => ({
-          width,
-          height,
           addMouseMove,
           removeMouseMove,
           addMouseEnter,
@@ -61,8 +60,6 @@ export default function Chart({ width, height, children }: Props) {
           removeMouseUp,
         }),
         [
-          width,
-          height,
           addMouseMove,
           removeMouseMove,
           addMouseEnter,
@@ -78,10 +75,8 @@ export default function Chart({ width, height, children }: Props) {
         ]
       )}
     >
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
+      <span
+        className="handmadeReactChart-utilities-MouseZone"
         ref={ref}
         onMouseMove={callMouseMove}
         onMouseEnter={callMouseEnter}
@@ -91,13 +86,7 @@ export default function Chart({ width, height, children }: Props) {
         onMouseUp={callMouseUp}
       >
         {children}
-      </svg>
-    </ChartContext.Provider>
+      </span>
+    </MouseZoneContext.Provider>
   );
-}
-
-interface Props {
-  width: number;
-  height: number;
-  children?: ReactNode;
 }

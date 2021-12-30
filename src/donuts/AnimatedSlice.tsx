@@ -1,4 +1,4 @@
-import { useTransition } from "../utilities/useTransition";
+import { useTransition } from "../charts/useTransition";
 import { DrawSlice } from "./DrawSlice";
 
 export function AnimatedSlice({

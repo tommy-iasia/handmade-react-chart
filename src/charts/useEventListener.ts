@@ -24,7 +24,11 @@ export function useEventListener<T>() {
   );
 
   const add = useMemo(
-    () => (listen: Listen<T>) => dispatch({ type: "add", listen }),
+    () => (listen: Listen<T>) => {
+      dispatch({ type: "add", listen });
+
+      return () => dispatch({ type: "remove", listen });
+    },
     []
   );
 
