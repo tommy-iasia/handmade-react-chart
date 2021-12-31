@@ -53,7 +53,7 @@ export function BasicDonutRow() {
           }
         />
       }
-      content="The most basic donut for you to expand it."
+      content="The most basic donut for you to expand it"
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     />

@@ -61,7 +61,7 @@ export function AdvancedDonutRow() {
           }
         />
       }
-      content="An advanced donut with animation and labels."
+      content="An advanced donut with animation and labels"
     />
   );
 }

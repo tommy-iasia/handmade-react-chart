@@ -43,7 +43,7 @@ export function SimpleDonutRow() {
           }
         />
       }
-      content="A simple donut for an array of numbers."
+      content="A simple donut for an array of numbers"
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     />

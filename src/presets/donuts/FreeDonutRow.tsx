@@ -78,7 +78,7 @@ export function FreeDonutRow() {
           />
         </Tag>
       }
-      content="Draw freely without boundary."
+      content="Draw freely without boundary"
     ></Row>
   );
 }
