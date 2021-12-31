@@ -1,10 +1,10 @@
 import { ReactNode, useMemo, useRef } from "react";
-import "./MouseZone.css";
-import { MouseZoneContext } from "./MouseZoneContext";
+import "./Area.css";
+import { AreaContext } from "./AreaContext";
 import { useMouseEvent } from "./useMouseEvent";
 
-export function MouseZone({ children }: { children?: ReactNode }) {
-  const ref = useRef<HTMLSpanElement>(null);
+export function Area({ className, children }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
 
   const {
     call: callMouseMove,
@@ -43,7 +43,7 @@ export function MouseZone({ children }: { children?: ReactNode }) {
   } = useMouseEvent(ref);
 
   return (
-    <MouseZoneContext.Provider
+    <AreaContext.Provider
       value={useMemo(
         () => ({
           addMouseMove,
@@ -75,8 +75,8 @@ export function MouseZone({ children }: { children?: ReactNode }) {
         ]
       )}
     >
-      <span
-        className="handmadeReactChart-utilities-MouseZone"
+      <div
+        className={`handmadeReactChart-charts-Area ${className ?? ""}`}
         ref={ref}
         onMouseMove={callMouseMove}
         onMouseEnter={callMouseEnter}
@@ -86,7 +86,12 @@ export function MouseZone({ children }: { children?: ReactNode }) {
         onMouseUp={callMouseUp}
       >
         {children}
-      </span>
-    </MouseZoneContext.Provider>
+      </div>
+    </AreaContext.Provider>
   );
+}
+
+interface Props {
+  className?: string;
+  children?: ReactNode;
 }

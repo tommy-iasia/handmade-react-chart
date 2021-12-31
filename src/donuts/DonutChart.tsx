@@ -1,9 +1,10 @@
-import { ReactNode, useMemo, useState } from "react";
+import React, { ReactNode, useMemo, useState } from "react";
 import Chart from "../charts/Chart";
 import { DonutChartContext } from "./DonutChartContext";
 import { DonutItem } from "./DonutItem";
 
 export function DonutChart({
+  className,
   width,
   height,
   centerX: inputCenterX,
@@ -39,7 +40,7 @@ export function DonutChart({
         [centerX, centerY, innerRadius, outerRadius, transitionDuration, items]
       )}
     >
-      <Chart width={width} height={height}>
+      <Chart className={className} width={width} height={height}>
         {children}
       </Chart>
     </DonutChartContext.Provider>
@@ -47,6 +48,7 @@ export function DonutChart({
 }
 
 interface Props {
+  className?: string;
   width: number;
   height: number;
   centerX?: number;

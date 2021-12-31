@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { Listen } from "../useEventListener";
+import { Listen } from "./useEventListener";
 import { Event } from "./useMouseEvent";
 
-export const MouseZoneContext = createContext<{
+export const AreaContext = createContext<{
   addMouseEnter: (listen: Listen<Event>) => () => void;
   removeMouseEnter: (listen: Listen<Event>) => void;
 

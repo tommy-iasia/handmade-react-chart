@@ -9,21 +9,33 @@ export function DrawSlice({
   fromAngle,
   toAngle,
 }: Props) {
-  const fromRadian = (fromAngle * Math.PI) / 180;
+  const { x: outerFromX, y: outerFromY } = getPoint(
+    centerX,
+    centerY,
+    outerRadius,
+    fromAngle
+  );
 
-  var outerFromX = centerX + outerRadius * Math.cos(fromRadian);
-  var outerFromY = centerY + outerRadius * Math.sin(fromRadian);
+  const { x: innerFromX, y: innerFromY } = getPoint(
+    centerX,
+    centerY,
+    innerRadius,
+    fromAngle
+  );
 
-  var innerFromX = centerX + innerRadius * Math.cos(fromRadian);
-  var innerFromY = centerY + innerRadius * Math.sin(fromRadian);
+  const { x: outerToX, y: outerToY } = getPoint(
+    centerX,
+    centerY,
+    outerRadius,
+    toAngle
+  );
 
-  const toRadian = (toAngle * Math.PI) / 180;
-
-  var outerToX = centerX + outerRadius * Math.cos(toRadian);
-  var outerToY = centerY + outerRadius * Math.sin(toRadian);
-
-  var innerToX = centerX + innerRadius * Math.cos(toRadian);
-  var innerToY = centerY + innerRadius * Math.sin(toRadian);
+  const { x: innerToX, y: innerToY } = getPoint(
+    centerX,
+    centerY,
+    innerRadius,
+    toAngle
+  );
 
   const largeArcFlag = toAngle - fromAngle >= 180 ? 1 : 0;
 
@@ -47,4 +59,18 @@ interface Props {
   outerRadius: number;
   fromAngle: number;
   toAngle: number;
+}
+
+export function getPoint(
+  centerX: number,
+  centerY: number,
+  radius: number,
+  angle: number
+) {
+  const radian = (angle * Math.PI) / 180;
+
+  var x = centerX + radius * Math.cos(radian);
+  var y = centerY + radius * Math.sin(radian);
+
+  return { x, y };
 }

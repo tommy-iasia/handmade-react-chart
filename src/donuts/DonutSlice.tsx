@@ -24,6 +24,12 @@ export function DonutSlice({
     setItems,
   } = useContext(DonutChartContext);
 
+  const centerX = inputCenterX ?? chartCenterX;
+  const centerY = inputCenterY ?? chartCenterY;
+
+  const innerRadius = inputInnerRadius ?? chartInnerRadius;
+  const outerRadius = inputOuterRadius ?? chartOuterRadius;
+
   const totalValue = items.map((t) => t.value).reduce((s, t) => s + t, 0);
 
   const fromAngle =
@@ -41,26 +47,45 @@ export function DonutSlice({
     inputToAngle ??
     (() => {
       const sliceAngle = totalValue > 0 ? (value / totalValue) * 360 : 0;
-      return fromAngle + sliceAngle;
+      return Math.min(fromAngle + sliceAngle, 360);
     })();
 
   useEffect(() => {
-    const item = { index, value, fromAngle, toAngle };
+    const item = {
+      index,
+      value,
+      centerX,
+      centerY,
+      innerRadius,
+      outerRadius,
+      fromAngle,
+      toAngle,
+    };
 
     setItems((items) => [...items, item]);
 
     return () => {
       setItems((items) => items.filter((t) => t !== item));
     };
-  }, [index, value, fromAngle, toAngle, setItems]);
+  }, [
+    index,
+    value,
+    fromAngle,
+    toAngle,
+    setItems,
+    centerX,
+    centerY,
+    innerRadius,
+    outerRadius,
+  ]);
 
   return (
     <AnimatedSlice
       className={className}
-      centerX={inputCenterX ?? chartCenterX}
-      centerY={inputCenterY ?? chartCenterY}
-      innerRadius={inputInnerRadius ?? chartInnerRadius}
-      outerRadius={inputOuterRadius ?? chartOuterRadius}
+      centerX={centerX}
+      centerY={centerY}
+      innerRadius={innerRadius}
+      outerRadius={outerRadius}
       fromAngle={fromAngle}
       toAngle={toAngle}
       transitionDuration={inputTransitionDuration ?? chartTransitionDuration}
