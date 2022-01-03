@@ -6,7 +6,7 @@ import { BasicDonut } from "./BasicDonut";
 
 const examples = [
   { innerRadius: 65, outerRadius: 100, values: [1, 2, 3] },
-  { innerRadius: 65, outerRadius: 100, values: [110, 130, 80] },
+  { innerRadius: 50, outerRadius: 100, values: [110, 130, 80] },
   { innerRadius: 0, outerRadius: 100, values: [110, 130, 80] },
 ];
 
