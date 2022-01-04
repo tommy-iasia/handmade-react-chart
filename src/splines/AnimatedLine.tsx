@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { Transition, useTransition } from "../charts/useTransition";
 import { getProgress } from "../charts/useTransitionValue";
-import { DrawSpline } from "./DrawSpline";
+import { DrawLine } from "./DrawLine";
 
-export function AnimatedSpline({
+export function AnimatedLine({
   className,
   width,
   height,
@@ -75,7 +75,7 @@ export function AnimatedSpline({
   );
 
   return (
-    <DrawSpline
+    <DrawLine
       className={className}
       width={width}
       height={height}

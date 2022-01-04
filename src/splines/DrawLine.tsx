@@ -1,6 +1,6 @@
-import "./DrawSpline.css";
+import "./DrawLine.css";
 
-export function DrawSpline({
+export function DrawLine({
   className,
   width,
   height,
@@ -24,7 +24,7 @@ export function DrawSpline({
 
   return (
     <svg
-      className={`handmadeReactChart-splines-DrawSpline ${className ?? ""}`}
+      className={`handmadeReactChart-splines-DrawLine ${className ?? ""}`}
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}

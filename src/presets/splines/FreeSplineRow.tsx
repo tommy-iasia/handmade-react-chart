@@ -1,7 +1,8 @@
 import { useMemo, useReducer } from "react";
-import { Chart } from "../../charts/Chart";
-import { AnimatedArea } from "../../splines/AnimatedArea";
-import { AnimatedSpline } from "../../splines/AnimatedSpline";
+import { SplineXAxis } from "../../splines/axes/SplineXAxis";
+import { SplineYAxis } from "../../splines/axes/SplineYAxis";
+import { SplineChart } from "../../splines/SplineChart";
+import { SplineLine } from "../../splines/SplineLine";
 import { Row } from "../Row";
 
 const points = [
@@ -34,25 +35,41 @@ export function FreeSplineRow() {
     [points1]
   );
 
+  const xLabels = useMemo(
+    () => [
+      { value: 50, text: "50" },
+      { value: 100, text: "100" },
+      { value: 150, text: "150" },
+    ],
+    []
+  );
+
+  const yLabels = useMemo(
+    () => [
+      { value: 50, text: "50" },
+      { value: 100, text: "100" },
+      { value: 150, text: "150" },
+    ],
+    []
+  );
+
   return (
     <Row
       chart={
-        <Chart width={200} height={200}>
-          <AnimatedSpline
-            width={200}
-            height={200}
-            points={points1}
-            smoothness={1}
-            transitionDuration={500}
-          />
-          <AnimatedArea
-            width={200}
-            height={200}
-            points={area1}
-            smoothness={1}
-            transitionDuration={500}
-          />
-        </Chart>
+        <SplineChart
+          chartWidth={300}
+          chartHeight={200}
+          contentLeft={50}
+          contentTop={5}
+          contentWidth={245}
+          contentHeight={165}
+          transitionDuration={200}
+        >
+          <SplineXAxis labels={xLabels} />
+          <SplineYAxis labels={yLabels} />
+
+          <SplineLine points={points1} />
+        </SplineChart>
       }
       code="ABC"
       content="ABC"

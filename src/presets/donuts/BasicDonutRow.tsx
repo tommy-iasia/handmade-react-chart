@@ -45,6 +45,7 @@ export function BasicDonutRow() {
         >
           {values.map((value, i) => (
             <Tag
+              key={i}
               name="DonutSlice"
               content={
                 <>
