@@ -1,10 +1,10 @@
-import "./DrawSplineArea.css";
+import "./DrawArea.css";
 
-export function DrawSplineArea({ points, smoothness }: Props) {
+export function DrawArea({ points, smoothness }: Props) {
   const firstPoint = points[0];
   const firstText = `M ${firstPoint.x} ${firstPoint.upperY}`;
 
-  const smoothnessFactor = 0.4 * (smoothness ?? 1);
+  const smoothnessFactor = 0.4 * smoothness;
 
   const upperFollowingTexts = points.slice(1).map((currentPoint, i) => {
     const lastPoint = points[i];
@@ -39,7 +39,7 @@ export function DrawSplineArea({ points, smoothness }: Props) {
 
   return (
     <path
-      className="handmadeReactChart-splines-DrawSplineArea"
+      className="handmadeReactChart-splines-DrawArea"
       d={`${upperText} ${lowerText} Z`}
     />
   );
@@ -47,5 +47,5 @@ export function DrawSplineArea({ points, smoothness }: Props) {
 
 interface Props {
   points: { x: number; upperY: number; lowerY: number }[];
-  smoothness?: number;
+  smoothness: number;
 }

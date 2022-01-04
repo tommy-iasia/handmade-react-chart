@@ -7,7 +7,6 @@
   --color4: #6b506b;
   --color5: #54504c;
   --color6: #474440;
-  transition: all 0.5s;
 }
 
 .handmadeReactChart-splines-DrawSpline:nth-child(6n + 1) {

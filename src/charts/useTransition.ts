@@ -1,72 +1,49 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAnimationFrame } from "./useAnimationFrame";
 
-export function useTransition(
-  value: number,
-  transitionDuration: number,
-  transitionTimingFunction?: (value: number) => number
+export function useTransition<T>(
+  value: T,
+  getOutput: (transition: Transition<T>, time: number) => T,
+  transitionDuration: number
 ) {
-  const [values, updateValues] = useReducer(
-    (values: Values, change: ChangeValue) => {
-      return {
-        fromValue: getOutputValue(values, change.time),
-        toValue: change.value,
-        fromTime: change.time,
-        transitionDuration: change.transitionDuration,
-      };
-    },
-    {
-      fromValue: value,
-      fromTime: Date.now(),
-      toValue: value,
-      transitionDuration,
-    }
-  );
+  const valuesRef = useRef<Transition<T>>({
+    fromValue: value,
+    toValue: value,
+    fromTime: Date.now(),
+    transitionDuration,
+  });
 
-  function getOutputValue(values: Values, time: number) {
-    const elapsed = time - values.fromTime;
-    const progress =
-      values.transitionDuration > 0
-        ? Math.min(Math.max(elapsed / values.transitionDuration, 0), 1)
-        : 1;
-
-    const ratio = transitionTimingFunction
-      ? transitionTimingFunction(progress)
-      : Math.pow(progress, 3);
-
-    return (values.toValue - values.fromValue) * ratio + values.fromValue;
-  }
-
-  useEffect(() => {
-    updateValues({
-      value,
-      time: Date.now(),
-      transitionDuration,
-    });
-  }, [value, transitionDuration]);
+  const getOutputRef = useRef(getOutput);
+  getOutputRef.current = getOutput;
 
   const [outputValue, setOutputValue] = useState(() =>
-    getOutputValue(values, Date.now())
+    getOutputRef.current(valuesRef.current, Date.now())
   );
 
   useAnimationFrame(() => {
-    const outputValue = getOutputValue(values, Date.now());
+    const outputValue = getOutputRef.current(valuesRef.current, Date.now());
     setOutputValue(outputValue);
   });
+
+  useEffect(() => {
+    const time = Date.now();
+    const fromValue = getOutputRef.current(valuesRef.current, time);
+
+    valuesRef.current = {
+      fromValue,
+      toValue: value,
+      fromTime: time,
+      transitionDuration: transitionDuration,
+    };
+  }, [value, transitionDuration]);
 
   return outputValue;
 }
 
-interface Values {
-  fromValue: number;
-  toValue: number;
+export interface Transition<T> {
+  fromValue: T;
+  toValue: T;
 
   fromTime: number;
-  transitionDuration: number;
-}
-
-interface ChangeValue {
-  value: number;
-  time: number;
   transitionDuration: number;
 }

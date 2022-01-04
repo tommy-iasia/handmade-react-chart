@@ -1,4 +1,4 @@
-import { useTransition } from "../charts/useTransition";
+import { useTransitionValue } from "../charts/useTransitionValue";
 import { DrawSlice } from "./DrawSlice";
 
 export function AnimatedSlice({
@@ -11,14 +11,20 @@ export function AnimatedSlice({
   toAngle,
   transitionDuration,
 }: Props) {
-  const animatedCenterX = useTransition(centerX, transitionDuration);
-  const animatedCenterY = useTransition(centerY, transitionDuration);
+  const animatedCenterX = useTransitionValue(centerX, transitionDuration);
+  const animatedCenterY = useTransitionValue(centerY, transitionDuration);
 
-  const animatedInnerRadius = useTransition(innerRadius, transitionDuration);
-  const animatedOuterRadius = useTransition(outerRadius, transitionDuration);
+  const animatedInnerRadius = useTransitionValue(
+    innerRadius,
+    transitionDuration
+  );
+  const animatedOuterRadius = useTransitionValue(
+    outerRadius,
+    transitionDuration
+  );
 
-  const animatedFromAngle = useTransition(fromAngle, transitionDuration);
-  const animatedToAngle = useTransition(toAngle, transitionDuration);
+  const animatedFromAngle = useTransitionValue(fromAngle, transitionDuration);
+  const animatedToAngle = useTransitionValue(toAngle, transitionDuration);
 
   return (
     <DrawSlice

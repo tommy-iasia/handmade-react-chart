@@ -4,7 +4,7 @@ export function DrawSpline({ points, smoothness }: Props) {
   const firstPoint = points[0];
   const firstText = `M ${firstPoint.x} ${firstPoint.y}`;
 
-  const smoothnessFactor = 0.4 * (smoothness ?? 1);
+  const smoothnessFactor = 0.4 * smoothness;
 
   const followingTexts = points.slice(1).map((currentPoint, i) => {
     const lastPoint = points[i];
@@ -26,5 +26,5 @@ export function DrawSpline({ points, smoothness }: Props) {
 
 interface Props {
   points: { x: number; y: number }[];
-  smoothness?: number;
+  smoothness: number;
 }
