@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Property } from "../codes/Property";
 import { Tag } from "../codes/Tag";
 import { Row } from "../Row";
@@ -11,22 +11,7 @@ const examples = [
 ];
 
 export function BasicDonutRow() {
-  const [active, setActive] = useState(false);
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (!active) {
-      return;
-    }
-
-    var timer = setInterval(
-      () => setIndex((index) => (index + 1) % examples.length),
-      3000
-    );
-
-    return () => clearInterval(timer);
-  }, [active]);
-
   const { innerRadius, outerRadius, values } = examples[index];
 
   return (
@@ -54,8 +39,7 @@ export function BasicDonutRow() {
         />
       }
       content="The most basic donut for you to expand it"
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
+      onMouseLeave={() => setIndex((index) => (index + 1) % examples.length)}
     />
   );
 }
