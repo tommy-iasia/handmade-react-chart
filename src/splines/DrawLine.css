@@ -13,26 +13,26 @@
   --color6: #474440;
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 1) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 1) {
   stroke: var(--color1);
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 2) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 2) {
   stroke: var(--color2);
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 3) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 3) {
   stroke: var(--color3);
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 4) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 4) {
   stroke: var(--color4);
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 5) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 5) {
   stroke: var(--color5);
 }
 
-.handmadeReactChart-splines-DrawLine:nth-child(6n + 6) {
+.handmadeReactChart-splines-DrawLine:nth-of-type(6n + 6) {
   stroke: var(--color6);
 }
