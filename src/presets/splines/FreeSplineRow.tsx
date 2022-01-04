@@ -1,6 +1,7 @@
 import { useMemo, useReducer } from "react";
 import { SplineXAxis } from "../../splines/axes/SplineXAxis";
 import { SplineYAxis } from "../../splines/axes/SplineYAxis";
+import { SplineArea } from "../../splines/SplineArea";
 import { SplineChart } from "../../splines/SplineChart";
 import { SplineLine } from "../../splines/SplineLine";
 import { Row } from "../Row";
@@ -30,7 +31,7 @@ export function FreeSplineRow() {
       points1.map((t) => ({
         x: t.x,
         upperY: t.y,
-        lowerY: 400,
+        lowerY: 0,
       })),
     [points1]
   );
@@ -68,6 +69,7 @@ export function FreeSplineRow() {
           <SplineXAxis labels={xLabels} />
           <SplineYAxis labels={yLabels} />
 
+          <SplineArea points={area1} />
           <SplineLine points={points1} />
         </SplineChart>
       }

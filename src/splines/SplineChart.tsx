@@ -1,5 +1,6 @@
 import { ReactNode, useMemo, useState } from "react";
 import { Chart } from "../charts/Chart";
+import { SplineAreaItem } from "./SplineAreaItem";
 import { SplineAxisItem } from "./SplineAxisItem";
 import { SplineChartContext } from "./SplineChartContext";
 import { SplineLineItem } from "./SplineLineItem";
@@ -27,6 +28,7 @@ export function SplineChart({
     inputContentHeight ?? chartHeight - (inputContentTop ?? 0);
 
   const [lineItems, setLineItems] = useState<SplineLineItem[]>([]);
+  const [areaItems, setAreaItems] = useState<SplineAreaItem[]>([]);
 
   const [xAxes, setXAxes] = useState<SplineAxisItem[]>([]);
   const [yAxes, setYAxes] = useState<SplineAxisItem[]>([]);
@@ -45,12 +47,15 @@ export function SplineChart({
           transitionDuration: transitionDuration ?? 0,
           lineItems,
           setLineItems,
+          areaItems,
+          setAreaItems,
           xAxes,
           setXAxes,
           yAxes,
           setYAxes,
         }),
         [
+          areaItems,
           chartHeight,
           chartWidth,
           contentHeight,

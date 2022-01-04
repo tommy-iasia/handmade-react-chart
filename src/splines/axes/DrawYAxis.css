@@ -2,6 +2,7 @@
   position: absolute;
   transform: translate(-100%, -53%);
   padding-right: 10px;
+  color: #888;
 }
 
 .handmadeReactChart-splines-axes-DrawYAxis .grid {
@@ -23,5 +24,5 @@
 .handmadeReactChart-splines-axes-DrawYAxis .axis {
   position: absolute;
   width: 1px;
-  background-color: #000;
+  background-color: #888;
 }

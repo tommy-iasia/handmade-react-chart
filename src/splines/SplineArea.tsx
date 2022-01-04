@@ -1,9 +1,9 @@
 import { useContext, useEffect, useMemo } from "react";
-import { AnimatedLine } from "./AnimatedLine";
+import { AnimatedArea } from "./AnimatedArea";
 import { SplineChartContext } from "./SplineChartContext";
 import { usePositioning } from "./usePositioning";
 
-export function SplineLine({
+export function SplineArea({
   className,
   points: inputPoints,
   smoothness: inputSmoothness,
@@ -14,7 +14,7 @@ export function SplineLine({
     chartHeight,
     smoothness: chartSmoothness,
     transitionDuration: chartTransitionDuration,
-    setLineItems,
+    setAreaItems,
   } = useContext(SplineChartContext);
 
   useEffect(() => {
@@ -22,22 +22,32 @@ export function SplineLine({
       points: [...inputPoints],
     };
 
-    setLineItems((items) => [...items, item]);
+    setAreaItems((items) => [...items, item]);
 
     return () => {
-      setLineItems((items) => items.filter((t) => t !== item));
+      setAreaItems((items) => items.filter((t) => t !== item));
     };
-  }, [inputPoints, setLineItems]);
+  }, [inputPoints, setAreaItems]);
 
   const positioning = usePositioning();
 
   const drawingPoints = useMemo(
-    () => inputPoints.map((point) => positioning(point.x, point.y)),
+    () =>
+      inputPoints.map((point) => {
+        const upperPoint = positioning(point.x, point.upperY);
+        const lowerPoint = positioning(point.x, point.lowerY);
+
+        return {
+          x: upperPoint.x,
+          upperY: upperPoint.y,
+          lowerY: lowerPoint.y,
+        };
+      }),
     [inputPoints, positioning]
   );
 
   return (
-    <AnimatedLine
+    <AnimatedArea
       className={className}
       width={chartWidth}
       height={chartHeight}
@@ -50,7 +60,7 @@ export function SplineLine({
 
 interface Props {
   className?: string;
-  points: { x: number; y: number }[];
+  points: { x: number; upperY: number; lowerY: number }[];
   smoothness?: number;
   transitionDuration?: number;
 }
