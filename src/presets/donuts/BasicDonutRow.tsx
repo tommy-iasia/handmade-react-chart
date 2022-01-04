@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { DonutChart } from "../../donuts/DonutChart";
+import { DonutSlice } from "../../donuts/DonutSlice";
 import { Property } from "../codes/Property";
 import { Tag } from "../codes/Tag";
 import { Row } from "../Row";
-import { BasicDonut } from "./BasicDonut";
 
 const examples = [
   { innerRadius: 65, outerRadius: 100, values: [1, 2, 3] },
@@ -17,26 +18,44 @@ export function BasicDonutRow() {
   return (
     <Row
       chart={
-        <BasicDonut
+        <DonutChart
+          width={outerRadius * 2}
+          height={outerRadius * 2}
           innerRadius={innerRadius}
           outerRadius={outerRadius}
-          values={values}
-        />
+        >
+          {values.map((value, i) => (
+            <DonutSlice key={i} index={i} value={value} />
+          ))}
+        </DonutChart>
       }
       code={
         <Tag
-          name="BasicDonut"
+          name="DonutChart"
           content={
             <>
               <br />
+              <Property name="width" value={outerRadius * 2} />
+              <Property name="height" value={outerRadius * 2} />
+              <br />
               <Property name="innerRadius" value={innerRadius} />
-              <br />
               <Property name="outerRadius" value={outerRadius} />
-              <br />
-              <Property name="values" value={JSON.stringify(values)} />
             </>
           }
-        />
+        >
+          {values.map((value, i) => (
+            <Tag
+              name="DonutSlice"
+              content={
+                <>
+                  <Property name="key" value={i} />
+                  <Property name="index" value={i} />
+                  <Property name="value" value={value} />
+                </>
+              }
+            />
+          ))}
+        </Tag>
       }
       content="The most basic donut for you to expand it"
       onMouseLeave={() => setIndex((index) => (index + 1) % examples.length)}
