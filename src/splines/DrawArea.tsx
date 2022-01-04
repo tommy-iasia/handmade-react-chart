@@ -1,6 +1,12 @@
 import "./DrawArea.css";
 
-export function DrawArea({ points, smoothness }: Props) {
+export function DrawArea({
+  className,
+  width,
+  height,
+  points,
+  smoothness,
+}: Props) {
   const firstPoint = points[0];
   const firstText = `M ${firstPoint.x} ${firstPoint.upperY}`;
 
@@ -38,14 +44,21 @@ export function DrawArea({ points, smoothness }: Props) {
   const lowerText = `${lastText} ${lowerFollowingTexts.join(" ")}`;
 
   return (
-    <path
-      className="handmadeReactChart-splines-DrawArea"
-      d={`${upperText} ${lowerText} Z`}
-    />
+    <svg
+      className={`handmadeReactChart-splines-DrawArea ${className ?? ""}`}
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+    >
+      <path d={`${upperText} ${lowerText} Z`} />
+    </svg>
   );
 }
 
 interface Props {
+  className?: string;
+  width: number;
+  height: number;
   points: { x: number; upperY: number; lowerY: number }[];
   smoothness: number;
 }

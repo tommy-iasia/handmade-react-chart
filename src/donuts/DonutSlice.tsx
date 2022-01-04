@@ -6,6 +6,8 @@ export function DonutSlice({
   className,
   index,
   value,
+  width: inputWidth,
+  height: inputHeight,
   centerX: inputCenterX,
   centerY: inputCenterY,
   innerRadius: inputInnerRadius,
@@ -15,6 +17,8 @@ export function DonutSlice({
   transitionDuration: inputTransitionDuration,
 }: Props) {
   const {
+    width: chartWidth,
+    height: chartHeight,
     centerX: chartCenterX,
     centerY: chartCenterY,
     innerRadius: chartInnerRadius,
@@ -23,6 +27,9 @@ export function DonutSlice({
     items,
     setItems,
   } = useContext(DonutChartContext);
+
+  const width = inputWidth ?? chartWidth;
+  const height = inputHeight ?? chartHeight;
 
   const centerX = inputCenterX ?? chartCenterX;
   const centerY = inputCenterY ?? chartCenterY;
@@ -54,6 +61,8 @@ export function DonutSlice({
     const item = {
       index,
       value,
+      width,
+      height,
       centerX,
       centerY,
       innerRadius,
@@ -77,11 +86,15 @@ export function DonutSlice({
     centerY,
     innerRadius,
     outerRadius,
+    width,
+    height,
   ]);
 
   return (
     <AnimatedSlice
       className={className}
+      width={width}
+      height={height}
       centerX={centerX}
       centerY={centerY}
       innerRadius={innerRadius}
@@ -97,6 +110,8 @@ interface Props {
   className?: string;
   index: number;
   value: number;
+  width?: number;
+  height?: number;
   centerX?: number;
   centerY?: number;
   innerRadius?: number;

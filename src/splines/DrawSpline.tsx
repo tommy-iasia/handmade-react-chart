@@ -1,6 +1,12 @@
 import "./DrawSpline.css";
 
-export function DrawSpline({ points, smoothness }: Props) {
+export function DrawSpline({
+  className,
+  width,
+  height,
+  points,
+  smoothness,
+}: Props) {
   const firstPoint = points[0];
   const firstText = `M ${firstPoint.x} ${firstPoint.y}`;
 
@@ -17,14 +23,21 @@ export function DrawSpline({ points, smoothness }: Props) {
   });
 
   return (
-    <path
-      className="handmadeReactChart-splines-DrawSpline"
-      d={`${firstText} ${followingTexts.join(" ")}`}
-    />
+    <svg
+      className={`handmadeReactChart-splines-DrawSpline ${className ?? ""}`}
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+    >
+      <path d={`${firstText} ${followingTexts.join(" ")}`} />
+    </svg>
   );
 }
 
 interface Props {
+  className?: string;
+  width: number;
+  height: number;
   points: { x: number; y: number }[];
   smoothness: number;
 }

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { AreaContext } from "../../charts/AreaContext";
+import { ChartContext } from "../../charts/ChartContext";
 import { Event } from "../../charts/useMouseEvent";
 import { DonutChartContext } from "../DonutChartContext";
 import { DonutItem } from "../DonutItem";
 
 export function MouseMoveSelector({ setSelectedItem }: Props) {
-  const { addMouseMove } = useContext(AreaContext);
+  const { addMouseMove } = useContext(ChartContext);
 
   const [mouseX, setMouseX] = useState<number>();
   const [mouseY, setMouseY] = useState<number>();

@@ -1,6 +1,10 @@
 .handmadeReactChart-splines-DrawSpline {
+  position: absolute;
+  top: 0;
+  left: 0;
   fill: none;
   stroke-width: 3px;
+
   --color1: #eb44e8;
   --color2: #de25da;
   --color3: #ab3da9;

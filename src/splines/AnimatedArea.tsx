@@ -4,6 +4,9 @@ import { getProgress } from "../charts/useTransitionValue";
 import { DrawArea } from "./DrawArea";
 
 export function AnimatedArea({
+  className,
+  width,
+  height,
   points,
   smoothness,
   transitionDuration,
@@ -75,11 +78,20 @@ export function AnimatedArea({
   );
 
   return (
-    <DrawArea points={outputValue.points} smoothness={outputValue.smoothness} />
+    <DrawArea
+      className={className}
+      width={width}
+      height={height}
+      points={outputValue.points}
+      smoothness={outputValue.smoothness}
+    />
   );
 }
 
 interface Props {
+  className?: string;
+  width: number;
+  height: number;
   points: { x: number; upperY: number; lowerY: number }[];
   smoothness?: number;
   transitionDuration: number;

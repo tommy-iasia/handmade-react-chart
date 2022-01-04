@@ -1,4 +1,4 @@
-import Chart from "../../charts/Chart";
+import { Chart } from "../../charts/Chart";
 import { DrawSlice } from "../../donuts/DrawSlice";
 import { Property } from "../codes/Property";
 import { Tag } from "../codes/Tag";
@@ -13,6 +13,8 @@ export function FreeDonutRow() {
         <Chart width={200} height={200}>
           <DrawSlice
             className="free"
+            width={200}
+            height={200}
             centerX={100}
             centerY={100}
             innerRadius={0}
@@ -22,6 +24,8 @@ export function FreeDonutRow() {
           />
 
           <DrawSlice
+            width={200}
+            height={200}
             centerX={100}
             centerY={100}
             innerRadius={60}
@@ -48,6 +52,9 @@ export function FreeDonutRow() {
                 <br />
                 <Property name="className" value='"free"' />
                 <br />
+                <Property name="width" value="200" />
+                <Property name="height" value="200" />
+                <br />
                 <Property name="centerX" value="100" />
                 <Property name="centerY" value="100" />
                 <br />
@@ -64,6 +71,9 @@ export function FreeDonutRow() {
             name="DrawSlice"
             content={
               <>
+                <br />
+                <Property name="width" value="200" />
+                <Property name="height" value="200" />
                 <br />
                 <Property name="centerX" value="100" />
                 <Property name="centerY" value="100" />

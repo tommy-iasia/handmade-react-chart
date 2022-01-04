@@ -1,5 +1,5 @@
-import React, { ReactNode, useMemo, useState } from "react";
-import Chart from "../charts/Chart";
+import { ReactNode, useMemo, useState } from "react";
+import { Chart } from "../charts/Chart";
 import { DonutChartContext } from "./DonutChartContext";
 import { DonutItem } from "./DonutItem";
 
@@ -29,6 +29,8 @@ export function DonutChart({
     <DonutChartContext.Provider
       value={useMemo(
         () => ({
+          width,
+          height,
           centerX,
           centerY,
           innerRadius,
@@ -37,7 +39,16 @@ export function DonutChart({
           items,
           setItems,
         }),
-        [centerX, centerY, innerRadius, outerRadius, transitionDuration, items]
+        [
+          width,
+          height,
+          centerX,
+          centerY,
+          innerRadius,
+          outerRadius,
+          transitionDuration,
+          items,
+        ]
       )}
     >
       <Chart className={className} width={width} height={height}>

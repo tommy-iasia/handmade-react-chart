@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from "react";
-import Chart from "../../charts/Chart";
+import { Chart } from "../../charts/Chart";
 import { AnimatedArea } from "../../splines/AnimatedArea";
 import { AnimatedSpline } from "../../splines/AnimatedSpline";
 import { Row } from "../Row";
@@ -39,11 +39,15 @@ export function FreeSplineRow() {
       chart={
         <Chart width={200} height={200}>
           <AnimatedSpline
+            width={200}
+            height={200}
             points={points1}
             smoothness={1}
             transitionDuration={500}
           />
           <AnimatedArea
+            width={200}
+            height={200}
             points={area1}
             smoothness={1}
             transitionDuration={500}

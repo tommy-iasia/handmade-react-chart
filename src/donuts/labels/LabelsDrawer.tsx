@@ -1,20 +1,22 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { DonutChartContext } from "../DonutChartContext";
 import { DonutItem } from "../DonutItem";
 import { DrawLabel } from "./DrawLabel";
-import { LabelPosition } from "./LabelPosition";
 
-export function LabelsDrawer({ radius, positions, getContent }: Props) {
+export function LabelsDrawer({ radius, getContent }: Props) {
+  const { items } = useContext(DonutChartContext);
+
   return (
     <>
-      {positions.map((position, i) => (
+      {items.map((item, i) => (
         <DrawLabel
           key={i}
-          centerX={position.centerX}
-          centerY={position.centerY}
+          centerX={item.centerX}
+          centerY={item.centerY}
           radius={radius}
-          angle={position.angle}
+          angle={(item.fromAngle + item.toAngle) / 2}
         >
-          {getContent(position.donutItem)}
+          {getContent(item)}
         </DrawLabel>
       ))}
     </>
@@ -23,6 +25,5 @@ export function LabelsDrawer({ radius, positions, getContent }: Props) {
 
 interface Props {
   radius: number;
-  positions: LabelPosition[];
   getContent(donutItem: DonutItem): ReactNode;
 }

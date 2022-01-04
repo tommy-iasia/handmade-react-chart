@@ -4,6 +4,9 @@ import { getProgress } from "../charts/useTransitionValue";
 import { DrawSpline } from "./DrawSpline";
 
 export function AnimatedSpline({
+  className,
+  width,
+  height,
   points,
   smoothness,
   transitionDuration,
@@ -73,6 +76,9 @@ export function AnimatedSpline({
 
   return (
     <DrawSpline
+      className={className}
+      width={width}
+      height={height}
       points={outputValue.points}
       smoothness={outputValue.smoothness}
     />
@@ -80,6 +86,9 @@ export function AnimatedSpline({
 }
 
 interface Props {
+  className?: string;
+  width: number;
+  height: number;
   points: { x: number; y: number }[];
   smoothness?: number;
   transitionDuration: number;

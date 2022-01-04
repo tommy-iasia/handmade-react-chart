@@ -2,6 +2,8 @@ import "./DrawSlice.css";
 
 export function DrawSlice({
   className,
+  width,
+  height,
   centerX,
   centerY,
   innerRadius,
@@ -40,19 +42,27 @@ export function DrawSlice({
   const largeArcFlag = toAngle - fromAngle >= 180 ? 1 : 0;
 
   return (
-    <path
+    <svg
       className={`handmadeReactChart-donuts-DrawSlice ${className ?? ""}`}
-      d={`M ${outerFromX} ${outerFromY}
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+    >
+      <path
+        d={`M ${outerFromX} ${outerFromY}
             A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerToX} ${outerToY}
             L ${innerToX} ${innerToY}
             A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerFromX} ${innerFromY}
             Z`}
-    />
+      />
+    </svg>
   );
 }
 
 interface Props {
   className?: string;
+  width: number;
+  height: number;
   centerX: number;
   centerY: number;
   innerRadius: number;

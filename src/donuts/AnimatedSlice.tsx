@@ -3,6 +3,8 @@ import { DrawSlice } from "./DrawSlice";
 
 export function AnimatedSlice({
   className,
+  width,
+  height,
   centerX,
   centerY,
   innerRadius,
@@ -11,6 +13,9 @@ export function AnimatedSlice({
   toAngle,
   transitionDuration,
 }: Props) {
+  const animatedWidth = useTransitionValue(width, transitionDuration);
+  const animatedHeight = useTransitionValue(height, transitionDuration);
+
   const animatedCenterX = useTransitionValue(centerX, transitionDuration);
   const animatedCenterY = useTransitionValue(centerY, transitionDuration);
 
@@ -29,6 +34,8 @@ export function AnimatedSlice({
   return (
     <DrawSlice
       className={className}
+      width={animatedWidth}
+      height={animatedHeight}
       centerX={animatedCenterX}
       centerY={animatedCenterY}
       innerRadius={animatedInnerRadius}
@@ -41,6 +48,8 @@ export function AnimatedSlice({
 
 interface Props {
   className?: string;
+  width: number;
+  height: number;
   centerX: number;
   centerY: number;
   innerRadius: number;

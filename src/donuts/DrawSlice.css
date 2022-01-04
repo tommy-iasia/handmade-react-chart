@@ -1,4 +1,8 @@
 .handmadeReactChart-donuts-DrawSlice {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   --color1: #eb44e8;
   --color2: #de25da;
   --color3: #ab3da9;

@@ -2,6 +2,8 @@ import { createContext, Dispatch, SetStateAction } from "react";
 import { DonutItem } from "./DonutItem";
 
 export const DonutChartContext = createContext<{
+  width: number;
+  height: number;
   centerX: number;
   centerY: number;
   innerRadius: number;
@@ -10,6 +12,8 @@ export const DonutChartContext = createContext<{
   items: DonutItem[];
   setItems: Dispatch<SetStateAction<DonutItem[]>>;
 }>({
+  width: 0,
+  height: 0,
   centerX: 0,
   centerY: 0,
   innerRadius: 0,

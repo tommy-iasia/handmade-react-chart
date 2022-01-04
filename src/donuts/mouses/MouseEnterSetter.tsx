@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-import { AreaContext } from "../../charts/AreaContext";
+import { ChartContext } from "../../charts/ChartContext";
 
 export function MouseEnterSetter({ setEntered }: Props) {
-  const { addMouseEnter, addMouseLeave } = useContext(AreaContext);
+  const { addMouseEnter, addMouseLeave } = useContext(ChartContext);
 
   useEffect(
     () => addMouseEnter(() => setEntered(true)),
