@@ -1,9 +1,9 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { SplineAxisItem } from "../SplineAxisItem";
 import { SplineChartContext } from "../SplineChartContext";
-import { usePositioning } from "../usePositioning";
 import { DrawXAxis } from "./DrawXAxis";
-import { getOutputAxis, Label } from "./SplineYAxis";
+import { Label } from "./SplineYAxis";
+import { usePositioning } from "./usePositioning";
 
 export function SplineXAxis({
   labels: inputLabels,
@@ -16,6 +16,7 @@ export function SplineXAxis({
     contentWidth,
     contentHeight,
     lineItems,
+    areaItems,
     setXAxes,
   } = useContext(SplineChartContext);
 
@@ -27,16 +28,33 @@ export function SplineXAxis({
       return;
     }
 
-    const axis = getOutputAxis(
-      lineItems,
-      (item) => item.x,
-      inputLabels,
-      inputMaximum,
-      inputMinimum
-    );
+    const lineValues = lineItems
+      .flatMap((item) => item.points)
+      .map((point) => point.x);
 
-    setAxis(axis);
-  }, [inputLabels, inputMaximum, inputMinimum, lineItems]);
+    const areaValues = areaItems
+      .flatMap((item) => item.points)
+      .map((point) => point.x);
+
+    const labelValues = inputLabels.map((label) => label.value);
+
+    const allValues = [...lineValues, ...areaValues, ...labelValues];
+
+    const maximum =
+      inputMaximum ?? allValues.length > 0
+        ? allValues.reduce((s, t) => Math.max(s, t))
+        : undefined;
+
+    const minimum =
+      inputMinimum ?? allValues.length > 0
+        ? allValues.reduce((s, t) => Math.min(s, t))
+        : undefined;
+
+    setAxis({
+      from: minimum ?? 0,
+      range: (maximum ?? 0) - (minimum ?? 0),
+    });
+  }, [areaItems, inputLabels, inputMaximum, inputMinimum, lineItems]);
 
   useEffect(() => {
     if (!axis) {

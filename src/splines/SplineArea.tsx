@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo } from "react";
 import { AnimatedArea } from "./AnimatedArea";
+import { usePositioning } from "./axes/usePositioning";
 import { SplineChartContext } from "./SplineChartContext";
-import { usePositioning } from "./usePositioning";
 
 export function SplineArea({
   className,
@@ -18,9 +18,7 @@ export function SplineArea({
   } = useContext(SplineChartContext);
 
   useEffect(() => {
-    const item = {
-      points: [...inputPoints],
-    };
+    const item = { points: inputPoints };
 
     setAreaItems((items) => [...items, item]);
 

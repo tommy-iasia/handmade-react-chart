@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo } from "react";
 import { AnimatedLine } from "./AnimatedLine";
+import { usePositioning } from "./axes/usePositioning";
 import { SplineChartContext } from "./SplineChartContext";
-import { usePositioning } from "./usePositioning";
 
 export function SplineLine({
   className,
@@ -18,9 +18,7 @@ export function SplineLine({
   } = useContext(SplineChartContext);
 
   useEffect(() => {
-    const item = {
-      points: [...inputPoints],
-    };
+    const item = { points: inputPoints };
 
     setLineItems((items) => [...items, item]);
 

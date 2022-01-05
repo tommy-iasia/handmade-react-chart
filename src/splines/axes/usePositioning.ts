@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from "react";
-import { SplineChartContext } from "./SplineChartContext";
+import { SplineChartContext } from "../SplineChartContext";
 
 export function usePositioning() {
   const {

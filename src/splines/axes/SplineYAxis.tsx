@@ -1,9 +1,8 @@
 import { ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { SplineAxisItem } from "../SplineAxisItem";
 import { SplineChartContext } from "../SplineChartContext";
-import { SplineLineItem } from "../SplineLineItem";
-import { usePositioning } from "../usePositioning";
 import { DrawYAxis } from "./DrawYAxis";
+import { usePositioning } from "./usePositioning";
 
 export function SplineYAxis({
   labels: inputLabels,
@@ -16,6 +15,7 @@ export function SplineYAxis({
     contentWidth,
     contentHeight,
     lineItems,
+    areaItems,
     setYAxes,
   } = useContext(SplineChartContext);
 
@@ -27,16 +27,33 @@ export function SplineYAxis({
       return;
     }
 
-    const axis = getOutputAxis(
-      lineItems,
-      (item) => item.y,
-      inputLabels,
-      inputMaximum,
-      inputMinimum
-    );
+    const lineValues = lineItems
+      .flatMap((item) => item.points)
+      .map((point) => point.y);
 
-    setAxis(axis);
-  }, [inputLabels, inputMaximum, inputMinimum, lineItems]);
+    const areaValues = areaItems
+      .flatMap((item) => item.points)
+      .flatMap((point) => [point.upperY, point.lowerY]);
+
+    const labelValues = inputLabels.map((label) => label.value);
+
+    const allValues = [...lineValues, ...areaValues, ...labelValues];
+
+    const maximum =
+      inputMaximum ?? allValues.length > 0
+        ? allValues.reduce((s, t) => Math.max(s, t))
+        : undefined;
+
+    const minimum =
+      inputMinimum ?? allValues.length > 0
+        ? allValues.reduce((s, t) => Math.min(s, t))
+        : undefined;
+
+    setAxis({
+      from: minimum ?? 0,
+      range: (maximum ?? 0) - (minimum ?? 0),
+    });
+  }, [areaItems, inputLabels, inputMaximum, inputMinimum, lineItems]);
 
   useEffect(() => {
     if (!axis) {
@@ -82,68 +99,4 @@ interface Props {
 export interface Label {
   value: number;
   text?: ReactNode;
-}
-
-export function getOutputAxis(
-  items: SplineLineItem[],
-  getItemValue: (point: { x: number; y: number }) => number,
-  labels: Label[],
-  maximum: number | undefined,
-  minimum: number | undefined
-) {
-  const outputMaximum = (() => {
-    if (maximum !== undefined) {
-      return maximum;
-    } else {
-      const { maximum: lineMaximum } = getLinesRange(items, getItemValue);
-
-      if (labels.length > 0) {
-        const { maximum: labelMaximum } = getLabelsRange(labels);
-        return Math.max(lineMaximum, labelMaximum);
-      } else {
-        return lineMaximum;
-      }
-    }
-  })();
-
-  const outputMinimum = (() => {
-    if (minimum !== undefined) {
-      return minimum;
-    } else {
-      const { minimum: lineMinimum } = getLinesRange(items, getItemValue);
-
-      if (labels.length > 0) {
-        const { minimum: labelMinimum } = getLabelsRange(labels);
-        return Math.min(lineMinimum, labelMinimum);
-      } else {
-        return lineMinimum;
-      }
-    }
-  })();
-
-  return {
-    from: outputMinimum,
-    range: outputMaximum - outputMinimum,
-  };
-}
-
-function getLinesRange(
-  lineItems: SplineLineItem[],
-  getValue: (point: { x: number; y: number }) => number
-) {
-  const xs = lineItems.flatMap((lineItem) => lineItem.points).map(getValue);
-
-  return {
-    maximum: xs.reduce((s, t) => Math.max(s, t), 0),
-    minimum: xs.reduce((s, t) => Math.min(s, t), 0),
-  };
-}
-
-function getLabelsRange(lables: { value: number }[]) {
-  const values = lables.map((label) => label.value);
-
-  return {
-    maximum: values.reduce((s, t) => Math.max(s, t), 0),
-    minimum: values.reduce((s, t) => Math.min(s, t), 0),
-  };
 }

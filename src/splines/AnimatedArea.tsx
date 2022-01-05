@@ -20,10 +20,7 @@ export function AnimatedArea({
       );
 
       if (progress >= 1) {
-        return {
-          points: transition.toValue.points,
-          smoothness: transition.toValue.smoothness,
-        };
+        return transition.toValue;
       }
 
       const lastFromPoint =
