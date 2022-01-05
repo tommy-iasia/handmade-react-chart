@@ -115,7 +115,7 @@ export function BasicSplineRow() {
           />
         </Tag>
       }
-      content="ABC"
+      content="Having full control on everything"
       onMouseLeave={() => setIndex((index) => (index + 1) % examples.length)}
     />
   );

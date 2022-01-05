@@ -4,11 +4,7 @@ import { SplineChartContext } from "../SplineChartContext";
 import { DrawYAxis } from "./DrawYAxis";
 import { usePositioning } from "./usePositioning";
 
-export function SplineYAxis({
-  labels: inputLabels,
-  maximum: inputMaximum,
-  minimum: inputMinimum,
-}: Props) {
+export function SplineYAxis({ labels: inputLabels, axisX }: Props) {
   const {
     contentLeft,
     contentTop,
@@ -22,11 +18,6 @@ export function SplineYAxis({
   const [axis, setAxis] = useState<SplineAxisItem>();
 
   useEffect(() => {
-    if (lineItems.length <= 0) {
-      setAxis(undefined);
-      return;
-    }
-
     const lineValues = lineItems
       .flatMap((item) => item.points)
       .map((point) => point.y);
@@ -39,21 +30,19 @@ export function SplineYAxis({
 
     const allValues = [...lineValues, ...areaValues, ...labelValues];
 
-    const maximum =
-      inputMaximum ?? allValues.length > 0
-        ? allValues.reduce((s, t) => Math.max(s, t))
-        : undefined;
+    if (allValues.length <= 0) {
+      setAxis(undefined);
+      return;
+    }
 
-    const minimum =
-      inputMinimum ?? allValues.length > 0
-        ? allValues.reduce((s, t) => Math.min(s, t))
-        : undefined;
+    const maximum = Math.max(...allValues);
+    const minimum = Math.min(...allValues);
 
     setAxis({
-      from: minimum ?? 0,
-      range: (maximum ?? 0) - (minimum ?? 0),
+      from: minimum,
+      range: maximum - minimum,
     });
-  }, [areaItems, inputLabels, inputMaximum, inputMinimum, lineItems]);
+  }, [areaItems, inputLabels, lineItems]);
 
   useEffect(() => {
     if (!axis) {
@@ -86,14 +75,14 @@ export function SplineYAxis({
       contentTop={contentTop}
       contentWidth={contentWidth}
       contentHeight={contentHeight}
+      axisX={axisX}
     />
   );
 }
 
 interface Props {
   labels: Label[];
-  maximum?: number;
-  minimum?: number;
+  axisX?: number;
 }
 
 export interface Label {

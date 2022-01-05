@@ -1,0 +1,11 @@
+.handmadeReactChart-presets-splines-AdvancedSpline
+  .handmadeReactChart-presets-splines-AdvancedCursor
+  > .content {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #444444cc;
+  color: #fff;
+  white-space: nowrap;
+  padding: 5px 10px;
+  text-align: center;
+}

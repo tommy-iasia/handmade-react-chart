@@ -74,6 +74,8 @@ export function AnimatedArea({
     transitionDuration
   );
 
+  console.log("AnimatedArea", outputValue.points);
+
   return (
     <DrawArea
       className={className}

@@ -6,7 +6,12 @@ import { DonutSlice } from "../../donuts/DonutSlice";
 import { MouseMoveSelector } from "../../donuts/mouses/MouseMoveSelector";
 import "./SimpleDonut.css";
 
-export function SimpleDonut({ radius, values, children }: Props) {
+export function SimpleDonut({
+  radius,
+  values,
+  transitionDuration,
+  children,
+}: Props) {
   const [selectedItem, setSelectedItem] = useState<DonutItem>();
 
   return (
@@ -16,7 +21,7 @@ export function SimpleDonut({ radius, values, children }: Props) {
       height={radius * 2}
       innerRadius={radius * 0.6}
       outerRadius={radius * 0.95}
-      transitionDuration={200}
+      transitionDuration={transitionDuration ?? 200}
     >
       {values.map((value, i) => (
         <DonutSlice
@@ -40,5 +45,6 @@ export function SimpleDonut({ radius, values, children }: Props) {
 interface Props {
   radius: number;
   values: number[];
+  transitionDuration?: number;
   children?: ReactNode;
 }

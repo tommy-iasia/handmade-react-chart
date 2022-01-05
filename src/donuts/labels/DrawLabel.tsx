@@ -13,7 +13,7 @@ export function DrawLabel({
 
   return (
     <div
-      className={`handmadeReactChart-labels-DrawLabel ${
+      className={`handmadeReactChart-donuts-labels-DrawLabel ${
         angle <= 90 || angle >= 270 ? "right" : "left"
       }`}
       style={{ left: `${point.x}px`, top: `${point.y}px` }}

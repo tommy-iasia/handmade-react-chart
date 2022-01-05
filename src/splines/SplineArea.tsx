@@ -44,6 +44,8 @@ export function SplineArea({
     [inputPoints, positioning]
   );
 
+  console.log("SplineArea", inputPoints, drawingPoints);
+
   return (
     <AnimatedArea
       className={className}

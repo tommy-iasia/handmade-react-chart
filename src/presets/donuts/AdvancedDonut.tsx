@@ -18,6 +18,7 @@ export function AdvancedDonut<T>({
   getValue,
   getLabel,
   getCenter,
+  transitionDuration,
   children,
 }: Props<T>) {
   const [entered, setEntered] = useState(true);
@@ -34,7 +35,7 @@ export function AdvancedDonut<T>({
       centerY={height / 2}
       innerRadius={innerRadius}
       outerRadius={outerRadius}
-      transitionDuration={200}
+      transitionDuration={transitionDuration ?? 200}
     >
       {items.map((item, i) => (
         <DonutSlice
@@ -96,5 +97,6 @@ interface Props<T> {
   getValue(item: T): number;
   getLabel(item: T): ReactNode;
   getCenter(item: T): ReactNode;
+  transitionDuration?: number;
   children?: ReactNode;
 }

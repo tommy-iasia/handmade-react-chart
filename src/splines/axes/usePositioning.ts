@@ -8,6 +8,7 @@ export function usePositioning() {
     contentWidth,
     contentHeight,
     lineItems,
+    areaItems,
     xAxes,
     yAxes,
   } = useContext(SplineChartContext);
@@ -16,42 +17,70 @@ export function usePositioning() {
     if (xAxes.length > 0) {
       return xAxes[0];
     } else {
-      const xs = lineItems
-        .flatMap((lineItem) => lineItem.points)
+      const lineXs = lineItems
+        .flatMap((item) => item.points)
         .map((point) => point.x);
 
-      const maximum = xs.reduce((s, t) => Math.max(s, t), 0);
-      const minimum = xs.reduce((s, t) => Math.min(s, t), 0);
+      const areaXs = areaItems
+        .flatMap((item) => item.points)
+        .map((point) => point.x);
+
+      const allXs = [...lineXs, ...areaXs];
+
+      if (allXs.length <= 0) {
+        return {
+          from: 0,
+          range: 0,
+        };
+      }
+
+      const maximum = Math.max(...allXs);
+      const minimum = Math.min(...allXs);
 
       return {
         from: minimum,
         range: maximum - minimum,
       };
     }
-  }, [lineItems, xAxes]);
+  }, [areaItems, lineItems, xAxes]);
 
   const yAxis = useMemo(() => {
     if (yAxes.length > 0) {
       return yAxes[0];
     } else {
-      const ys = lineItems
-        .flatMap((lineItem) => lineItem.points)
+      const lineYs = lineItems
+        .flatMap((item) => item.points)
         .map((point) => point.y);
 
-      const maximum = ys.reduce((s, t) => Math.max(s, t), 0);
-      const minimum = ys.reduce((s, t) => Math.min(s, t), 0);
+      const areaYs = areaItems
+        .flatMap((item) => item.points)
+        .flatMap((point) => [point.upperY, point.lowerY]);
+
+      const allYs = [...lineYs, ...areaYs];
+
+      if (allYs.length <= 0) {
+        return {
+          from: 0,
+          range: 0,
+        };
+      }
+
+      const maximum = Math.max(...allYs);
+      const minimum = Math.min(...allYs);
 
       return {
         from: minimum,
         range: maximum - minimum,
       };
     }
-  }, [lineItems, yAxes]);
+  }, [areaItems, lineItems, yAxes]);
+
+  console.log("usePositiong", xAxis, yAxis);
 
   return useCallback(
     (x: number, y: number) => {
-      const xRatio = (x - xAxis.from) / (xAxis.range || 1);
-      const yRatio = (y - yAxis.from) / (yAxis.range || 1);
+      const xRatio = xAxis.range > 0 ? (x - xAxis.from) / xAxis.range : 0;
+      const yRatio = yAxis.range > 0 ? (y - yAxis.from) / yAxis.range : 0;
 
       return {
         x: contentLeft + xRatio * contentWidth,

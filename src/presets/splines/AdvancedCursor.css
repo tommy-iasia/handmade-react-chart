@@ -1,0 +1,40 @@
+.handmadeReactChart-presets-splines-AdvancedCursor {
+  position: absolute;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content {
+  position: absolute;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.left {
+  left: 0;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.right {
+  right: 0;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor
+  > .content.horizontal-center {
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.top {
+  top: 0;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.bottom {
+  bottom: 0;
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.vertical-center {
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.handmadeReactChart-presets-splines-AdvancedCursor > .content.both-center {
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+}

@@ -1,16 +1,16 @@
-.handmadeReactChart-labels-DrawLabel {
+.handmadeReactChart-donuts-labels-DrawLabel {
   position: absolute;
   display: flex;
   align-items: center;
   color: #aaa;
 }
 
-.handmadeReactChart-labels-DrawLabel.right {
+.handmadeReactChart-donuts-labels-DrawLabel.right {
   transform: translateY(-50%);
 }
 
-.handmadeReactChart-labels-DrawLabel.right::before,
-.handmadeReactChart-labels-DrawLabel.left::after {
+.handmadeReactChart-donuts-labels-DrawLabel.right::before,
+.handmadeReactChart-donuts-labels-DrawLabel.left::after {
   margin-top: 3px;
   width: 6px;
   height: 6px;
@@ -19,14 +19,14 @@
   content: "";
 }
 
-.handmadeReactChart-labels-DrawLabel.right::before {
+.handmadeReactChart-donuts-labels-DrawLabel.right::before {
   margin-right: 4px;
 }
 
-.handmadeReactChart-labels-DrawLabel.left {
+.handmadeReactChart-donuts-labels-DrawLabel.left {
   transform: translate(-100%, -50%);
 }
 
-.handmadeReactChart-labels-DrawLabel.left::after {
+.handmadeReactChart-donuts-labels-DrawLabel.left::after {
   margin-left: 4px;
 }

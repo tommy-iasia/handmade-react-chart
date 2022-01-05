@@ -1,4 +1,8 @@
 .handmadeReactChart-splines-DrawArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   --color1: #eb44e844;
   --color2: #de25da44;
   --color3: #ab3da944;

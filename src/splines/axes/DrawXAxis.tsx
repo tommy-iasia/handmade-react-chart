@@ -7,6 +7,7 @@ export function DrawXAxis({
   contentTop,
   contentWidth,
   contentHeight,
+  axisY,
 }: Props) {
   return (
     <div className="handmadeReactChart-splines-axes-DrawXAxis">
@@ -14,7 +15,7 @@ export function DrawXAxis({
         <div
           key={i}
           className="label"
-          style={{ left: label.x, top: contentTop + contentHeight }}
+          style={{ left: label.x, top: axisY ?? contentTop + contentHeight }}
         >
           {label.text}
         </div>
@@ -32,7 +33,7 @@ export function DrawXAxis({
         className="axis"
         style={{
           left: contentLeft,
-          top: contentTop + contentHeight,
+          top: axisY ?? contentTop + contentHeight,
           width: contentWidth,
         }}
       ></div>
@@ -46,4 +47,5 @@ interface Props {
   contentTop: number;
   contentWidth: number;
   contentHeight: number;
+  axisY?: number;
 }
