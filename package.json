@@ -1,12 +1,13 @@
 {
   "name": "handmade-react-chart",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/cjs/components.js",
   "module": "dist/esm/components.js",
   "types": "dist/components.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "rollup": "rimraf dist && rollup -c",
