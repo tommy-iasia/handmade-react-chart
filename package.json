@@ -11,10 +11,24 @@
   "scripts": {
     "rollup": "rimraf dist && rollup -c",
     "start": "react-scripts start",
-    "build": "rimraf build && react-scripts build"
+    "build": "rimraf build&&SET PUBLIC_URL=.&&react-scripts build"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommy-iasia/handmade-react-chart.git"
+  },
+  "keywords": [
+    "chart",
+    "charts",
+    "svg",
+    "react",
+    "react-charts"
+  ],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tommy-iasia/handmade-react-chart/issues"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
@@ -44,7 +58,7 @@
       "react-app/jest"
     ]
   },
-  "homepage": ".",
+  "homepage": "https://github.com/tommy-iasia/handmade-react-chart#readme",
   "browserslist": {
     "production": [
       ">0.2%",
