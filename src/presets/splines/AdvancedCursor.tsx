@@ -1,43 +1,59 @@
 import { ReactNode, useContext, useState } from "react";
 import {
-  Match,
   MouseMoveSelector,
+  Selected,
 } from "../../splines/mouses/MouseMoveSelector";
 import { SplineChartContext } from "../../splines/SplineChartContext";
 import { SplineLineItem } from "../../splines/SplineLineItem";
 import "./AdvancedCursor.css";
 
 export function AdvancedCursor({ className, distance, getContent }: Props) {
-  const [match, setMatch] = useState<Match>();
+  const [selected, setSelected] = useState<Selected>();
 
   const { contentLeft, contentTop, contentWidth, contentHeight } =
     useContext(SplineChartContext);
 
   return (
-    <div
-      className={`handmadeReactChart-presets-splines-AdvancedCursor ${className}`}
-      style={{ left: match?.position.x, top: match?.position.y }}
-    >
-      <MouseMoveSelector distance={distance} setMatch={setMatch} />
+    <>
+      <MouseMoveSelector distance={distance} setSelected={setSelected} />
 
-      {match && (
-        <div className={`content ${getPositionClass()}`}>
-          {getContent(match.item, match.point, match.position)}
-        </div>
-      )}
-    </div>
+      {selected &&
+        (() => {
+          const content = getContent(
+            selected.item,
+            selected.point,
+            selected.position
+          );
+
+          return (
+            content && (
+              <div
+                className={`handmadeReactChart-presets-splines-AdvancedCursor ${
+                  className ?? ""
+                }`}
+                style={{
+                  left: selected?.position.x,
+                  top: selected?.position.y,
+                }}
+              >
+                <div className={`content ${getPositionClass()}`}>{content}</div>
+              </div>
+            )
+          );
+        })()}
+    </>
   );
 
   function getPositionClass() {
-    if (!match) {
+    if (!selected) {
       return "";
     }
 
-    const xRatio = (match.position.x - contentLeft) / contentWidth;
+    const xRatio = (selected.position.x - contentLeft) / contentWidth;
     const horizontalClass =
       xRatio <= 0.35 ? "left" : xRatio >= 0.65 ? "right" : "horizontal-center";
 
-    const yRatio = (match.position.y - contentTop) / contentHeight;
+    const yRatio = (selected.position.y - contentTop) / contentHeight;
     const verticalClass =
       yRatio <= 0.35 ? "top" : yRatio >= 0.65 ? "bottom" : "vertical-center";
 

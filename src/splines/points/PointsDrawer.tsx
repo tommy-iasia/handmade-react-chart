@@ -10,13 +10,13 @@ export function PointsDrawer({ transitionDuration }: Props) {
 
   return (
     <>
-      {lineItems.flatMap((item) =>
-        item.points.map((point, i) => {
+      {lineItems.flatMap((item, i) =>
+        item.points.map((point, j) => {
           const { x, y } = positioning(point.x, point.y);
 
           return (
             <AnimtedPoint
-              key={i}
+              key={`${i}-${j}`}
               x={x}
               y={y}
               transitionDuration={transitionDuration ?? 200}

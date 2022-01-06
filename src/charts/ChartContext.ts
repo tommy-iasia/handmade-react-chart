@@ -1,6 +1,6 @@
 import { createContext } from "react";
+import { Event } from "./mouses/useMouseEvent";
 import { Listen } from "./useEventListener";
-import { Event } from "./useMouseEvent";
 
 export const ChartContext = createContext<{
   width: number;

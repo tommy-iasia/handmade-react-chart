@@ -1,8 +1,9 @@
 .handmadeReactChart-splines-points-DrawPoint {
   position: absolute;
+  margin-left: -5px;
+  margin-top: -5px;
   width: 10px;
   height: 10px;
   border-radius: 5px;
   background-color: #eb44e888;
-  transform: translate(-50%, -50%);
 }

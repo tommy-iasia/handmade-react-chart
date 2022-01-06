@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useRef } from "react";
 import "./Chart.css";
 import { ChartContext } from "./ChartContext";
-import { useMouseEvent } from "./useMouseEvent";
+import { useMouseEvent } from "./mouses/useMouseEvent";
 
 export function Chart({ className, width, height, children }: Props) {
   const ref = useRef<HTMLDivElement>(null);

@@ -1,10 +1,10 @@
 import { Key, ReactNode, useState } from "react";
+import { MouseEnterSetter } from "../../charts/mouses/MouseEnterSetter";
 import { Center } from "../../donuts/centers/Center";
 import { DonutChart } from "../../donuts/DonutChart";
 import { DonutItem } from "../../donuts/DonutItem";
 import { DonutSlice } from "../../donuts/DonutSlice";
 import { LabelsDrawer } from "../../donuts/labels/LabelsDrawer";
-import { MouseEnterSetter } from "../../donuts/mouses/MouseEnterSetter";
 import { MouseMoveSelector } from "../../donuts/mouses/MouseMoveSelector";
 import "./AdvancedDonut.css";
 

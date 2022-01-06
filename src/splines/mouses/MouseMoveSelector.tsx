@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ChartContext } from "../../charts/ChartContext";
-import { Event } from "../../charts/useMouseEvent";
+import { Event } from "../../charts/mouses/useMouseEvent";
 import { usePositioning } from "../axes/usePositioning";
 import { SplineChartContext } from "../SplineChartContext";
 import { SplineLineItem } from "../SplineLineItem";
 
-export function MouseMoveSelector({ distance, setMatch }: Props) {
+export function MouseMoveSelector({ distance, setSelected }: Props) {
   const { addMouseMove } = useContext(ChartContext);
 
   const [mouseX, setMouseX] = useState<number>();
@@ -52,23 +52,23 @@ export function MouseMoveSelector({ distance, setMatch }: Props) {
       .sort((a, b) => a.distanceSquare - b.distanceSquare);
 
     if (sortedMatches.length <= 0) {
-      setMatch(undefined);
+      setSelected(undefined);
       return;
     }
 
     const bestMatch = sortedMatches[0];
-    setMatch(bestMatch);
-  }, [distance, lineItems, mouseX, mouseY, positioning, setMatch]);
+    setSelected(bestMatch);
+  }, [distance, lineItems, mouseX, mouseY, positioning, setSelected]);
 
   return <></>;
 }
 
 interface Props {
   distance: number;
-  setMatch(match: Match | undefined): void;
+  setSelected(selected: Selected | undefined): void;
 }
 
-export interface Match {
+export interface Selected {
   item: SplineLineItem;
   point: { x: number; y: number };
   position: { x: number; y: number };

@@ -1,4 +1,5 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo, useState } from "react";
+import { MouseEnterSetter } from "../../charts/mouses/MouseEnterSetter";
 import { PointsDrawer } from "../../splines/points/PointsDrawer";
 import { SplineArea } from "../../splines/SplineArea";
 import { SplineChart } from "../../splines/SplineChart";
@@ -20,6 +21,8 @@ export function AdvancedSpline({
     const ys = items.flatMap((item) => item.points).map((point) => point.y);
     return Math.min(...ys);
   }, [items]);
+
+  const [entered, setEntered] = useState(true);
 
   return (
     <SplineChart
@@ -55,9 +58,11 @@ export function AdvancedSpline({
       <AdvancedCursor
         distance={30}
         getContent={(item, point, position) =>
-          getLabel?.(item, point, position)
+          entered && getLabel?.(item, point, position)
         }
       />
+
+      <MouseEnterSetter setEntered={setEntered} />
     </SplineChart>
   );
 }

@@ -75,8 +75,6 @@ export function usePositioning() {
     }
   }, [areaItems, lineItems, yAxes]);
 
-  console.log("usePositiong", xAxis, yAxis);
-
   return useCallback(
     (x: number, y: number) => {
       const xRatio = xAxis.range > 0 ? (x - xAxis.from) / xAxis.range : 0;

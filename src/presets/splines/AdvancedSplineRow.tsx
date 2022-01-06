@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Property } from "../codes/Property";
 import { Tag } from "../codes/Tag";
 import { Row } from "../Row";
@@ -33,11 +33,11 @@ export function AdvancedSplineRow() {
                   <>
                     {"["}
                     {example.map((item, i) => (
-                      <>
+                      <Fragment key={i}>
                         <br />
                         {`{ points: ${JSON.stringify(item.points)} }`}
                         {i < example.length - 1 ? "," : ""}
-                      </>
+                      </Fragment>
                     ))}
                     {"]"}
                   </>

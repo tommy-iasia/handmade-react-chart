@@ -1,5 +1,5 @@
 import { RefObject, useCallback } from "react";
-import { useEventListener } from "./useEventListener";
+import { useEventListener } from "../useEventListener";
 
 export function useMouseEvent<T extends Element>(ref: RefObject<T>) {
   const { listens, call: innerCall, add, remove } = useEventListener<Event>();
