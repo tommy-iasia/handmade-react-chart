@@ -8,4 +8,4 @@ This project aims to a chart library which is comprehensive to every user.
 
 ## Release
 
-This is currently a preview only. The project will still need refinement before releasing.
+This is currently a preview only. Documents and tests are not ready yet.
