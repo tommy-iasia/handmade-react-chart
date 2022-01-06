@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { usePositioning } from "../axes/usePositioning";
 import { SplineChartContext } from "../SplineChartContext";
-import { AnimtedPoint } from "./AnimatedPoint";
+import { AnimatedPoint } from "./AnimatedPoint";
 
 export function PointsDrawer({ transitionDuration }: Props) {
   const { lineItems } = useContext(SplineChartContext);
@@ -15,7 +15,7 @@ export function PointsDrawer({ transitionDuration }: Props) {
           const { x, y } = positioning(point.x, point.y);
 
           return (
-            <AnimtedPoint
+            <AnimatedPoint
               key={`${i}-${j}`}
               x={x}
               y={y}

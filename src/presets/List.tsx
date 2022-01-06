@@ -1,3 +1,4 @@
+import React from "react";
 import { AdvancedDonutRow } from "./donuts/AdvancedDonutRow";
 import { BasicDonutRow } from "./donuts/BasicDonutRow";
 import { FreeDonutRow } from "./donuts/FreeDonutRow";
@@ -11,6 +12,8 @@ import { SimpleSplineRow } from "./splines/SimpleSplineRow";
 export function List() {
   return (
     <div className="handmadeReactChart-presets-List">
+      <h1>Handmade React Chart</h1>
+
       <RawSplineRow />
 
       <SimpleSplineRow />

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Center } from "../../donuts/centers/Center";
 import { DonutChart } from "../../donuts/DonutChart";
 import { DonutItem } from "../../donuts/DonutItem";

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Property } from "../codes/Property";
 import { Tag } from "../codes/Tag";
 import { Row } from "../Row";

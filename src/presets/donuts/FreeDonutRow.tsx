@@ -1,3 +1,4 @@
+import React from "react";
 import { Chart } from "../../charts/Chart";
 import { DrawSlice } from "../../donuts/DrawSlice";
 import { Property } from "../codes/Property";

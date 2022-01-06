@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { DonutChart } from "../../donuts/DonutChart";
 import { DonutSlice } from "../../donuts/DonutSlice";
 import { Property } from "../codes/Property";

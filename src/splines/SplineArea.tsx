@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { AnimatedArea } from "./AnimatedArea";
 import { usePositioning } from "./axes/usePositioning";
 import { SplineChartContext } from "./SplineChartContext";

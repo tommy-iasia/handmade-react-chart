@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useState } from "react";
 import {
   MouseMoveSelector,
   Selected,
@@ -10,8 +10,9 @@ import "./AdvancedCursor.css";
 export function AdvancedCursor({ className, distance, getContent }: Props) {
   const [selected, setSelected] = useState<Selected>();
 
-  const { contentLeft, contentTop, contentWidth, contentHeight } =
-    useContext(SplineChartContext);
+  const { contentLeft, contentTop, contentWidth, contentHeight } = useContext(
+    SplineChartContext
+  );
 
   return (
     <>

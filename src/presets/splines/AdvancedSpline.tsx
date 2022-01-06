@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from "react";
+import React, { ReactNode, useMemo, useState } from "react";
 import { MouseEnterSetter } from "../../charts/mouses/MouseEnterSetter";
 import { PointsDrawer } from "../../splines/points/PointsDrawer";
 import { SplineArea } from "../../splines/SplineArea";

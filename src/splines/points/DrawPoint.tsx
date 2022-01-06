@@ -1,3 +1,4 @@
+import React from "react";
 import "./DrawPoint.css";
 
 export function DrawPoint({ x, y }: Props) {

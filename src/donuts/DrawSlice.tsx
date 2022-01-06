@@ -1,3 +1,4 @@
+import React from "react";
 import "./DrawSlice.css";
 
 export function DrawSlice({

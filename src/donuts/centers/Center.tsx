@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import "./Center.css";
 
 export function Center({ className, children }: Props) {

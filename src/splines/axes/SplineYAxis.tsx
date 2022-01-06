@@ -1,4 +1,10 @@
-import { ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { SplineAxisItem } from "../SplineAxisItem";
 import { SplineChartContext } from "../SplineChartContext";
 import { DrawYAxis } from "./DrawYAxis";

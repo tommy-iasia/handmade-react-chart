@@ -1,3 +1,4 @@
+import React from "react";
 import { SplineChart } from "../../splines/SplineChart";
 import { SplineLine } from "../../splines/SplineLine";
 

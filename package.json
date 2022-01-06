@@ -1,26 +1,42 @@
 {
   "name": "handmade-react-chart",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "description": "",
+  "main": "dist/cjs/components.js",
+  "module": "dist/esm/components.js",
+  "types": "dist/components.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "rollup": "rimraf dist && rollup -c",
+    "start": "react-scripts start",
+    "build": "rimraf build && react-scripts build"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.2.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.17",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.18",
     "@types/react-dom": "^17.0.11",
-    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
-    "typescript": "^4.5.4",
-    "web-vitals": "^2.1.2"
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.2",
+    "rollup-plugin-dts": "^3.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.3.5"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "peerDependencies": {
+    "react": "^17.0.2"
   },
   "eslintConfig": {
     "extends": [

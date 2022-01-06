@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AnimatedSlice } from "./AnimatedSlice";
 import { DonutChartContext } from "./DonutChartContext";
 

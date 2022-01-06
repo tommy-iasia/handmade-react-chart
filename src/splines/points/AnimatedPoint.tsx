@@ -1,7 +1,8 @@
+import React from "react";
 import { useTransitionValue } from "../../charts/useTransitionValue";
 import { DrawPoint } from "./DrawPoint";
 
-export function AnimtedPoint({
+export function AnimatedPoint({
   x: inputX,
   y: inputY,
   transitionDuration,

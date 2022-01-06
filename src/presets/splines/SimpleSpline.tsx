@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { SplineArea } from "../../splines/SplineArea";
 import { SplineChart } from "../../splines/SplineChart";
 import { SplineLine } from "../../splines/SplineLine";

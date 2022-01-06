@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { SplineXAxis } from "../../splines/axes/SplineXAxis";
 import { SplineYAxis } from "../../splines/axes/SplineYAxis";
 import { SplineArea } from "../../splines/SplineArea";

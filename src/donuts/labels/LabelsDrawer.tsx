@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from "react";
+import React, { ReactNode, useContext } from "react";
 import { DonutChartContext } from "../DonutChartContext";
 import { DonutItem } from "../DonutItem";
 import { DrawLabel } from "./DrawLabel";

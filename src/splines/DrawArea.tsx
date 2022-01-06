@@ -1,3 +1,4 @@
+import React from "react";
 import "./DrawArea.css";
 
 export function DrawArea({

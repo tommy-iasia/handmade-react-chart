@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Transition, useTransition } from "../charts/useTransition";
 import { getProgress } from "../charts/useTransitionValue";
 import { DrawLine } from "./DrawLine";
@@ -60,10 +60,10 @@ export function AnimatedLine({
     []
   );
 
-  const inputValue = useMemo(
-    () => ({ points, smoothness: smoothness ?? 1 }),
-    [points, smoothness]
-  );
+  const inputValue = useMemo(() => ({ points, smoothness: smoothness ?? 1 }), [
+    points,
+    smoothness,
+  ]);
 
   const outputValue = useTransition(
     inputValue,

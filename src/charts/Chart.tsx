@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useRef } from "react";
+import React, { ReactNode, useMemo, useRef } from "react";
 import "./Chart.css";
 import { ChartContext } from "./ChartContext";
 import { useMouseEvent } from "./mouses/useMouseEvent";

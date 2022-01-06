@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { SplineXAxis } from "../../splines/axes/SplineXAxis";
 import { Label } from "../../splines/axes/SplineYAxis";
 import { SplineAreaItem } from "../../splines/SplineAreaItem";
@@ -8,10 +8,10 @@ import { SplineLineItem } from "../../splines/SplineLineItem";
 export function SimpleXAxis() {
   const { lineItems, areaItems } = useContext(SplineChartContext);
 
-  const labels = useMemo(
-    () => getLabels(lineItems, areaItems),
-    [areaItems, lineItems]
-  );
+  const labels = useMemo(() => getLabels(lineItems, areaItems), [
+    areaItems,
+    lineItems,
+  ]);
 
   return <SplineXAxis labels={labels} />;
 }

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ChartContext } from "../../charts/ChartContext";
 import { Event } from "../../charts/mouses/useMouseEvent";
 import { DonutChartContext } from "../DonutChartContext";

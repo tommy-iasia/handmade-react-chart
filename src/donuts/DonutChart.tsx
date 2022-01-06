@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from "react";
+import React, { ReactNode, useMemo, useState } from "react";
 import { Chart } from "../charts/Chart";
 import { DonutChartContext } from "./DonutChartContext";
 import { DonutItem } from "./DonutItem";
