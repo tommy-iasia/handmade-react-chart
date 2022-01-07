@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "rollup": "rimraf dist && rollup -c",
-    "start": "react-scripts start",
+    "start": "SET PUBLIC_URL=.&&react-scripts start",
     "build": "rimraf build&&SET PUBLIC_URL=.&&react-scripts build"
   },
   "repository": {

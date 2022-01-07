@@ -5,21 +5,20 @@
   color: #aaa;
 }
 
-.handmadeReactChart-donuts-labels-DrawLabel.right {
-  transform: translateY(-50%);
-}
-
-.handmadeReactChart-donuts-labels-DrawLabel.right::before,
-.handmadeReactChart-donuts-labels-DrawLabel.left::after {
+.handmadeReactChart-donuts-labels-DrawLabel > .point {
+  position: relative;
   margin-top: 3px;
   width: 6px;
   height: 6px;
   border-radius: 3px;
   background-color: #aaa;
-  content: "";
 }
 
-.handmadeReactChart-donuts-labels-DrawLabel.right::before {
+.handmadeReactChart-donuts-labels-DrawLabel.right {
+  transform: translateY(-50%);
+}
+
+.handmadeReactChart-donuts-labels-DrawLabel.right > .point {
   margin-right: 4px;
 }
 
@@ -27,6 +26,16 @@
   transform: translate(-100%, -50%);
 }
 
-.handmadeReactChart-donuts-labels-DrawLabel.left::after {
+.handmadeReactChart-donuts-labels-DrawLabel.left > .point {
   margin-left: 4px;
+}
+
+.handmadeReactChart-donuts-labels-DrawLabel > .point .line {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 1px;
+  background-color: #aaa;
+  transform-origin: 0% 50%;
+  content: "";
 }
