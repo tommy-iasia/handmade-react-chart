@@ -47,14 +47,14 @@ export function DonutSlice({
         .map((t) => t.value)
         .reduce((s, t) => s + t, 0);
 
-      return totalValue > 0 ? (beforeValue / totalValue) * 360 : 0;
+      return totalValue > 0 ? (beforeValue / totalValue) * 359.999 : 0;
     })();
 
   const toAngle =
     inputToAngle ??
     (() => {
-      const sliceAngle = totalValue > 0 ? (value / totalValue) * 360 : 0;
-      return Math.min(fromAngle + sliceAngle, 360);
+      const sliceAngle = totalValue > 0 ? (value / totalValue) * 359.999 : 0;
+      return Math.min(fromAngle + sliceAngle, 359.999);
     })();
 
   useEffect(() => {
