@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ChartContext } from "../../charts/ChartContext";
 import { Event } from "../../charts/mouses/useMouseEvent";
 import { usePositioning } from "../axes/usePositioning";
@@ -8,57 +8,45 @@ import { SplineLineItem } from "../SplineLineItem";
 export function MouseMoveSelector({ distance, setSelected }: Props) {
   const { addMouseMove } = useContext(ChartContext);
 
-  const [mouseX, setMouseX] = useState<number>();
-  const [mouseY, setMouseY] = useState<number>();
-
-  useEffect(
-    () =>
-      addMouseMove((event: Event) => {
-        setMouseX(event.x);
-        setMouseY(event.y);
-      }),
-    [addMouseMove]
-  );
-
   const { lineItems } = useContext(SplineChartContext);
 
   const positioning = usePositioning();
 
-  useEffect(() => {
-    if (mouseX === undefined || mouseY === undefined) {
-      return;
-    }
+  useEffect(
+    () =>
+      addMouseMove((event: Event) => {
+        const matches = lineItems.flatMap((item) =>
+          item.points.map((point) => {
+            const position = positioning(point.x, point.y);
 
-    const matches = lineItems.flatMap((item) =>
-      item.points.map((point) => {
-        const position = positioning(point.x, point.y);
+            const dX = position.x - event.x;
+            const dY = position.y - event.y;
 
-        const dX = position.x - mouseX;
-        const dY = position.y - mouseY;
+            return {
+              distanceSquare: dX * dX + dY * dY,
+              item,
+              point,
+              position,
+            };
+          })
+        );
 
-        return {
-          distanceSquare: dX * dX + dY * dY,
-          item,
-          point,
-          position,
-        };
-      })
-    );
+        const validDistanceSquare = distance * distance;
 
-    const validDistanceSquare = distance * distance;
+        const sortedMatches = matches
+          .filter((match) => match.distanceSquare <= validDistanceSquare)
+          .sort((a, b) => a.distanceSquare - b.distanceSquare);
 
-    const sortedMatches = matches
-      .filter((match) => match.distanceSquare <= validDistanceSquare)
-      .sort((a, b) => a.distanceSquare - b.distanceSquare);
+        if (sortedMatches.length <= 0) {
+          setSelected(undefined);
+          return;
+        }
 
-    if (sortedMatches.length <= 0) {
-      setSelected(undefined);
-      return;
-    }
-
-    const bestMatch = sortedMatches[0];
-    setSelected(bestMatch);
-  }, [distance, lineItems, mouseX, mouseY, positioning, setSelected]);
+        const bestMatch = sortedMatches[0];
+        setSelected(bestMatch);
+      }),
+    [addMouseMove, distance, lineItems, positioning, setSelected]
+  );
 
   return <></>;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ChartContext } from "../../charts/ChartContext";
 import { Event } from "../../charts/mouses/useMouseEvent";
 import { DonutChartContext } from "../DonutChartContext";
@@ -7,41 +7,33 @@ import { DonutItem } from "../DonutItem";
 export function MouseMoveSelector({ setSelectedItem }: Props) {
   const { addMouseMove } = useContext(ChartContext);
 
-  const [mouseX, setMouseX] = useState<number>();
-  const [mouseY, setMouseY] = useState<number>();
+  const { items } = useContext(DonutChartContext);
 
   useEffect(
     () =>
       addMouseMove((event: Event) => {
-        setMouseX(event.x);
-        setMouseY(event.y);
+        const item = items.find((item) => {
+          const x = event.x - item.centerX;
+          const y = event.y - item.centerY;
+
+          if (x === 0 && y === 0) {
+            return false;
+          }
+
+          const radian = Math.atan2(y, x);
+          const angle = ((radian / Math.PI) * 180 + 360) % 360;
+
+          return angle >= item.fromAngle && angle <= item.toAngle;
+        });
+
+        if (!item) {
+          return;
+        }
+
+        setSelectedItem(item);
       }),
-    [addMouseMove]
+    [addMouseMove, items, setSelectedItem]
   );
-
-  const { items } = useContext(DonutChartContext);
-
-  useEffect(() => {
-    if (mouseX === undefined || mouseY === undefined) {
-      return;
-    }
-
-    const item = items.find((item) => {
-      const x = mouseX - item.centerX;
-      const y = mouseY - item.centerY;
-
-      if (x === 0 && y === 0) {
-        return false;
-      }
-
-      const radian = Math.atan2(y, x);
-      const angle = ((radian / Math.PI) * 180 + 360) % 360;
-
-      return angle >= item.fromAngle && angle <= item.toAngle;
-    });
-
-    setSelectedItem(item);
-  }, [items, mouseX, mouseY, setSelectedItem]);
 
   return <></>;
 }

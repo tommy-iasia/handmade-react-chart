@@ -1,6 +1,6 @@
 {
   "name": "handmade-react-chart",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/cjs/components.js",
   "module": "dist/esm/components.js",
