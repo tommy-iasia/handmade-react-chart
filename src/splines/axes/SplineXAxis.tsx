@@ -5,7 +5,7 @@ import { DrawXAxis } from "./DrawXAxis";
 import { Label } from "./SplineYAxis";
 import { usePositioning } from "./usePositioning";
 
-export function SplineXAxis({ labels: inputLabels, axisY }: Props) {
+export function SplineXAxis({ className, labels: inputLabels, axisY }: Props) {
   const {
     contentLeft,
     contentTop,
@@ -71,6 +71,7 @@ export function SplineXAxis({ labels: inputLabels, axisY }: Props) {
 
   return (
     <DrawXAxis
+      className={className}
       labels={outputLabels}
       contentLeft={contentLeft}
       contentTop={contentTop}
@@ -82,6 +83,7 @@ export function SplineXAxis({ labels: inputLabels, axisY }: Props) {
 }
 
 interface Props {
+  className?: string;
   labels: Label[];
   maximum?: number;
   minimum?: number;

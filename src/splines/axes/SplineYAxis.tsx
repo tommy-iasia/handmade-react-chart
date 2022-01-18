@@ -10,7 +10,7 @@ import { SplineChartContext } from "../SplineChartContext";
 import { DrawYAxis } from "./DrawYAxis";
 import { usePositioning } from "./usePositioning";
 
-export function SplineYAxis({ labels: inputLabels, axisX }: Props) {
+export function SplineYAxis({ className, labels: inputLabels, axisX }: Props) {
   const {
     contentLeft,
     contentTop,
@@ -76,6 +76,7 @@ export function SplineYAxis({ labels: inputLabels, axisX }: Props) {
 
   return (
     <DrawYAxis
+      className={className}
       labels={outputLabels}
       contentLeft={contentLeft}
       contentTop={contentTop}
@@ -87,6 +88,7 @@ export function SplineYAxis({ labels: inputLabels, axisX }: Props) {
 }
 
 interface Props {
+  className?: string;
   labels: Label[];
   axisX?: number;
 }

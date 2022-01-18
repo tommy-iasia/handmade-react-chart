@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import "./DrawXAxis.css";
 
 export function DrawXAxis({
+  className,
   labels,
   contentLeft,
   contentTop,
@@ -10,7 +11,9 @@ export function DrawXAxis({
   axisY,
 }: Props) {
   return (
-    <div className="handmadeReactChart-splines-axes-DrawXAxis">
+    <div
+      className={`handmadeReactChart-splines-axes-DrawXAxis ${className ?? ""}`}
+    >
       {labels.map((label, i) => (
         <div
           key={i}
@@ -42,6 +45,7 @@ export function DrawXAxis({
 }
 
 interface Props {
+  className?: string;
   labels: { x: number; text?: ReactNode }[];
   contentLeft: number;
   contentTop: number;

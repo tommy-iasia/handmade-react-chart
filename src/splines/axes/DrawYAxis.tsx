@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import "./DrawYAxis.css";
 
 export function DrawYAxis({
+  className,
   labels,
   contentLeft,
   contentTop,
@@ -10,7 +11,9 @@ export function DrawYAxis({
   axisX,
 }: Props) {
   return (
-    <div className="handmadeReactChart-splines-axes-DrawYAxis">
+    <div
+      className={`handmadeReactChart-splines-axes-DrawYAxis ${className ?? ""}`}
+    >
       {labels.map((label, i) => (
         <div
           key={i}
@@ -46,6 +49,7 @@ export function DrawYAxis({
 }
 
 interface Props {
+  className?: string;
   labels: { y: number; text?: ReactNode }[];
   contentLeft: number;
   contentTop: number;

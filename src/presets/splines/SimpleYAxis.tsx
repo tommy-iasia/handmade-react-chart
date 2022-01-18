@@ -1,38 +1,35 @@
 import React, { useContext, useMemo } from "react";
 import { Label, SplineYAxis } from "../../splines/axes/SplineYAxis";
-import { SplineAreaItem } from "../../splines/SplineAreaItem";
 import { SplineChartContext } from "../../splines/SplineChartContext";
-import { SplineLineItem } from "../../splines/SplineLineItem";
 
 export function SimpleYAxis() {
   const { lineItems, areaItems } = useContext(SplineChartContext);
 
-  const labels = useMemo(() => getLabels(lineItems, areaItems), [
-    areaItems,
-    lineItems,
-  ]);
+  const labels = useMemo(() => {
+    const lineValues = lineItems
+      .flatMap((item) => item.points)
+      .map((point) => point.y);
+
+    const areaValues = areaItems
+      .flatMap((t) => t.points)
+      .flatMap((point) => [point.upperY, point.lowerY]);
+
+    const itemValues = [...lineValues, ...areaValues];
+
+    if (itemValues.length <= 0) {
+      return [];
+    }
+
+    const maximum = Math.max(...itemValues);
+    const minimum = Math.min(...itemValues);
+
+    return getLabels(maximum, minimum);
+  }, [areaItems, lineItems]);
 
   return <SplineYAxis labels={labels} />;
 }
 
-export function getLabels(
-  lineItems: SplineLineItem[],
-  areaItems: SplineAreaItem[]
-) {
-  const lineValues = lineItems.flatMap((t) => t.points).map((point) => point.y);
-
-  const areaValues = areaItems
-    .flatMap((t) => t.points)
-    .flatMap((point) => [point.upperY, point.lowerY]);
-
-  const itemValues = [...lineValues, ...areaValues];
-
-  if (itemValues.length <= 0) {
-    return [];
-  }
-
-  const maximum = Math.max(...itemValues);
-  const minimum = Math.min(...itemValues);
+export function getLabels(maximum: number, minimum: number) {
   const magnitude = Math.max(Math.abs(maximum), Math.abs(minimum));
 
   const order = Math.pow(10, Math.floor(Math.log10(magnitude)));
