@@ -1,4 +1,4 @@
-# Handmade React Chart
+# handmade-react-chart
 
 This project aims to a chart library which is comprehensive to every user.
 

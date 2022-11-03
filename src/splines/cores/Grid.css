@@ -1,0 +1,17 @@
+.handmadeReactChart-splines-cores-Grid {
+  position: absolute;
+}
+
+.handmadeReactChart-splines-cores-Grid .vertical,
+.handmadeReactChart-splines-cores-Grid .horizontal {
+  position: absolute;
+  background-color: #ccc;
+}
+
+.handmadeReactChart-splines-cores-Grid .vertical {
+  width: 1px;
+}
+
+.handmadeReactChart-splines-cores-Grid .horizontal {
+  height: 1px;
+}

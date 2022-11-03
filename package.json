@@ -1,6 +1,6 @@
 {
   "name": "handmade-react-chart",
-  "version": "0.1.3",
+  "version": "2.0.1",
   "description": "",
   "main": "dist/cjs/components.js",
   "module": "dist/esm/components.js",
@@ -25,7 +25,6 @@
     "react",
     "react-charts"
   ],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tommy-iasia/handmade-react-chart/issues"

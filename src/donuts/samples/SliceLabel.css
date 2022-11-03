@@ -1,0 +1,30 @@
+.handmadeReactChart-donuts-samples-SliceLabel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+.handmadeReactChart-donuts-samples-SliceLabel .point {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #aaa;
+}
+
+.handmadeReactChart-donuts-samples-SliceLabel .point .line {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 1px;
+  background-color: #aaa;
+  transform-origin: 0 50%;
+}
+
+.handmadeReactChart-donuts-samples-SliceLabel .text {
+  color: #aaa;
+  margin-bottom: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

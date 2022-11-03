@@ -1,0 +1,72 @@
+.handmadeReactChart-splines-samples-PointLabel {
+  position: absolute;
+  display: grid;
+  padding: 3px;
+}
+
+.handmadeReactChart-splines-samples-PointLabel.left.up {
+  margin-right: -8px;
+  margin-bottom: -8px;
+  grid-template:
+    "label ." auto
+    ". point" auto
+    / auto auto;
+}
+
+.handmadeReactChart-splines-samples-PointLabel.left.down {
+  margin-right: -8px;
+  margin-top: -8px;
+  grid-template:
+    ". point" auto
+    "label ." auto
+    / auto auto;
+}
+
+.handmadeReactChart-splines-samples-PointLabel.right.up {
+  margin-left: -8px;
+  margin-bottom: -8px;
+  grid-template:
+    ". label" auto
+    "point ." auto
+    / auto auto;
+}
+
+.handmadeReactChart-splines-samples-PointLabel.right.down {
+  margin-left: -8px;
+  margin-top: -8px;
+  grid-template:
+    "point ." auto
+    ". label" auto
+    / auto auto;
+}
+
+.handmadeReactChart-splines-samples-PointLabel .point {
+  grid-area: point;
+  width: 6px;
+  height: 6px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: #eb44e888;
+}
+
+.handmadeReactChart-splines-samples-PointLabel:hover .point {
+  border-color: #eb44e8cc;
+  background-color: #ffffff88;
+}
+
+.handmadeReactChart-splines-samples-PointLabel .label {
+  grid-area: label;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  background-color: #ffffffcc;
+  padding: 5px 10px;
+}
+
+.handmadeReactChart-splines-samples-PointLabel:not(:hover) .label {
+  width: 0;
+  height: 0;
+  border: none;
+  padding: 0;
+  visibility: collapse;
+  overflow: hidden;
+}
