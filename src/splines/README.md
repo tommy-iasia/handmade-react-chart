@@ -1,6 +1,6 @@
 # Spline Chart
 
-Spline is simply a SVG `<path>`. Our job is to map the data points to drawing points of this path.
+Spline is simply a SVG `<path/>`. Our job is to map the data points to drawing points of this path.
 
 ## SVG Path
 
@@ -18,9 +18,9 @@ However, this method produces line with shape corners. In order to get a smooth 
 
 The + and - points are imaginary points for corners.
 
-Our [getSplinePath.ts](cores/getSplinePath.ts), further simplifying things by interpolating **x** only, is therefore written as following.
+Our [getSplinePath.ts](cores/getSplinePath.ts), further simplifying things by interpolating x only, is therefore written as following.
 
-```js
+```ts
 const [firstPoint, ...otherPoints] = points;
 
 const firstText = `M ${firstPoint.x} ${firstPoint.y}`;
@@ -46,7 +46,7 @@ You know how to draw a line. Now, draw it in the correct position.
 
 In [useDraw.ts](cores/useDraw.ts), we simply map a point according to the range of all points in chart.
 
-```js
+```ts
 const range = useRange();
 const { maximum, minimum } = range;
 
@@ -59,9 +59,9 @@ const drawY = (y: number) =>
 
 ## Raw Spline
 
-Learning the above [two things](#svg-path), you can now draw SVG like [Spline.tsx](cores/Spline.tsx) and [RawSpline](samples/RawSpline.tsx).
+Learning the above [two things](#svg-path), you can now draw [SVG](#svg-path) like in [Spline.tsx](cores/Spline.tsx) and [RawSpline.tsx](samples/RawSpline.tsx).
 
-```jsx
+```tsx
 export function Spline({ points: propsPoints, smoothness }: Props) {
   const draw = useDraw();
 
@@ -86,7 +86,7 @@ export function Spline({ points: propsPoints, smoothness }: Props) {
 
 In practice, a chart does not contains only one but many splines. A spline's location also depends on its sibling splines. Therefore, we need a context for sibling splines to share their points inputs.
 
-```js
+```ts
 export const ChartContext = createContext<{
   pointsInputs: PointsInput[];
   setPointsInputs: Dispatch<SetStateAction<PointsInput[]>>;
@@ -95,18 +95,18 @@ export const ChartContext = createContext<{
 });
 ```
 
-```js
+```ts
 export interface PointsInput {
   type: "spline" | "area" | "axis" | "dots";
   points: SourcePoint[];
-  maximum: { x: number, y: number };
-  minimum: { x: number, y: number };
+  maximum: { x: number; y: number };
+  minimum: { x: number; y: number };
 }
 ```
 
 Then, each `Spline` in `Chart` can register its data into the context, in [Spline.tsx](cores/Spline.tsx) and [usePointsInput.ts](cores/usePointsInput.ts).
 
-```js
+```ts
 useEffect(() => {
   if (memoInput) {
     setPointsInputs((oldInputs) => [...oldInputs, memoInput]);
@@ -121,9 +121,9 @@ This allows other splines to draw in correct position. In addition, axes can the
 
 ## Axis
 
-Axis is one of the headache in spline chart. Indeed, axis is a place for developer to show user the points of interest, on what a developer should brush up. Therefore, here we just leave the axis class open.
+In fact, axis is one of the important places for developer to show user the points of interest, on what a developer should brush up. Therefore, here we just leave the axis class open.
 
-```jsx
+```tsx
 <XAxis
   y={0}
   labels={[
@@ -136,7 +136,7 @@ Axis is one of the headache in spline chart. Indeed, axis is a place for develop
 
 However, if you want a simple example code, checkout [SimpleXAxis](samples/SimpleXAxis.tsx) and[getSimpleAxisValues](samples/getSimpleAxisValues.ts).
 
-```js
+```ts
 const step = Math.pow(10, Math.ceil(Math.log10(Math.abs(maximum))) - 1);
 ```
 
@@ -144,7 +144,7 @@ For example, When maximum value is 100, the above guesses 10, 20, 30, etc.
 
 ## Simple Spline Chart
 
-Learning the [above topics](#svg-path), you can now draw [SimpleSplineChart](samples/SimpleChart.tsx) with multiple [spline](cores/Spline.tsx) and [x](samples/SimpleXAxis.tsx) [y](samples/SimpleYAxis.tsx) axes.
+Learning the [above topics](#svg-path), you can now draw [SimpleSplineChart](samples/SimpleChart.tsx) with multiple [spline](#svg-path) and [xy axes](#axis).
 
 ## Point Labels
 
@@ -152,7 +152,7 @@ With the data in [ChartContext](#chart-context), not only the axes can be calcul
 
 In [PointLabel](samples/PointLabel.tsx), it is easily done with [useDraw](cores/useDraw.ts). You can add anything onto your points.
 
-```js
+```ts
 const draw = useDraw();
 const { x: drawX, y: drawY } = draw({ x: inputX, y: inputY });
 
@@ -167,9 +167,9 @@ return (
 
 ## Advanced Spline Chart
 
-With the [above knowledge](#svg-path), you can draw an [AdvancedSplineChart](samples/AdvancedChart.tsx) without any difficulty.
+With the [above knowledge](#svg-path), you can draw any [AdvancedSplineChart](samples/AdvancedChart.tsx) without difficulty.
 
-In fact, a chart is just layers of SVG for splines, layers of DIV for axes and a bunch of DIV for labels stacking together.
+In fact, a chart is just layers of [SVG](#svg-path) for splines, layers of DIV for axes and a bunch of DIV for labels stacking together.
 
 ```html
 <div class="handmadeReactChart-splines-cores-Chart">
@@ -207,11 +207,26 @@ If you follow the pattern here, just add any custom child component inside [Char
 </Chart>
 ```
 
-```jsx
+```tsx
 export function CustomComponent() {
   const draw = useDraw();
   const { x, y } = draw(0, 1);
 
   return <div style={{ left: x, top: y, position: "absolute" }}>Custom</div>;
+}
+```
+
+## CSS
+
+Finally, if you want to brush up your chart, just override the [CSS](cores/DrawSlice.css) with your own rules.
+
+```css
+.handmadeReactChart-splines-cores-Spline {
+  stroke-width: 3px;
+  stroke: #eb44e8;
+}
+
+.handmadeReactChart-splines-cores-Area {
+  fill: #eb44e844;
 }
 ```
