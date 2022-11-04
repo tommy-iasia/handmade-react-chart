@@ -1,0 +1,24 @@
+.handmadeReactChart-demos-Demo {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.handmadeReactChart-demos-Demo h1 {
+  text-align: center;
+}
+
+.handmadeReactChart-demos-Demo .columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.handmadeReactChart-demos-Demo .column {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 800px;
+}
+
+.handmadeReactChart-demos-Demo .handmadeReactChart-demos-Card {
+  margin-top: 30px;
+}

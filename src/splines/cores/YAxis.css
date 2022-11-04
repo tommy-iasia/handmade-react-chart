@@ -1,0 +1,19 @@
+.handmadeReactChart-splines-cores-YAxis {
+  position: absolute;
+  border-right: 1px solid #888;
+}
+
+.handmadeReactChart-splines-cores-YAxis .line {
+  position: absolute;
+  right: -5px;
+  width: 10px;
+  height: 1px;
+  background-color: #888;
+}
+
+.handmadeReactChart-splines-cores-YAxis .label {
+  position: absolute;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #888;
+}

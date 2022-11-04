@@ -1,0 +1,29 @@
+.handmadeReactChart-donuts-cores-DrawSlice {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 1) {
+  fill: #eb44e8;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 2) {
+  fill: #de25da;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 3) {
+  fill: #ab3da9;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 4) {
+  fill: #6b506b;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 5) {
+  fill: #54504c;
+}
+
+.handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 6) {
+  fill: #474440;
+}
