@@ -1,7 +1,6 @@
 # handmade-react-chart
 
-I can guarantee you that drawing chart is so so easy that you don't need any libraries.
-
+I can guarantee you that drawing chart is so so easy that you don't need any libraries.  
 Therefore, for you, I created a library?!
 
 ```tsx
@@ -12,10 +11,8 @@ Therefore, for you, I created a library?!
 <SimpleDonutChart radius={100} values={[1, 2, 3]} />
 ```
 
-This library is to demonstrate how simple the code can be.
-
-Give me 10 minutes. After that, you will be able to draw chart with any functionality you want.
-
+This library is to demonstrate how simple the code can be.  
+Give me 10 minutes. After that, you will be able to draw chart with any functionality you want.  
 No need to search for clumsy plugins, with unclear code debt, anymore.
 
 ## Demo
