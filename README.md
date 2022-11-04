@@ -11,9 +11,9 @@ Therefore, for you, I created a library?!
 <SimpleDonutChart radius={100} values={[1, 2, 3]} />
 ```
 
-This library is to demonstrate how simple the code can be.  
-Give me 10 minutes. After that, you will be able to draw chart with any functionality you want.  
-No need to search for clumsy plugins, with unclear code debt, anymore.
+This library is to demonstrate how simple the code can be. No need to search for clumsy plugins, with unclear code debt, anymore.
+
+Give me 10 minutes. After that, you will be able to write your own chart library with any functionality you want.
 
 ## Demo
 
