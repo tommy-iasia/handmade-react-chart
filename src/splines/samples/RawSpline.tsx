@@ -1,8 +1,14 @@
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { Chart } from "../cores/Chart";
 import { Spline } from "../cores/Spline";
 
-export function RawSpline({ className, width, height, values }: Props) {
+export function RawSpline({
+  className,
+  width,
+  height,
+  values,
+  children,
+}: Props) {
   const points = useMemo(
     () => values.map((value, i) => ({ x: i, y: value })),
     [values]
@@ -19,6 +25,8 @@ export function RawSpline({ className, width, height, values }: Props) {
       contentBottom={2}
     >
       <Spline points={points} />
+
+      {children}
     </Chart>
   );
 }
@@ -28,4 +36,5 @@ interface Props {
   width: number;
   height: number;
   values: number[];
+  children?: ReactNode;
 }

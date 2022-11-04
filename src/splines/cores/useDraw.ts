@@ -12,19 +12,19 @@ export function useDraw() {
     return undefined;
   }
 
+  const { maximum, minimum } = range;
+
   const drawX =
-    range.maximum.x - range.minimum.x > 0
+    maximum.x - minimum.x > 0
       ? (x: number) =>
-          ((x - range.minimum.x) / (range.maximum.x - range.minimum.x)) *
-            contentWidth +
+          ((x - minimum.x) / (maximum.x - minimum.x)) * contentWidth +
           contentLeft
       : () => contentWidth / 2 + contentLeft;
 
   const drawY =
-    range.maximum.y - range.minimum.y > 0
+    maximum.y - minimum.y > 0
       ? (y: number) =>
-          (1 - (y - range.minimum.y) / (range.maximum.y - range.minimum.y)) *
-            contentHeight +
+          (1 - (y - minimum.y) / (maximum.y - minimum.y)) * contentHeight +
           contentTop
       : () => contentHeight / 2 + contentTop;
 
