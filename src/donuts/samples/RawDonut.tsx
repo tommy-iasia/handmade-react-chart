@@ -12,6 +12,8 @@ export function RawDonut({ className, radius, values, children }: Props) {
       {values.map((value, i) => (
         <ValueSlice key={i} index={i} value={value} />
       ))}
+
+      {children}
     </Chart>
   );
 }

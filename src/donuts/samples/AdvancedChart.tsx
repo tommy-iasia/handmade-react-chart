@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Chart } from "../cores/Chart";
 import { AnimatedSlice } from "./AnimatedSlice";
 import { CenterText } from "./CenterText";
@@ -19,6 +19,7 @@ export function AdvancedChart<T>({
   getName,
   getText,
   transition,
+  children,
 }: Props<T>) {
   const [selectedIndex, setSelectedIndex] = useState<number>();
 
@@ -57,6 +58,8 @@ export function AdvancedChart<T>({
           text={`${getText(items[selectedIndex])}`}
         />
       )}
+
+      {children}
     </Chart>
   );
 }
@@ -74,4 +77,5 @@ interface Props<T> {
   getName: (item: T) => string;
   getText: (item: T) => string;
   transition?: number;
+  children?: ReactNode;
 }

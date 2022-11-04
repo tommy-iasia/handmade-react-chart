@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Chart } from "../cores/Chart";
 import { AnimatedSlice } from "./AnimatedSlice";
 import { CenterText } from "./CenterText";
 import { SelectContext } from "./SelectContext";
 import { Selector } from "./Selector";
 
-export function SimpleChart({ className, radius, values, transition }: Props) {
+export function SimpleChart({
+  className,
+  radius,
+  values,
+  transition,
+  children,
+}: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number>();
 
   return (
@@ -35,6 +41,8 @@ export function SimpleChart({ className, radius, values, transition }: Props) {
           text={`${values[selectedIndex]}`}
         />
       )}
+
+      {children}
     </Chart>
   );
 }
@@ -44,4 +52,5 @@ interface Props {
   radius: number;
   values: number[];
   transition?: number;
+  children?: ReactNode;
 }
