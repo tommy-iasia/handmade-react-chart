@@ -222,7 +222,15 @@ export function CustomSplineCard() {
           {">"}
         </div>
 
-        <div className="text">Having full control on everything</div>
+        <div className="text">
+          Have full control on everything.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#custom-component"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );

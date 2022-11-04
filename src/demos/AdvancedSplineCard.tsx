@@ -122,7 +122,15 @@ export function AdvancedSplineCard() {
           {" />"}
         </div>
 
-        <div className="text">Interact with user easily</div>
+        <div className="text">
+          Interact with user easily.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#advanced-spline-chart"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );

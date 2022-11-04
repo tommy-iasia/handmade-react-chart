@@ -59,3 +59,17 @@
   margin-top: 25px;
   color: #888;
 }
+
+.handmadeReactChart-demos-Card > .text .more {
+  margin-left: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #0099bf;
+}
+
+.handmadeReactChart-demos-Card > .text .more:hover {
+  background-color: #0099bf;
+  color: #fff;
+}

@@ -116,7 +116,15 @@ export function SimpleSplineCard() {
           {" />"}
         </div>
 
-        <div className="text">Draw spline chart easily</div>
+        <div className="text">
+          Draw spline chart easily.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#simple-spline-chart"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );

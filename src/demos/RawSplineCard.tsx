@@ -33,7 +33,15 @@ export function RawSplineCard() {
           {" />"}
         </div>
 
-        <div className="text">Draw a spline with one-liner</div>
+        <div className="text">
+          Draw a spline with one-liner.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#raw-spline"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );
