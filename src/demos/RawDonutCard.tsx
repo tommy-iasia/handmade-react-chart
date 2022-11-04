@@ -29,7 +29,15 @@ export function RawDonutCard() {
           {" />"}
         </div>
 
-        <div className="text">Draw a donut with one-liner</div>
+        <div className="text">
+          Draw a donut with one-liner.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#donut-chart"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );

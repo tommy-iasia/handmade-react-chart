@@ -37,7 +37,7 @@ export function RawSplineCard() {
           Draw a spline with one-liner.
           <a
             className="more"
-            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#raw-spline"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#spline-chart"
           >
             Read more...
           </a>

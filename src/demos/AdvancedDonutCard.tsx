@@ -81,7 +81,15 @@ export function AdvancedDonutCard() {
         {" />"}
       </div>
 
-      <div className="text">Interaction is so smooth</div>
+      <div className="text">
+        Interaction is so smooth.
+        <a
+          className="more"
+          href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#advanced-donut-chart"
+        >
+          Read more...
+        </a>
+      </div>
     </Card>
   );
 }

@@ -4,6 +4,12 @@ I can guarantee you that drawing chart is so so easy that you don't need any lib
 
 Therefore, for you, I created a library?!
 
+```tsx
+<RawSpline width={200} height={200} values={[250, 20, 180, 150, 230, 200]} />
+
+<SimpleDonutChart radius={100} values={[1,2,3]} />
+```
+
 This library is to demonstrate how simple the code can be. Give me 10 minutes. After that, you will be able to draw chart with any functionality you want. No need to search for bad plugins, with unclear code debt, anymore.
 
 ## Demo

@@ -30,7 +30,15 @@ export function SimpleDonutCard() {
           {" />"}
         </div>
 
-        <div className="text">Draw a chart so easily</div>
+        <div className="text">
+          Draw a chart so easily.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#simple-donut-chart"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );

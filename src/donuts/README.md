@@ -1,10 +1,10 @@
 # Donut Chart
 
-Here we use SVG `<path/>` to draw the chart.
+It is fairly easy to use SVG `<path/>` to draw the slices.
 
 ## SVG Path
 
-According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), we use can use `A` to draw for arc. We may take a look of [DrawSlice.tsx](cores/DrawSlice.tsx).
+According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), SVG path `A` are for drawing arc. Take a look of [DrawSlice.tsx](cores/DrawSlice.tsx).
 
 ```tsx
 const outerFromX = centerX + outerRadius * Math.cos(fromAngle);
@@ -120,7 +120,7 @@ const listener = (event: PointerEvent) => {
 
 Then adjust the `outerRadius`, you can let user select slice by mouse and finger, like in [SimpleChart.tsx](samples/SimpleChart.tsx).
 
-```ts
+```tsx
 <AnimatedSlice
   index={i}
   value={value}

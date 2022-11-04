@@ -74,7 +74,15 @@ export function CustomDonutCard() {
           {">"}
         </div>
 
-        <div className="text">Full control without boundary</div>
+        <div className="text">
+          Have full control without boundary.
+          <a
+            className="more"
+            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#css"
+          >
+            Read more...
+          </a>
+        </div>
       </Card>
     </div>
   );
