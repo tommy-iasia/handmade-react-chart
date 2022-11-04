@@ -24,7 +24,7 @@ export function SimpleChart({
   const yCapacity = (height - contentTop - contentBottom) / 40;
 
   const ys = items.flatMap((item) => item.points.map((point) => point.y));
-  const yMinimum = ys.length > 0 ? Math.min(...ys, 0) : 0;
+  const yMinimum = ys.length > 0 ? Math.min(...ys) : 0;
 
   return (
     <Chart

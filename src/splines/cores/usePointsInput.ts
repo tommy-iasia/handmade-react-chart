@@ -20,13 +20,16 @@ export function usePointsInput(
       source: inputPoint,
     }));
 
+    const xs = sourcePoints.map((point) => point.x);
+    const ys = sourcePoints.map((point) => point.y);
+
     const maximum = {
-      x: Math.max(...sourcePoints.map((point) => point.x)),
-      y: Math.max(...sourcePoints.map((point) => point.y)),
+      x: Math.max(...xs),
+      y: Math.max(...ys),
     };
     const minimum = {
-      x: Math.min(...sourcePoints.map((point) => point.x)),
-      y: Math.min(...sourcePoints.map((point) => point.y)),
+      x: Math.min(...xs),
+      y: Math.min(...ys),
     };
 
     return {

@@ -10,6 +10,7 @@ export function SliceLabels<T>({
     <>
       {items.map((item, i) => (
         <SliceLabel
+          key={i}
           index={i}
           pointRadius={pointRadius}
           lineLength={lineLength}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { AdvancedSplineChart } from "../components";
 import { Card } from "./Card";
 import { useAnimatedSplineItems } from "./useAnimatedSplineItems";
@@ -77,14 +77,14 @@ export function AdvancedSplineCard() {
             <span className="value" onClick={() => setShortCode(false)}>
               [
               {indexItems.map((item, i) => (
-                <>
+                <Fragment key={i}>
                   <br />
                   {"{"}
                   points: [{"{"}x:{item.points[0].x}, y:{item.points[0].y}
                   {"}"}
                   <span className="more">...</span>]{"}"}
                   {i < indexItems.length - 1 && ","}
-                </>
+                </Fragment>
               ))}
               ]
             </span>
@@ -92,7 +92,7 @@ export function AdvancedSplineCard() {
             <span className="value" onDoubleClick={() => setShortCode(true)}>
               [
               {indexItems.map((item, i) => (
-                <>
+                <Fragment key={i}>
                   <br />
                   {"{"}
                   points: [
@@ -108,7 +108,7 @@ export function AdvancedSplineCard() {
                   ))}
                   ]{"}"}
                   {i < indexItems.length - 1 && ","}
-                </>
+                </Fragment>
               ))}
               <br />]
             </span>
