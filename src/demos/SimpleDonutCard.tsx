@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SimpleDonutChart } from "../components";
 import { Card } from "./Card";
+
 const items = [
   [1, 2, 3],
   [100, 800],

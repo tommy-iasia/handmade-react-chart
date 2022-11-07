@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RawSpline } from "../components";
 import { Card } from "./Card";
+
 const items = [
   [250, 20, 180, 150, 230, 200],
   [180, 250, 110, 230, 150, 210, 170, 200],

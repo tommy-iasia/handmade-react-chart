@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { AdvancedSplineChart } from "../components";
 import { Card } from "./Card";
 import { useAnimatedSplineItems } from "./useAnimatedSplineItems";
+
 export const data1 = [
   {
     points: [

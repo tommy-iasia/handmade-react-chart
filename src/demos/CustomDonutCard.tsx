@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { DonutChart, ValueSlice } from "../components";
 import { Card } from "./Card";
+
 const values1 = [10, 20, 30];
 const values2 = [100, 100, 30];
 
