@@ -1,6 +1,7 @@
 import { useContext, useMemo } from "react";
 import { ChartContext } from "./ChartContext";
 import { getSplinePath } from "./getSplinePath";
+import { Point } from "./point";
 import "./Spline.css";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
@@ -47,6 +48,6 @@ export function Spline({ className, points: propsPoints, smoothness }: Props) {
 
 interface Props {
   className?: string;
-  points: { x: number; y: number }[];
+  points: Point[];
   smoothness?: number;
 }

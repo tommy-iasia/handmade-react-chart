@@ -1,7 +1,6 @@
-export function getSplinePath(
-  points: { x: number; y: number }[],
-  smoothness: number
-) {
+import { Point } from "./point";
+
+export function getSplinePath(points: Point[], smoothness: number) {
   const [firstPoint, ...otherPoints] = points;
 
   const firstText = `M ${firstPoint.x} ${firstPoint.y}`;

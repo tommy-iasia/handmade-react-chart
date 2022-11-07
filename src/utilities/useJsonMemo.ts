@@ -1,27 +1,18 @@
 import { useRef } from "react";
 
-export function useJsonMemo<T>(
-  value: T,
-  replacer?: (key: string, value: any) => any
-) {
-  const ref = useRef({
-    value,
-    text: JSON.stringify(value, replacer),
-  });
+export function useJsonMemo<T>(value: T) {
+  const ref = useRef<T>(value);
 
-  if (value === ref.current.value) {
+  if (value === ref.current) {
     return value;
   } else {
-    const text = JSON.stringify(value);
+    const oldText = JSON.stringify(ref.current);
+    const newText = JSON.stringify(value);
 
-    if (ref.current.text === text) {
-      return ref.current.value;
+    if (oldText === newText) {
+      return ref.current;
     } else {
-      ref.current = {
-        value,
-        text,
-      };
-
+      ref.current = value;
       return value;
     }
   }

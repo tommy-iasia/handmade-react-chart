@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Area } from "../cores/Area";
 import { Chart } from "../cores/Chart";
 import { Coordinate } from "../cores/Coordinate";
+import { Point } from "../cores/point";
 import { Spline } from "../cores/Spline";
 import { SimpleGrid } from "./SimpleGrid";
 import { SimpleXAxis } from "./SimpleXAxis";
@@ -69,9 +70,7 @@ interface Props {
   className?: string;
   width: number;
   height: number;
-  items: {
-    points: { x: number; y: number }[];
-  }[];
+  items: { points: Point[] }[];
   smoothness?: number;
   children?: ReactNode;
 }

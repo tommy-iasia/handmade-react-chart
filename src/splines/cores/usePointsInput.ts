@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useJsonMemo } from "../../utilities/useJsonMemo";
 import { ChartContext } from "./ChartContext";
+import { Point } from "./point";
 import { PointsInput } from "./pointsInput";
 
 export function usePointsInput(
   type: PointsInput["type"],
-  inputPoints: { x: number; y: number }[]
+  inputPoints: Point[]
 ) {
   const { setPointsInputs } = useContext(ChartContext);
 
@@ -14,14 +15,13 @@ export function usePointsInput(
       return undefined;
     }
 
-    const sourcePoints = inputPoints.map((inputPoint) => ({
+    const purePoints = inputPoints.map((inputPoint) => ({
       x: inputPoint.x,
       y: inputPoint.y,
-      source: inputPoint,
     }));
 
-    const xs = sourcePoints.map((point) => point.x);
-    const ys = sourcePoints.map((point) => point.y);
+    const xs = purePoints.map((point) => point.x);
+    const ys = purePoints.map((point) => point.y);
 
     const maximum = {
       x: Math.max(...xs),
@@ -34,15 +34,13 @@ export function usePointsInput(
 
     return {
       type,
-      points: sourcePoints,
+      points: purePoints,
       maximum,
       minimum,
     };
   })();
 
-  const memoInput = useJsonMemo(inputInput, (key, value) =>
-    key === "source" ? undefined : value
-  );
+  const memoInput = useJsonMemo(inputInput);
 
   useEffect(() => {
     if (memoInput) {

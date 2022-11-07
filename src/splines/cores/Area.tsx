@@ -2,6 +2,7 @@ import { useContext, useMemo } from "react";
 import "./Area.css";
 import { ChartContext } from "./ChartContext";
 import { getSplinePath } from "./getSplinePath";
+import { Point } from "./point";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 
@@ -63,7 +64,7 @@ export function Area({
 
 interface Props {
   className?: string;
-  points: { x: number; y: number }[];
+  points: Point[];
   baseY: number;
   smoothness?: number;
 }

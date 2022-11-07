@@ -1,9 +1,7 @@
 import { useMemo } from "react";
-import { useAnimated } from "../components";
+import { Point, useAnimated } from "../components";
 
-export function useAnimatedSplineItems(
-  inputItems: { points: { x: number; y: number }[] }[]
-) {
+export function useAnimatedSplineItems(inputItems: { points: Point[] }[]) {
   return useAnimated(
     inputItems,
     800,

@@ -1,17 +1,17 @@
-import { ReactNode, useMemo } from "react";
-import { SourcePoint } from "../cores/sourcePoint";
+import { ReactNode } from "react";
+import { Point } from "../cores/point";
 import { PointLabels } from "./PointLabels";
 import { SimpleChart } from "./SimpleChart";
 
-export function AdvancedChart<T extends { x: number; y: number }>({
+export function AdvancedChart({
   className,
   width,
   height,
   items,
   smoothness,
-  getLabel: inputGetLabel,
+  getLabel,
   children,
-}: Props<T>) {
+}: Props) {
   return (
     <SimpleChart
       className={className}
@@ -20,26 +20,19 @@ export function AdvancedChart<T extends { x: number; y: number }>({
       items={items}
       smoothness={smoothness}
     >
-      <PointLabels
-        inputType="spline"
-        getLabel={useMemo(
-          () => (sourcePoint: SourcePoint) =>
-            inputGetLabel(sourcePoint.source as T),
-          [inputGetLabel]
-        )}
-      />
+      <PointLabels items={items} getLabel={getLabel} />
 
       {children}
     </SimpleChart>
   );
 }
 
-interface Props<T extends { x: number; y: number }> {
+interface Props {
   className?: string;
   width: number;
   height: number;
-  items: { points: T[] }[];
+  items: { points: Point[] }[];
   smoothness?: number;
-  getLabel: (point: T) => string;
+  getLabel: (point: Point) => string;
   children?: ReactNode;
 }
