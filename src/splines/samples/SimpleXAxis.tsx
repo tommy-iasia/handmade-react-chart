@@ -4,7 +4,7 @@ import { findRange } from "../cores/findRange";
 import { XAxis } from "../cores/XAxis";
 import { getSimpleAxisValues } from "./getSimpleAxisValues";
 
-export function SimpleXAxis({ capacity }: Props) {
+export function SimpleXAxis({ className, capacity }: Props) {
   const { coordinateInput, pointsInputs } = useContext(ChartContext);
 
   const range = useMemo(() => {
@@ -30,9 +30,10 @@ export function SimpleXAxis({ capacity }: Props) {
     return <></>;
   }
 
-  return <XAxis y={range.minimum.y} labels={labels} />;
+  return <XAxis className={className} y={range.minimum.y} labels={labels} />;
 }
 
 interface Props {
+  className?: string;
   capacity: number;
 }

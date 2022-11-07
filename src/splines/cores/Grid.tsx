@@ -2,7 +2,7 @@ import "./Grid.css";
 import { useDraw } from "./useDraw";
 import { useRange } from "./useRange";
 
-export function Grid({ xs, ys }: Props) {
+export function Grid({ className, xs, ys }: Props) {
   const range = useRange();
 
   const draw = useDraw();
@@ -16,7 +16,7 @@ export function Grid({ xs, ys }: Props) {
   }
 
   return (
-    <div className="handmadeReactChart-splines-cores-Grid">
+    <div className={`handmadeReactChart-splines-cores-Grid ${className ?? ""}`}>
       {xs?.map((x, i) => {
         const top = draw({ x, y: range.maximum.y });
         const bottom = draw({ x, y: range.minimum.y });
@@ -47,6 +47,7 @@ export function Grid({ xs, ys }: Props) {
 }
 
 interface Props {
+  className?: string;
   xs?: number[];
   ys?: number[];
 }

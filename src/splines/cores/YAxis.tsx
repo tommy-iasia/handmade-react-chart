@@ -4,7 +4,7 @@ import { usePointsInput } from "./usePointsInput";
 import { useRange } from "./useRange";
 import "./YAxis.css";
 
-export function YAxis({ x, labels }: Props) {
+export function YAxis({ className, x, labels }: Props) {
   const pointsInput = usePointsInput(
     "axis",
     labels.map((label) => ({ x, y: label.y }))
@@ -31,7 +31,7 @@ export function YAxis({ x, labels }: Props) {
 
   return (
     <div
-      className="handmadeReactChart-splines-cores-YAxis"
+      className={`handmadeReactChart-splines-cores-YAxis ${className ?? ""}`}
       style={{
         left: minimumPoint.x,
         top: maximumPoint.y,
@@ -62,6 +62,7 @@ export function YAxis({ x, labels }: Props) {
 }
 
 interface Props {
+  className?: string;
   x: number;
   labels: { y: number; text: string }[];
 }

@@ -5,7 +5,12 @@ import { getSplinePath } from "./getSplinePath";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 
-export function Area({ points: propsPoints, baseY, smoothness }: Props) {
+export function Area({
+  className,
+  points: propsPoints,
+  baseY,
+  smoothness,
+}: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
   const pointsInput = usePointsInput("area", propsPoints);
@@ -47,7 +52,7 @@ export function Area({ points: propsPoints, baseY, smoothness }: Props) {
 
   return (
     <svg
-      className="handmadeReactChart-splines-cores-Area"
+      className={`handmadeReactChart-splines-cores-Area ${className ?? ""}`}
       width={chartWidth}
       height={chartHeight}
     >
@@ -57,6 +62,7 @@ export function Area({ points: propsPoints, baseY, smoothness }: Props) {
 }
 
 interface Props {
+  className?: string;
   points: { x: number; y: number }[];
   baseY: number;
   smoothness?: number;

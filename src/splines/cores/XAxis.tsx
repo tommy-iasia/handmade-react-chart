@@ -4,7 +4,7 @@ import { usePointsInput } from "./usePointsInput";
 import { useRange } from "./useRange";
 import "./XAxis.css";
 
-export function XAxis({ y, labels }: Props) {
+export function XAxis({ className, y, labels }: Props) {
   const pointsInput = usePointsInput(
     "axis",
     labels.map((label) => ({ x: label.x, y }))
@@ -31,7 +31,7 @@ export function XAxis({ y, labels }: Props) {
 
   return (
     <div
-      className="handmadeReactChart-splines-cores-XAxis"
+      className={`handmadeReactChart-splines-cores-XAxis ${className ?? ""}`}
       style={{
         left: minimumPoint.x,
         top: minimumPoint.y,
@@ -62,6 +62,7 @@ export function XAxis({ y, labels }: Props) {
 }
 
 interface Props {
+  className?: string;
   y: number;
   labels: { x: number; text: string }[];
 }

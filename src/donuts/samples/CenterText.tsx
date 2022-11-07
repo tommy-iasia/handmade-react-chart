@@ -1,9 +1,11 @@
 import "./CenterText.css";
 
-export function CenterText({ width, height, text }: Props) {
+export function CenterText({ className, width, height, text }: Props) {
   return (
     <div
-      className="handmadeReactChart-donuts-samples-CenterText"
+      className={`handmadeReactChart-donuts-samples-CenterText ${
+        className ?? ""
+      }`}
       style={{ width, height }}
     >
       {text}
@@ -12,6 +14,7 @@ export function CenterText({ width, height, text }: Props) {
 }
 
 interface Props {
+  className?: string;
   width: number;
   height: number;
   text: string;
