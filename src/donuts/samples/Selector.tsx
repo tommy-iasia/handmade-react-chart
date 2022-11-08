@@ -24,8 +24,10 @@ export function Selector() {
         return;
       }
 
-      const x = event.offsetX - centerX;
-      const y = event.offsetY - centerY;
+      const bounding = current.getBoundingClientRect();
+
+      const x = event.clientX - bounding.left - centerX;
+      const y = event.clientY - bounding.top - centerY;
 
       const distance = Math.sqrt(x * x + y * y);
       if (distance < innerRadius) {
