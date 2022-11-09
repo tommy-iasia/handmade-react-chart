@@ -5,18 +5,12 @@ import { useRange } from "./useRange";
 import "./XAxis.css";
 
 export function XAxis({ className, y, labels }: Props) {
-  const pointsInput = usePointsInput(
-    "axis",
-    labels.map((label) => ({ x: label.x, y }))
-  );
+  const points = labels.map((label) => ({ x: label.x, y }));
+  usePointsInput("axis", points);
 
   const range = useRange();
 
   const draw = useDraw();
-
-  if (!pointsInput) {
-    return <></>;
-  }
 
   if (!range) {
     return <></>;
