@@ -5,7 +5,7 @@ import { useRange } from "./useRange";
 import "./YAxis.css";
 
 export function YAxis({ className, x, labels }: Props) {
-  const pointsInput = usePointsInput(
+  usePointsInput(
     "axis",
     labels.map((label) => ({ x, y: label.y }))
   );
@@ -13,10 +13,6 @@ export function YAxis({ className, x, labels }: Props) {
   const range = useRange();
 
   const draw = useDraw();
-
-  if (!pointsInput) {
-    return <></>;
-  }
 
   if (!range) {
     return <></>;
