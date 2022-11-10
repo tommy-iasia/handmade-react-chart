@@ -139,13 +139,16 @@ In fact, axis is one of the important places for developer to show user the poin
 />
 ```
 
-However, if you want a simple example code, checkout [SimpleXAxis](samples/SimpleXAxis.tsx) and[getSimpleAxisValues](samples/getSimpleAxisValues.ts).
+However, if you want a simple example code, checkout [SimpleXAxis](samples/SimpleXAxis.tsx) and [getSimpleAxisValues](samples/getSimpleAxisValues.ts).
 
 ```ts
-const step = Math.pow(10, Math.ceil(Math.log10(Math.abs(maximum))) - 1);
+const step = Math.pow(
+  10,
+  Math.ceil(Math.log10(Math.max(Math.abs(maximum), Math.abs(minimum)))) - 1
+);
 ```
 
-For example, When maximum value is 100, the above guesses 10, 20, 30, etc.
+For example, When range is 100, the above guesses 10, 20, 30, etc.
 
 ## Simple Spline Chart
 

@@ -3,7 +3,10 @@ export function getSimpleAxisValues(
   maximum: number,
   capacity: number
 ) {
-  const step = Math.pow(10, Math.ceil(Math.log10(Math.abs(maximum))) - 1);
+  const step = Math.pow(
+    10,
+    Math.ceil(Math.log10(Math.max(Math.abs(maximum), Math.abs(minimum)))) - 1
+  );
 
   for (const factor of [0.5, 1, 2, 3, 5]) {
     const count = 1 + Math.floor(10 / factor) * 2;
