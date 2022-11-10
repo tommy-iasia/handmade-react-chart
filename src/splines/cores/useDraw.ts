@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ChartContext } from "./ChartContext";
+import { Point } from "./point";
 import { useRange } from "./useRange";
 
 export function useDraw() {
@@ -28,7 +29,7 @@ export function useDraw() {
           contentTop
       : () => contentHeight / 2 + contentTop;
 
-  return (point: { x: number; y: number }) => ({
+  return (point: Point) => ({
     x: drawX(point.x),
     y: drawY(point.y),
   });

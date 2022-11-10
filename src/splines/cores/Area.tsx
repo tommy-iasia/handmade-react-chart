@@ -2,13 +2,34 @@ import { useContext, useMemo } from "react";
 import "./Area.css";
 import { ChartContext } from "./ChartContext";
 import { getSplinePath } from "./getSplinePath";
+import { Point } from "./point";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 
-export function Area({ points: propsPoints, baseY, smoothness }: Props) {
+export function Area({
+  className,
+  points: splinePoints,
+  baseY,
+  smoothness,
+}: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
-  const pointsInput = usePointsInput("area", propsPoints);
+  const areaPoints = useMemo(() => {
+    if (splinePoints.length < 2) {
+      return [];
+    }
+
+    const firstPoint = splinePoints[0];
+    const lastPoint = splinePoints[splinePoints.length - 1];
+
+    return [
+      ...splinePoints,
+      { x: lastPoint.x, y: baseY },
+      { x: firstPoint.x, y: baseY },
+    ];
+  }, [baseY, splinePoints]);
+
+  const pointsInput = usePointsInput("area", areaPoints);
 
   const draw = useDraw();
 
@@ -22,24 +43,22 @@ export function Area({ points: propsPoints, baseY, smoothness }: Props) {
     }
 
     const { points: inputPoints } = pointsInput;
-    const drawPoints = inputPoints.map((point) => draw(point));
 
-    if (drawPoints.length < 2) {
+    if (inputPoints.length < 4) {
       return undefined;
     }
 
-    const splinePath = getSplinePath(drawPoints, smoothness ?? 0.3);
+    const drawPoints = inputPoints.map((point) => draw(point));
 
-    const firstInputPoint = inputPoints[0];
-    const firstDrawPoint = draw({ x: firstInputPoint.x, y: baseY });
+    const splinePoints = drawPoints.slice(0, -2);
+    const splinePath = getSplinePath(splinePoints, smoothness ?? 0.3);
 
-    const lastInputPoint = inputPoints[inputPoints.length - 1];
-    const lastDrawPoint = draw({ x: lastInputPoint.x, y: baseY });
+    const baseStartPoint = drawPoints[drawPoints.length - 2];
+    const baseEndPoint = drawPoints[drawPoints.length - 1];
+    const basePath = `L ${baseStartPoint.x} ${baseStartPoint.y} L ${baseEndPoint.x} ${baseEndPoint.y} Z`;
 
-    const completePath = `L ${lastDrawPoint.x} ${lastDrawPoint.y} L ${firstDrawPoint.x} ${firstDrawPoint.y} Z`;
-
-    return `${splinePath} ${completePath}`;
-  }, [baseY, draw, pointsInput, smoothness]);
+    return `${splinePath} ${basePath}`;
+  }, [draw, pointsInput, smoothness]);
 
   if (!path) {
     return <></>;
@@ -47,7 +66,7 @@ export function Area({ points: propsPoints, baseY, smoothness }: Props) {
 
   return (
     <svg
-      className="handmadeReactChart-splines-cores-Area"
+      className={`handmadeReactChart-splines-cores-Area ${className ?? ""}`}
       width={chartWidth}
       height={chartHeight}
     >
@@ -57,7 +76,8 @@ export function Area({ points: propsPoints, baseY, smoothness }: Props) {
 }
 
 interface Props {
-  points: { x: number; y: number }[];
+  className?: string;
+  points: Point[];
   baseY: number;
   smoothness?: number;
 }

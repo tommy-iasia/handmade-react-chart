@@ -1,11 +1,12 @@
 import { useContext, useMemo } from "react";
 import { ChartContext } from "./ChartContext";
 import { getSplinePath } from "./getSplinePath";
+import { Point } from "./point";
 import "./Spline.css";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 
-export function Spline({ points: propsPoints, smoothness }: Props) {
+export function Spline({ className, points: propsPoints, smoothness }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
   const pointsInput = usePointsInput("spline", propsPoints);
@@ -36,7 +37,7 @@ export function Spline({ points: propsPoints, smoothness }: Props) {
 
   return (
     <svg
-      className="handmadeReactChart-splines-cores-Spline"
+      className={`handmadeReactChart-splines-cores-Spline ${className ?? ""}`}
       width={chartWidth}
       height={chartHeight}
     >
@@ -46,6 +47,7 @@ export function Spline({ points: propsPoints, smoothness }: Props) {
 }
 
 interface Props {
-  points: { x: number; y: number }[];
+  className?: string;
+  points: Point[];
   smoothness?: number;
 }

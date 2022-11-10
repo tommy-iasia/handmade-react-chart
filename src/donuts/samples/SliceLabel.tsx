@@ -3,7 +3,13 @@ import { ChartContext } from "../cores/ChartContext";
 import { useAngle } from "../cores/useAngle";
 import "./SliceLabel.css";
 
-export function SliceLabel({ index, pointRadius, lineLength, text }: Props) {
+export function SliceLabel({
+  className,
+  index,
+  pointRadius,
+  lineLength,
+  text,
+}: Props) {
   const { chartWidth, centerX, centerY } = useContext(ChartContext);
 
   const angle = useAngle(index);
@@ -20,7 +26,9 @@ export function SliceLabel({ index, pointRadius, lineLength, text }: Props) {
 
   return (
     <div
-      className="handmadeReactChart-donuts-samples-SliceLabel"
+      className={`handmadeReactChart-donuts-samples-SliceLabel ${
+        className ?? ""
+      }`}
       style={{
         left: right ? pointX : undefined,
         right: right ? undefined : chartWidth - pointX,
@@ -45,6 +53,7 @@ export function SliceLabel({ index, pointRadius, lineLength, text }: Props) {
 }
 
 interface Props {
+  className?: string;
   index: number;
   pointRadius: number;
   lineLength: number;

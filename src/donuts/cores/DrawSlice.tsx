@@ -3,6 +3,7 @@ import { ChartContext } from "./ChartContext";
 import "./DrawSlice.css";
 
 export function DrawSlice({
+  className,
   centerX,
   centerY,
   innerRadius,
@@ -28,7 +29,7 @@ export function DrawSlice({
 
   return (
     <svg
-      className="handmadeReactChart-donuts-cores-DrawSlice"
+      className={`handmadeReactChart-donuts-cores-DrawSlice ${className ?? ""}`}
       width={chartWidth}
       height={chartHeight}
     >
@@ -44,6 +45,7 @@ export function DrawSlice({
 }
 
 interface Props {
+  className?: string;
   centerX: number;
   centerY: number;
   innerRadius: number;

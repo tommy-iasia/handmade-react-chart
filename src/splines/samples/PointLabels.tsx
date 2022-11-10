@@ -1,26 +1,24 @@
-import { useContext } from "react";
-import { ChartContext } from "../cores/ChartContext";
-import { PointsInput } from "../cores/pointsInput";
-import { SourcePoint } from "../cores/sourcePoint";
+import { Point } from "../cores/point";
 import { PointLabel } from "./PointLabel";
 
-export function PointLabels({ inputType, getLabel }: Props) {
-  const { pointsInputs } = useContext(ChartContext);
-
-  const points = pointsInputs
-    .filter((input) => input.type === inputType)
-    .flatMap((input) => input.points);
-
+export function PointLabels({ items, getLabel }: Props) {
   return (
     <>
-      {points.map((point, i) => (
-        <PointLabel key={i} x={point.x} y={point.y} text={getLabel(point)} />
-      ))}
+      {items.flatMap((item, i) =>
+        item.points.map((point, j) => (
+          <PointLabel
+            key={`${i}-${j}`}
+            x={point.x}
+            y={point.y}
+            text={getLabel(point)}
+          />
+        ))
+      )}
     </>
   );
 }
 
 interface Props {
-  inputType: PointsInput["type"];
-  getLabel: (sourcePoint: SourcePoint) => string;
+  items: { points: Point[] }[];
+  getLabel: (point: Point) => string;
 }

@@ -3,7 +3,7 @@ import { ChartContext } from "../cores/ChartContext";
 import { useDraw } from "../cores/useDraw";
 import "./PointLabel.css";
 
-export function PointLabel({ x: inputX, y: inputY, text }: Props) {
+export function PointLabel({ className, x: inputX, y: inputY, text }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
   const draw = useDraw();
@@ -19,7 +19,9 @@ export function PointLabel({ x: inputX, y: inputY, text }: Props) {
 
   return (
     <div
-      className={`handmadeReactChart-splines-samples-PointLabel ${horizontal} ${vertical}`}
+      className={`handmadeReactChart-splines-samples-PointLabel ${horizontal} ${vertical} ${
+        className ?? ""
+      }`}
       style={{
         left: horizontal === "right" ? drawX : undefined,
         right: horizontal === "left" ? chartWidth - drawX : undefined,
@@ -35,6 +37,7 @@ export function PointLabel({ x: inputX, y: inputY, text }: Props) {
 }
 
 interface Props {
+  className?: string;
   x: number;
   y: number;
   text: string;

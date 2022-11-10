@@ -98,9 +98,14 @@ export const ChartContext = createContext<{
 ```ts
 export interface PointsInput {
   type: "spline" | "area" | "axis" | "dots";
-  points: SourcePoint[];
-  maximum: { x: number; y: number };
-  minimum: { x: number; y: number };
+  points: Point[];
+  maximum: Point;
+  minimum: Point;
+}
+
+export interface Point {
+  x: number;
+  y: number;
 }
 ```
 

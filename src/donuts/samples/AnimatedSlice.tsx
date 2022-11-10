@@ -5,6 +5,7 @@ import { useAngle } from "../cores/useAngle";
 import { useAnimatedValue } from "./useAnimatedValue";
 
 export function AnimatedSlice({
+  className,
   index,
   value,
   outerRadius: propsOuterRadius,
@@ -41,6 +42,7 @@ export function AnimatedSlice({
 
   return (
     <DrawSlice
+      className={className}
       centerX={chartCenterX}
       centerY={chartCenterY}
       innerRadius={innerRadius}
@@ -52,6 +54,7 @@ export function AnimatedSlice({
 }
 
 interface Props {
+  className?: string;
   index: number;
   value: number;
   outerRadius?: number;

@@ -1,8 +1,8 @@
-import { SourcePoint } from "./sourcePoint";
+import { Point } from "./point";
 
 export interface PointsInput {
   type: "spline" | "area" | "axis" | "dots";
-  points: SourcePoint[];
-  maximum: { x: number; y: number };
-  minimum: { x: number; y: number };
+  points: Point[];
+  maximum: Point;
+  minimum: Point;
 }

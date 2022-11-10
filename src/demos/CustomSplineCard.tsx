@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Area, Grid, Spline, SplineChart, XAxis, YAxis } from "../components";
 import { Card } from "./Card";
+
 export function CustomSplineCard() {
   const [index, setIndex] = useState(0);
 

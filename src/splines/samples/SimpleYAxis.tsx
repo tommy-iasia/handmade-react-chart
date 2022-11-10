@@ -4,7 +4,7 @@ import { findRange } from "../cores/findRange";
 import { YAxis } from "../cores/YAxis";
 import { getSimpleAxisValues } from "./getSimpleAxisValues";
 
-export function SimpleYAxis({ capacity }: Props) {
+export function SimpleYAxis({ className, capacity }: Props) {
   const { coordinateInput, pointsInputs } = useContext(ChartContext);
 
   const range = useMemo(() => {
@@ -34,9 +34,10 @@ export function SimpleYAxis({ capacity }: Props) {
     return <></>;
   }
 
-  return <YAxis x={range.minimum.x} labels={labels} />;
+  return <YAxis className={className} x={range.minimum.x} labels={labels} />;
 }
 
 interface Props {
+  className?: string;
   capacity: number;
 }

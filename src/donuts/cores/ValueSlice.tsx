@@ -4,6 +4,7 @@ import { DrawSlice } from "./DrawSlice";
 import { useAngle } from "./useAngle";
 
 export function ValueSlice({
+  className,
   index,
   value,
   innerRadius: propsInnerRadius,
@@ -32,6 +33,7 @@ export function ValueSlice({
 
   return (
     <DrawSlice
+      className={className}
       centerX={centerX}
       centerY={centerY}
       innerRadius={propsInnerRadius ?? chartInnerRadius}
@@ -43,6 +45,7 @@ export function ValueSlice({
 }
 
 interface Props {
+  className?: string;
   index: number;
   value: number;
   innerRadius?: number;
