@@ -3,8 +3,8 @@ import "./Area.css";
 import { ChartContext } from "./ChartContext";
 import { getSplinePath } from "./getSplinePath";
 import { Point } from "./point";
+import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
-import { usePointsInput } from "./usePointsInput";
 
 export function Area({
   className,
@@ -29,12 +29,12 @@ export function Area({
     ];
   }, [baseY, splinePoints]);
 
-  usePointsInput("area", areaPoints);
+  const chartInput = useChartInput("area", areaPoints);
 
   const draw = useDraw();
 
   const path = useMemo(() => {
-    if (!areaPoints) {
+    if (!chartInput) {
       return undefined;
     }
 
@@ -42,11 +42,13 @@ export function Area({
       return undefined;
     }
 
-    if (areaPoints.length < 4) {
+    const { points: inputPoints } = chartInput;
+
+    if (inputPoints.length < 4) {
       return undefined;
     }
 
-    const drawPoints = areaPoints.map((point) => draw(point));
+    const drawPoints = inputPoints.map((point) => draw(point));
 
     const splinePoints = drawPoints.slice(0, -2);
     const splinePath = getSplinePath(splinePoints, smoothness ?? 0.3);
@@ -56,7 +58,7 @@ export function Area({
     const basePath = `L ${baseStartPoint.x} ${baseStartPoint.y} L ${baseEndPoint.x} ${baseEndPoint.y} Z`;
 
     return `${splinePath} ${basePath}`;
-  }, [draw, areaPoints, smoothness]);
+  }, [chartInput, draw, smoothness]);
 
   if (!path) {
     return <></>;
