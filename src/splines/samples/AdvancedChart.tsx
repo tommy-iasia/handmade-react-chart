@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Point } from "../cores/point";
+import { Item } from "./item";
 import { PointLabels } from "./PointLabels";
 import { SimpleChart } from "./SimpleChart";
 
@@ -31,8 +32,8 @@ interface Props {
   className?: string;
   width: number;
   height: number;
-  items: { points: Point[] }[];
+  items: Item[];
   smoothness?: number;
-  getLabel: (point: Point) => string;
+  getLabel: (point: Point, item: Item) => string;
   children?: ReactNode;
 }

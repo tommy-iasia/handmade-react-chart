@@ -1,14 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 import { useRange } from "./useRange";
 import "./XAxis.css";
 
 export function XAxis({ className, y, labels }: Props) {
-  usePointsInput(
-    "axis",
-    labels.map((label) => ({ x: label.x, y }))
+  const labelPoints = useMemo(
+    () => labels.map((label) => ({ x: label.x, y })),
+    [labels, y]
   );
+  usePointsInput("axis", labelPoints);
 
   const range = useRange();
 

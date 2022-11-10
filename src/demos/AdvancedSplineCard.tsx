@@ -59,7 +59,7 @@ export function AdvancedSplineCard() {
           width={250}
           height={200}
           items={animatedItems}
-          getLabel={(point) => `${point.x}, ${point.y}`}
+          getLabel={({ x, y }) => `${x}, ${y}`}
         />
 
         <div className="code">

@@ -1,4 +1,5 @@
 import { Point } from "../cores/point";
+import { Item } from "./item";
 import { PointLabel } from "./PointLabel";
 
 export function PointLabels({ items, getLabel }: Props) {
@@ -10,7 +11,7 @@ export function PointLabels({ items, getLabel }: Props) {
             key={`${i}-${j}`}
             x={point.x}
             y={point.y}
-            text={getLabel(point)}
+            text={getLabel(point, item)}
           />
         ))
       )}
@@ -19,6 +20,6 @@ export function PointLabels({ items, getLabel }: Props) {
 }
 
 interface Props {
-  items: { points: Point[] }[];
-  getLabel: (point: Point) => string;
+  items: Item[];
+  getLabel: (point: Point, item: Item) => string;
 }
