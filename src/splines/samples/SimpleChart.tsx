@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { Area } from "../cores/Area";
 import { Chart } from "../cores/Chart";
-import { Coordinate } from "../cores/Coordinate";
 import { Point } from "../cores/point";
 import { Spline } from "../cores/Spline";
 import { SimpleGrid } from "./SimpleGrid";
@@ -37,8 +36,6 @@ export function SimpleChart({
       contentRight={contentRight}
       contentBottom={contentBottom}
     >
-      <Coordinate includeOriginY={true} />
-
       <SimpleGrid xCapacity={xCapacity} yCapacity={yCapacity} />
 
       <SimpleXAxis capacity={xCapacity} />
@@ -48,7 +45,7 @@ export function SimpleChart({
         <Area
           key={`area-${i}`}
           points={item.points}
-          baseY={Math.min(yMinimum, 0)}
+          baseY={yMinimum}
           smoothness={smoothness}
         />
       ))}

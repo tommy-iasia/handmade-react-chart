@@ -1,27 +1,18 @@
-import { useContext, useEffect } from "react";
-import { useJsonMemo } from "../../utilities/useJsonMemo";
+import { useContext, useEffect, useMemo } from "react";
 import { ChartContext } from "./ChartContext";
 import { Point } from "./point";
 import { PointsInput } from "./pointsInput";
 
-export function usePointsInput(
-  type: PointsInput["type"],
-  inputPoints: Point[]
-) {
+export function usePointsInput(type: PointsInput["type"], points: Point[]) {
   const { setPointsInputs } = useContext(ChartContext);
 
-  const inputInput = (() => {
-    if (inputPoints.length <= 0) {
+  const input = useMemo(() => {
+    if (points.length <= 0) {
       return undefined;
     }
 
-    const purePoints = inputPoints.map((inputPoint) => ({
-      x: inputPoint.x,
-      y: inputPoint.y,
-    }));
-
-    const xs = purePoints.map((point) => point.x);
-    const ys = purePoints.map((point) => point.y);
+    const xs = points.map((point) => point.x);
+    const ys = points.map((point) => point.y);
 
     const maximum = {
       x: Math.max(...xs),
@@ -34,22 +25,18 @@ export function usePointsInput(
 
     return {
       type,
-      points: purePoints,
+      points,
       maximum,
       minimum,
     };
-  })();
-
-  const memoInput = useJsonMemo(inputInput);
+  }, [points, type]);
 
   useEffect(() => {
-    if (memoInput) {
-      setPointsInputs((oldInputs) => [...oldInputs, memoInput]);
+    if (input) {
+      setPointsInputs((oldInputs) => [...oldInputs, input]);
 
       return () =>
-        setPointsInputs((inputs) => inputs.filter((t) => t !== memoInput));
+        setPointsInputs((inputs) => inputs.filter((t) => t !== input));
     }
-  }, [memoInput, setPointsInputs]);
-
-  return memoInput;
+  }, [input, setPointsInputs]);
 }

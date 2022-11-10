@@ -1,14 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 import { useRange } from "./useRange";
 import "./YAxis.css";
 
 export function YAxis({ className, x, labels }: Props) {
-  usePointsInput(
-    "axis",
-    labels.map((label) => ({ x, y: label.y }))
+  const labelPoints = useMemo(
+    () => labels.map((label) => ({ x, y: label.y })),
+    [labels, x]
   );
+  usePointsInput("axis", labelPoints);
 
   const range = useRange();
 

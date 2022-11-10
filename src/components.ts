@@ -41,4 +41,3 @@ export { SimpleXAxis } from "./splines/samples/SimpleXAxis";
 export { SimpleYAxis } from "./splines/samples/SimpleYAxis";
 export { isDefined } from "./utilities/isDefined";
 export { useAnimated } from "./utilities/useAnimated";
-export { useJsonMemo } from "./utilities/useJsonMemo";

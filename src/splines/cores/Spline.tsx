@@ -6,15 +6,15 @@ import "./Spline.css";
 import { useDraw } from "./useDraw";
 import { usePointsInput } from "./usePointsInput";
 
-export function Spline({ className, points: propsPoints, smoothness }: Props) {
+export function Spline({ className, points: inputPoints, smoothness }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
-  const pointsInput = usePointsInput("spline", propsPoints);
+  usePointsInput("spline", inputPoints);
 
   const draw = useDraw();
 
   const path = useMemo(() => {
-    if (!pointsInput) {
+    if (inputPoints.length < 2) {
       return undefined;
     }
 
@@ -22,14 +22,10 @@ export function Spline({ className, points: propsPoints, smoothness }: Props) {
       return undefined;
     }
 
-    const drawPoints = pointsInput.points.map((point) => draw(point));
-
-    if (drawPoints.length < 2) {
-      return undefined;
-    }
+    const drawPoints = inputPoints.map((point) => draw(point));
 
     return getSplinePath(drawPoints, smoothness ?? 0.3);
-  }, [draw, pointsInput, smoothness]);
+  }, [draw, inputPoints, smoothness]);
 
   if (!path) {
     return <></>;
