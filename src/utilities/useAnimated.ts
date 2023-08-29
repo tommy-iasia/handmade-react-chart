@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useMemo, useReducer, useRef } from "react";
 
 export function useAnimated<T>(
   currentValue: T,
@@ -53,7 +53,7 @@ export function useAnimated<T>(
     [currentValue]
   );
 
-  return calculateRef.current(state);
+  return useMemo(() => calculate(state), [calculate, state]);
 }
 
 interface State<T> {
