@@ -8,43 +8,62 @@
     "left chart text right" auto
     "left chart . right" 1fr
     / auto auto 1fr auto;
-  transition: all 0.3s;
+  transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+  .handmadeReactChart-demos-Card {
+    padding: 20px;
+    grid-template:
+      "left chart right" auto
+      "left code right" 1fr
+      "left text right" auto
+      / auto 1fr auto;
+    justify-items: center;
+  }
 }
 
 .handmadeReactChart-demos-Card:not(:hover) {
   background-color: #f8f8f8;
 }
 
-.handmadeReactChart-demos-Card > .left,
-.handmadeReactChart-demos-Card > .right {
-  width: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@media (min-width: 600px) {
+  .handmadeReactChart-demos-Card > .left,
+  .handmadeReactChart-demos-Card > .right {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.handmadeReactChart-demos-Card > .left {
-  grid-area: left;
-  margin-right: 20px;
-}
+  .handmadeReactChart-demos-Card > .left {
+    grid-area: left;
+    margin-right: 20px;
+  }
 
-.handmadeReactChart-demos-Card > .left::after,
-.handmadeReactChart-demos-Card > .right::after {
-  display: block;
-  border: 8px solid;
-  border-color: transparent;
-  content: "";
-}
+  .handmadeReactChart-demos-Card > .left::after,
+  .handmadeReactChart-demos-Card > .right::after {
+    display: block;
+    border: 8px solid;
+    border-color: transparent;
+    content: "";
+  }
 
-.handmadeReactChart-demos-Card > .left::after {
-  border-right-color: #f8f8f8;
+  .handmadeReactChart-demos-Card > .left::after {
+    border-right-color: #f8f8f8;
+  }
 }
 
 .handmadeReactChart-demos-Card > .chart {
   grid-area: chart;
   margin-top: 30px;
-  margin-bottom: 30px;
-  margin-right: 40px;
+}
+
+@media (min-width: 600px) {
+  .handmadeReactChart-demos-Card > .chart {
+    margin-right: 40px;
+    margin-bottom: 30px;
+  }
 }
 
 .handmadeReactChart-demos-Card > .code {
@@ -83,8 +102,13 @@
   grid-area: text;
   margin-top: 25px;
   margin-bottom: 30px;
-  margin-left: 20px;
   color: #888;
+}
+
+@media (min-width: 600px) {
+  .handmadeReactChart-demos-Card > .text {
+    margin-left: 20px;
+  }
 }
 
 .handmadeReactChart-demos-Card > .text .more {
@@ -101,11 +125,13 @@
   color: #fff;
 }
 
-.handmadeReactChart-demos-Card > .right {
-  grid-area: right;
-  margin-left: 20px;
-}
+@media (min-width: 600px) {
+  .handmadeReactChart-demos-Card > .right {
+    grid-area: right;
+    margin-left: 20px;
+  }
 
-.handmadeReactChart-demos-Card > .right::after {
-  border-left-color: #f8f8f8;
+  .handmadeReactChart-demos-Card > .right::after {
+    border-left-color: #f8f8f8;
+  }
 }
