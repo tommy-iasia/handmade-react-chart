@@ -52,81 +52,83 @@ export function SimpleSplineCard() {
   const [shortCode, setShortCode] = useState(true);
 
   return (
-    <div onPointerLeave={() => setIndex((index + 1) % allData.length)}>
-      <Card>
-        <SimpleSplineChart
-          className="chart"
-          width={250}
-          height={200}
-          items={animatedItems}
-        />
+    <Card
+      next={(next) =>
+        setIndex((index + next + allData.length) % allData.length)
+      }
+    >
+      <SimpleSplineChart
+        className="chart"
+        width={250}
+        height={200}
+        items={animatedItems}
+      />
 
-        <div className="code">
-          {"<"}
-          <span className="name">SimpleSplineChart</span>
-          <br />
-          <span className="property">width</span>={"{"}
-          <span className="value">250</span>
-          {"}"}
-          <span className="property">height</span>={"{"}
-          <span className="value">200</span>
-          {"}"}
-          <br />
-          <span className="property">items</span>={"{"}
-          {shortCode ? (
-            <span className="value" onClick={() => setShortCode(false)}>
-              [
-              {indexItems.map((item, i) => (
-                <Fragment key={i}>
-                  <br />
-                  {"{"}
-                  points: [{"{"}x:{item.points[0].x}, y:{item.points[0].y}
-                  {"}"}
-                  <span className="more">...</span>]{"}"}
-                  {i < indexItems.length - 1 && ","}
-                </Fragment>
-              ))}
-              ]
-            </span>
-          ) : (
-            <span className="value" onDoubleClick={() => setShortCode(true)}>
-              [
-              {indexItems.map((item, i) => (
-                <Fragment key={i}>
-                  <br />
-                  {"{"}
-                  points: [
-                  {item.points.map((point, i) => (
-                    <>
-                      <br />
-                      <span className="indent">
-                        {"{"}x:{point.x}, y:{point.y}
-                        {"}"}
-                        {i < item.points.length - 1 && ","}
-                      </span>
-                    </>
-                  ))}
-                  ]{"}"}
-                  {i < indexItems.length - 1 && ","}
-                </Fragment>
-              ))}
-              <br />]
-            </span>
-          )}
-          {"}"}
-          {" />"}
-        </div>
+      <div className="code">
+        {"<"}
+        <span className="name">SimpleSplineChart</span>
+        <br />
+        <span className="property">width</span>={"{"}
+        <span className="value">250</span>
+        {"}"}
+        <span className="property">height</span>={"{"}
+        <span className="value">200</span>
+        {"}"}
+        <br />
+        <span className="property">items</span>={"{"}
+        {shortCode ? (
+          <span className="value" onClick={() => setShortCode(false)}>
+            [
+            {indexItems.map((item, i) => (
+              <Fragment key={i}>
+                <br />
+                {"{"}
+                points: [{"{"}x:{item.points[0].x}, y:{item.points[0].y}
+                {"}"}
+                <span className="more">...</span>]{"}"}
+                {i < indexItems.length - 1 && ","}
+              </Fragment>
+            ))}
+            ]
+          </span>
+        ) : (
+          <span className="value" onDoubleClick={() => setShortCode(true)}>
+            [
+            {indexItems.map((item, i) => (
+              <Fragment key={i}>
+                <br />
+                {"{"}
+                points: [
+                {item.points.map((point, i) => (
+                  <>
+                    <br />
+                    <span className="indent">
+                      {"{"}x:{point.x}, y:{point.y}
+                      {"}"}
+                      {i < item.points.length - 1 && ","}
+                    </span>
+                  </>
+                ))}
+                ]{"}"}
+                {i < indexItems.length - 1 && ","}
+              </Fragment>
+            ))}
+            <br />]
+          </span>
+        )}
+        {"}"}
+        {" />"}
+      </div>
 
-        <div className="text">
-          Draw spline chart easily.
-          <a
-            className="more"
-            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#simple-spline-chart"
-          >
-            Read more...
-          </a>
-        </div>
-      </Card>
-    </div>
+      <div className="text">
+        Draw spline chart easily.
+        <a
+          className="more"
+          href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#simple-spline-chart"
+        >
+          Read more...
+        </a>
+      </div>
+    </Card>
   );
 }

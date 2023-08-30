@@ -14,32 +14,32 @@ export function RawDonutCard() {
   const values = items[index];
 
   return (
-    <div onPointerLeave={() => setIndex((index + 1) % items.length)}>
-      <Card>
-        <RawDonut className="chart" radius={100} values={values} />
+    <Card
+      next={(next) => setIndex((index + next + items.length) % items.length)}
+    >
+      <RawDonut className="chart" radius={100} values={values} />
 
-        <div className="code">
-          {"<"}
-          <span className="name">RawDonut</span>
-          <span className="property">radius</span>={"{"}
-          <span className="value">100</span>
-          {"}"}
-          <span className="property">values</span>={"{"}
-          <span className="value">[{values.join(",")}]</span>
-          {"}"}
-          {" />"}
-        </div>
+      <div className="code">
+        {"<"}
+        <span className="name">RawDonut</span>
+        <span className="property">radius</span>={"{"}
+        <span className="value">100</span>
+        {"}"}
+        <span className="property">values</span>={"{"}
+        <span className="value">[{values.join(",")}]</span>
+        {"}"}
+        {" />"}
+      </div>
 
-        <div className="text">
-          Draw a donut with one-liner.
-          <a
-            className="more"
-            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#donut-chart"
-          >
-            Read more...
-          </a>
-        </div>
-      </Card>
-    </div>
+      <div className="text">
+        Draw a donut with one-liner.
+        <a
+          className="more"
+          href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#donut-chart"
+        >
+          Read more...
+        </a>
+      </div>
+    </Card>
   );
 }
