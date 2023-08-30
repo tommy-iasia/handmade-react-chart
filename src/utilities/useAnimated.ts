@@ -1,57 +1,62 @@
-import { useEffect, useMemo, useReducer, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export function useAnimated<T>(
   currentValue: T,
   transition: number,
   calculate: (state: State<T>) => T
 ) {
-  const calculateRef = useRef(calculate);
-  calculateRef.current = calculate;
+  const [state, setState] = useState<State<T>>({
+    from: currentValue,
+    to: currentValue,
+    ratio: 1,
+  });
 
-  const [state, dispatch] = useReducer(
-    (state: State<T>, action: Action<T>) => {
-      switch (action.type) {
-        case "tick":
-          const ratio = Math.min(state.ratio + action.ratio, 1);
-          return ratio !== state.ratio ? { ...state, ratio } : state;
-
-        case "reset":
-          const value = calculateRef.current(state);
-
-          return {
-            from: value,
-            to: action.value,
-            ratio: 0,
-          };
-      }
-    },
-    {
-      from: currentValue,
-      to: currentValue,
-      ratio: 1,
-    }
+  useEffect(
+    () =>
+      setState((oldState) => ({
+        from: calculate(oldState),
+        to: currentValue,
+        ratio: 0,
+      })),
+    [calculate, currentValue]
   );
 
   useEffect(() => {
+    const cancellation = { cancelled: false };
+
     let lastTime = performance.now();
+    let frameHandler: number;
 
     const callback = (currentTime: DOMHighResTimeStamp) => {
-      dispatch({ type: "tick", ratio: (currentTime - lastTime) / transition });
+      const elapsed = currentTime - lastTime;
+
+      setTimeout(() => {
+        if (cancellation.cancelled) {
+          return;
+        }
+
+        setState((oldState) => {
+          if (oldState.ratio < 1) {
+            return {
+              ...oldState,
+              ratio: Math.min(oldState.ratio + elapsed / transition, 1),
+            };
+          } else {
+            return oldState;
+          }
+        });
+      });
 
       lastTime = currentTime;
-
-      requestAnimationFrame(callback);
+      frameHandler = requestAnimationFrame(callback);
     };
 
-    const handler = requestAnimationFrame(callback);
-
-    return () => cancelAnimationFrame(handler);
+    frameHandler = requestAnimationFrame(callback);
+    return () => {
+      cancelAnimationFrame(frameHandler);
+      cancellation.cancelled = true;
+    };
   }, [transition]);
-
-  useEffect(
-    () => dispatch({ type: "reset", value: currentValue }),
-    [currentValue]
-  );
 
   return useMemo(() => calculate(state), [calculate, state]);
 }
@@ -61,13 +66,3 @@ interface State<T> {
   to: T;
   ratio: number;
 }
-
-type Action<T> =
-  | {
-      type: "tick";
-      ratio: number;
-    }
-  | {
-      type: "reset";
-      value: T;
-    };
