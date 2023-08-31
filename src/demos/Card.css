@@ -11,7 +11,7 @@
   transition: 0.3s;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .handmadeReactChart-demos-Card {
     padding: 20px;
     grid-template:
@@ -27,7 +27,7 @@
   background-color: #f8f8f8;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .handmadeReactChart-demos-Card > .left,
   .handmadeReactChart-demos-Card > .right {
     width: 30px;
@@ -59,7 +59,7 @@
   margin-top: 30px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .handmadeReactChart-demos-Card > .chart {
     margin-right: 40px;
     margin-bottom: 30px;
@@ -106,7 +106,7 @@
   color: #888;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .handmadeReactChart-demos-Card > .text {
     margin-left: 20px;
   }
@@ -126,7 +126,7 @@
   color: #fff;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .handmadeReactChart-demos-Card > .right {
     grid-area: right;
     margin-left: 20px;

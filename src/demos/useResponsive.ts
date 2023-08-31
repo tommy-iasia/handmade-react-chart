@@ -1,14 +1,12 @@
 import { useLayoutEffect, useState } from "react";
 
-const maxWidth = 800;
-
 export function useResponsive() {
-  const firstMatch = match(maxWidth);
+  const firstMatch = match();
   const [matched, setMatched] = useState(firstMatch);
 
   useLayoutEffect(() => {
     function updateMatched() {
-      const nextMatched = match(maxWidth);
+      const nextMatched = match();
       setMatched(nextMatched);
     }
 
@@ -21,7 +19,7 @@ export function useResponsive() {
   return matched;
 }
 
-function match(maxWidth: number) {
-  const matchMedia = window.matchMedia(`(max-width: ${maxWidth}px)`);
+function match() {
+  const matchMedia = window.matchMedia("(max-width: 900px)");
   return matchMedia.matches;
 }
