@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SimpleDonutChart } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 const items = [
   [1, 2, 3],
@@ -10,8 +11,9 @@ const items = [
 
 export function SimpleDonutCard() {
   const [index, setIndex] = useState(0);
-
   const values = items[index];
+
+  const responsive = useResponsive();
 
   return (
     <Card
@@ -22,6 +24,7 @@ export function SimpleDonutCard() {
       <div className="code">
         {"<"}
         <span className="name">SimpleDonutChart</span>
+        {responsive && <br />}
         <span className="property">radius</span>={"{"}
         <span className="value">100</span>
         {"}"}

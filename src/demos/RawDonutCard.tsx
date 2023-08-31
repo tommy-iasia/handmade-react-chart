@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RawDonut } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 const items = [
   [1, 2, 3],
@@ -10,8 +11,9 @@ const items = [
 
 export function RawDonutCard() {
   const [index, setIndex] = useState(0);
-
   const values = items[index];
+
+  const responsive = useResponsive();
 
   return (
     <Card
@@ -22,9 +24,11 @@ export function RawDonutCard() {
       <div className="code">
         {"<"}
         <span className="name">RawDonut</span>
+        {responsive && <br />}
         <span className="property">radius</span>={"{"}
         <span className="value">100</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">values</span>={"{"}
         <span className="value">[{values.join(",")}]</span>
         {"}"}

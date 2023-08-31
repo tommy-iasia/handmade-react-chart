@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Area, Grid, Spline, SplineChart, XAxis, YAxis } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 export function CustomSplineCard() {
   const [index, setIndex] = useState(0);
+
+  const responsive = useResponsive();
 
   return (
     <Card next={(next) => setIndex((index + next + 4) % 4)}>
@@ -69,6 +72,7 @@ export function CustomSplineCard() {
         <span className="property">chartWidth</span>={"{"}
         <span className="value">250</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">chartHeight</span>={"{"}
         <span className="value">200</span>
         {"}"}
@@ -76,6 +80,7 @@ export function CustomSplineCard() {
         <span className="property">contentLeft</span>={"{"}
         <span className="value">40</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">contentTop</span>={"{"}
         <span className="value">5</span>
         {"}"}
@@ -83,6 +88,7 @@ export function CustomSplineCard() {
         <span className="property">contentWidth</span>={"{"}
         <span className="value">200</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">contentHeight</span>={"{"}
         <span className="value">165</span>
         {"}"}
@@ -218,8 +224,6 @@ export function CustomSplineCard() {
             </>
           )}
         </div>
-        {"<"}/<span className="name">Chart</span>
-        {">"}
       </div>
 
       <div className="text">

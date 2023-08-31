@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RawSpline } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 const items = [
   [250, 20, 180, 150, 230, 200],
@@ -9,12 +10,17 @@ const items = [
 
 export function RawSplineCard() {
   const [index, setIndex] = useState(0);
-
   const values = items[index];
+
+  const responsive = useResponsive();
+  const [shortCode, setShortCode] = useState(true);
 
   return (
     <Card
-      next={(next) => setIndex((index + next + items.length) % items.length)}
+      next={(next) => {
+        setIndex((index + next + items.length) % items.length);
+        setShortCode(true);
+      }}
     >
       <RawSpline className="chart" width={200} height={200} values={values} />
 
@@ -30,7 +36,18 @@ export function RawSplineCard() {
         {"}"}
         <br />
         <span className="property">values</span>={"{"}
-        <span className="value">[{values.join(",")}]</span>
+        <span className="value" onClick={() => setShortCode(false)}>
+          [
+          {responsive && shortCode ? (
+            <>
+              {values.slice(0, 3).join(",")}
+              <span className="more">...</span>
+            </>
+          ) : (
+            values.join(",")
+          )}
+          ]
+        </span>
         {"}"}
         {" />"}
       </div>

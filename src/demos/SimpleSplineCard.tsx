@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { SimpleSplineChart } from "../components";
 import { Card } from "./Card";
 import { useAnimatedSplineItems } from "./useAnimatedSplineItems";
+import { useResponsive } from "./useResponsive";
 
 export const data1 = [
   {
@@ -50,12 +51,14 @@ export function SimpleSplineCard() {
   const animatedItems = useAnimatedSplineItems(indexItems);
 
   const [shortCode, setShortCode] = useState(true);
+  const responsive = useResponsive();
 
   return (
     <Card
-      next={(next) =>
-        setIndex((index + next + allData.length) % allData.length)
-      }
+      next={(next) => {
+        setIndex((index + next + allData.length) % allData.length);
+        setShortCode(true);
+      }}
     >
       <SimpleSplineChart
         className="chart"
@@ -83,7 +86,9 @@ export function SimpleSplineCard() {
               <Fragment key={i}>
                 <br />
                 {"{"}
-                points: [{"{"}x:{item.points[0].x}, y:{item.points[0].y}
+                points:{!responsive && " "}[{"{"}x:
+                {item.points[0].x}, y:
+                {item.points[0].y}
                 {"}"}
                 <span className="more">...</span>]{"}"}
                 {i < indexItems.length - 1 && ","}
@@ -100,14 +105,14 @@ export function SimpleSplineCard() {
                 {"{"}
                 points: [
                 {item.points.map((point, i) => (
-                  <>
+                  <Fragment key={i}>
                     <br />
                     <span className="indent">
                       {"{"}x:{point.x}, y:{point.y}
                       {"}"}
                       {i < item.points.length - 1 && ","}
                     </span>
-                  </>
+                  </Fragment>
                 ))}
                 ]{"}"}
                 {i < indexItems.length - 1 && ","}

@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { DonutChart, ValueSlice } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 const items = [
   [10, 20, 30],
@@ -9,8 +10,9 @@ const items = [
 
 export function CustomDonutCard() {
   const [index, setIndex] = useState(0);
-
   const values = items[index];
+
+  const responsive = useResponsive();
 
   return (
     <Card
@@ -40,6 +42,7 @@ export function CustomDonutCard() {
         <span className="property">chartWidth</span>={"{"}
         <span className="value">200</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">chartHeight</span>={"{"}
         <span className="value">200</span>
         {"}"}
@@ -47,6 +50,7 @@ export function CustomDonutCard() {
         <span className="property">innerRadius</span>={"{"}
         <span className="value">{index < 2 ? 50 : 0}</span>
         {"}"}
+        {responsive && <br />}
         <span className="property">outerRadius</span>={"{"}
         <span className="value">{index < 3 ? 100 : 80}</span>
         {"}"}
@@ -56,6 +60,7 @@ export function CustomDonutCard() {
             <div className="indent">
               {"<"}
               <span className="name">ValueSlice</span>
+              {responsive && <br />}
               <span className="property">index</span>={"{"}
               <span className="value">{i}</span>
               {"}"}
