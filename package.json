@@ -1,6 +1,6 @@
 {
   "name": "handmade-react-chart",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "",
   "main": "dist/cjs/components.js",
   "module": "dist/esm/components.js",
@@ -50,7 +50,7 @@
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "17 - 18"
   },
   "eslintConfig": {
     "extends": [
