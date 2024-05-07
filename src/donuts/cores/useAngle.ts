@@ -14,6 +14,10 @@ export function useAngle(index: number) {
     .map((input) => input.value)
     .reduce((s, t) => s + t, 0);
 
+  if (totalValue === 0) {
+    return undefined;
+  }
+
   const beforeValue = valueInputs
     .filter((input) => input.index < index)
     .map((input) => input.value)
