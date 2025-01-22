@@ -22,18 +22,10 @@ export function Spline({ className, points: inputPoints, smoothness }: Props) {
       return undefined;
     }
 
-    if (!draw) {
-      return undefined;
-    }
-
     const drawPoints = chartInput.points.map((point) => draw(point));
 
     return getSplinePath(drawPoints, smoothness ?? 0.3);
   }, [chartInput, draw, smoothness]);
-
-  if (!path) {
-    return <></>;
-  }
 
   return (
     <svg
@@ -41,7 +33,7 @@ export function Spline({ className, points: inputPoints, smoothness }: Props) {
       width={chartWidth}
       height={chartHeight}
     >
-      <path d={path} />
+      {path && <path d={path} />}
     </svg>
   );
 }

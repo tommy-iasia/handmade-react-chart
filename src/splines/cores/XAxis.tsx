@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
 import { useRange } from "./useRange";
@@ -7,52 +7,54 @@ import "./XAxis.css";
 export function XAxis({ className, y, labels }: Props) {
   useChartInput(
     "axis",
-    labels.map((label) => ({ x: label.x, y }))
+    useMemo(() => labels.map((label) => ({ x: label.x, y })), [labels, y])
   );
-
-  const range = useRange();
 
   const draw = useDraw();
 
-  if (!range) {
-    return <></>;
-  }
+  const range = useRange();
+  const minimumDraw = useMemo(
+    () => draw({ x: range.minimum.x, y }),
+    [draw, range.minimum.x, y]
+  );
+  const maximumDraw = useMemo(
+    () => draw({ x: range.maximum.x, y }),
+    [draw, range.maximum.x, y]
+  );
 
-  if (!draw) {
-    return <></>;
-  }
-
-  const minimumPoint = draw({ x: range.minimum.x, y });
-  const maximumPoint = draw({ x: range.maximum.x, y });
+  const labelDraws = useMemo(
+    () =>
+      labels.map((label) => ({
+        label,
+        draw: draw({ x: label.x, y }),
+      })),
+    [draw, labels, y]
+  );
 
   return (
     <div
       className={`handmadeReactChart-splines-cores-XAxis ${className ?? ""}`}
       style={{
-        left: minimumPoint.x,
-        top: minimumPoint.y,
-        width: maximumPoint.x - minimumPoint.x,
+        left: minimumDraw.x,
+        top: minimumDraw.y,
+        width: maximumDraw.x - minimumDraw.x,
       }}
     >
-      {labels.map((label, i) => {
-        const drawPoint = draw({ x: label.x, y });
+      {labelDraws.map((labelDraw, i) => (
+        <Fragment key={i}>
+          <div
+            className="line"
+            style={{ left: labelDraw.draw.x - minimumDraw.x }}
+          />
 
-        return (
-          <Fragment key={i}>
-            <div
-              className="line"
-              style={{ left: drawPoint.x - minimumPoint.x }}
-            />
-
-            <div
-              className="label"
-              style={{ left: drawPoint.x - minimumPoint.x }}
-            >
-              {label.text}
-            </div>
-          </Fragment>
-        );
-      })}
+          <div
+            className="label"
+            style={{ left: labelDraw.draw.x - minimumDraw.x }}
+          >
+            {labelDraw.label.text}
+          </div>
+        </Fragment>
+      ))}
     </div>
   );
 }

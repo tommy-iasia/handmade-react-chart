@@ -14,31 +14,28 @@ export function Area({
 }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
-  const areaPoints = useMemo(() => {
-    if (splinePoints.length < 2) {
-      return [];
-    }
+  const chartInput = useChartInput(
+    "area",
+    useMemo(() => {
+      if (splinePoints.length < 2) {
+        return [];
+      }
 
-    const firstPoint = splinePoints[0];
-    const lastPoint = splinePoints[splinePoints.length - 1];
+      const firstPoint = splinePoints[0];
+      const lastPoint = splinePoints[splinePoints.length - 1];
 
-    return [
-      ...splinePoints,
-      { x: lastPoint.x, y: baseY },
-      { x: firstPoint.x, y: baseY },
-    ];
-  }, [baseY, splinePoints]);
-
-  const chartInput = useChartInput("area", areaPoints);
+      return [
+        ...splinePoints,
+        { x: lastPoint.x, y: baseY },
+        { x: firstPoint.x, y: baseY },
+      ];
+    }, [baseY, splinePoints])
+  );
 
   const draw = useDraw();
 
   const path = useMemo(() => {
     if (!chartInput) {
-      return undefined;
-    }
-
-    if (!draw) {
       return undefined;
     }
 
@@ -60,17 +57,13 @@ export function Area({
     return `${splinePath} ${basePath}`;
   }, [chartInput, draw, smoothness]);
 
-  if (!path) {
-    return <></>;
-  }
-
   return (
     <svg
       className={`handmadeReactChart-splines-cores-Area ${className ?? ""}`}
       width={chartWidth}
       height={chartHeight}
     >
-      <path d={path} />
+      {path && <path d={path} />}
     </svg>
   );
 }

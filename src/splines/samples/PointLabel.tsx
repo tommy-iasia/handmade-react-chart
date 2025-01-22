@@ -1,21 +1,16 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { ChartContext } from "../cores/ChartContext";
 import { useDraw } from "../cores/useDraw";
 import "./PointLabel.css";
 
-export function PointLabel({ className, x: inputX, y: inputY, text }: Props) {
+export function PointLabel({ className, x, y, text }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
   const draw = useDraw();
+  const drawPoint = useMemo(() => draw({ x, y }), [draw, x, y]);
 
-  if (!draw) {
-    return <></>;
-  }
-
-  const { x: drawX, y: drawY } = draw({ x: inputX, y: inputY });
-
-  const horizontal = drawX >= chartWidth / 2 ? "left" : "right";
-  const vertical = drawY >= chartHeight / 2 ? "up" : "down";
+  const horizontal = drawPoint.x >= chartWidth / 2 ? "left" : "right";
+  const vertical = drawPoint.y >= chartHeight / 2 ? "up" : "down";
 
   return (
     <div
@@ -23,10 +18,10 @@ export function PointLabel({ className, x: inputX, y: inputY, text }: Props) {
         className ?? ""
       }`}
       style={{
-        left: horizontal === "right" ? drawX : undefined,
-        right: horizontal === "left" ? chartWidth - drawX : undefined,
-        top: vertical === "down" ? drawY : undefined,
-        bottom: vertical === "up" ? chartHeight - drawY : undefined,
+        left: horizontal === "right" ? drawPoint.x : undefined,
+        right: horizontal === "left" ? chartWidth - drawPoint.x : undefined,
+        top: vertical === "down" ? drawPoint.y : undefined,
+        bottom: vertical === "up" ? chartHeight - drawPoint.y : undefined,
       }}
     >
       <div className="point" />

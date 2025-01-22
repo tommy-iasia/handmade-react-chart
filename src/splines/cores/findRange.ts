@@ -12,11 +12,7 @@ export function findRange(
     ...pointsInputs.map((input) => input.maximum.x),
   ].filter(isDefined);
 
-  if (maximumXs.length <= 0) {
-    return undefined;
-  }
-
-  const maximumX = Math.max(...maximumXs);
+  const maximumX = maximumXs.length > 0 ? Math.max(...maximumXs) : undefined;
 
   const maximumYs = [
     coordinateInput.maximumY,
@@ -24,11 +20,7 @@ export function findRange(
     ...pointsInputs.map((input) => input.maximum.y),
   ].filter(isDefined);
 
-  if (maximumYs.length <= 0) {
-    return undefined;
-  }
-
-  const maximumY = Math.max(...maximumYs);
+  const maximumY = maximumYs.length > 0 ? Math.max(...maximumYs) : undefined;
 
   const minimumXs = [
     coordinateInput.minimumX,
@@ -36,11 +28,7 @@ export function findRange(
     ...pointsInputs.map((input) => input.minimum.x),
   ].filter(isDefined);
 
-  if (minimumXs.length <= 0) {
-    return undefined;
-  }
-
-  const minimumX = Math.min(...minimumXs);
+  const minimumX = minimumXs.length > 0 ? Math.min(...minimumXs) : undefined;
 
   const minimumYs = [
     coordinateInput.minimumY,
@@ -48,14 +36,36 @@ export function findRange(
     ...pointsInputs.map((input) => input.minimum.y),
   ].filter(isDefined);
 
-  if (minimumYs.length <= 0) {
-    return undefined;
-  }
-
-  const minimumY = Math.min(...minimumYs);
+  const minimumY = minimumYs.length > 0 ? Math.min(...minimumYs) : undefined;
 
   return {
-    maximum: { x: maximumX, y: maximumY },
-    minimum: { x: minimumX, y: minimumY },
+    maximum: {
+      x:
+        maximumX !== undefined
+          ? maximumX
+          : minimumX !== undefined
+          ? minimumX
+          : 0,
+      y:
+        maximumY !== undefined
+          ? maximumY
+          : minimumY !== undefined
+          ? minimumY
+          : 0,
+    },
+    minimum: {
+      x:
+        minimumX !== undefined
+          ? minimumX
+          : maximumX !== undefined
+          ? maximumX
+          : 0,
+      y:
+        minimumY !== undefined
+          ? minimumY
+          : maximumY !== undefined
+          ? maximumY
+          : 0,
+    },
   };
 }

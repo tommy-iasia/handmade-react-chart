@@ -1,47 +1,55 @@
+import { useMemo } from "react";
 import "./Grid.css";
 import { useDraw } from "./useDraw";
 import { useRange } from "./useRange";
 
 export function Grid({ className, xs, ys }: Props) {
+  const draw = useDraw();
   const range = useRange();
 
-  const draw = useDraw();
+  const xDraws = useMemo(
+    () =>
+      xs?.map((x) => ({
+        top: draw({ x, y: range.maximum.y }),
+        bottom: draw({ x, y: range.minimum.y }),
+      })),
+    [draw, range.maximum.y, range.minimum.y, xs]
+  );
 
-  if (!range) {
-    return <></>;
-  }
-
-  if (!draw) {
-    return <></>;
-  }
+  const yDraws = useMemo(
+    () =>
+      ys?.map((y) => ({
+        left: draw({ x: range.minimum.x, y }),
+        right: draw({ x: range.maximum.x, y }),
+      })),
+    [draw, range.minimum.x, range.maximum.x, ys]
+  );
 
   return (
     <div className={`handmadeReactChart-splines-cores-Grid ${className ?? ""}`}>
-      {xs?.map((x, i) => {
-        const top = draw({ x, y: range.maximum.y });
-        const bottom = draw({ x, y: range.minimum.y });
+      {xDraws?.map((xDraw, i) => (
+        <div
+          key={`vertical-${i}`}
+          className="vertical"
+          style={{
+            left: xDraw.top.x,
+            top: xDraw.top.y,
+            height: xDraw.bottom.y - xDraw.top.y,
+          }}
+        />
+      ))}
 
-        return (
-          <div
-            key={`vertical-${i}`}
-            className="vertical"
-            style={{ left: top.x, top: top.y, height: bottom.y - top.y }}
-          />
-        );
-      })}
-
-      {ys?.map((y, i) => {
-        const left = draw({ x: range.minimum.x, y });
-        const right = draw({ x: range.maximum.x, y });
-
-        return (
-          <div
-            key={`horizontal-${i}`}
-            className="horizontal"
-            style={{ left: left.x, top: left.y, width: right.x - left.x }}
-          />
-        );
-      })}
+      {yDraws?.map((yDraw, i) => (
+        <div
+          key={`horizontal-${i}`}
+          className="horizontal"
+          style={{
+            left: yDraw.left.x,
+            top: yDraw.left.y,
+            width: yDraw.right.x - yDraw.left.x,
+          }}
+        />
+      ))}
     </div>
   );
 }
