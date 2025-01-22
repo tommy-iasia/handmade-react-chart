@@ -14,10 +14,6 @@ export function SimpleXAxis({ className, capacity }: Props) {
   }, [coordinateInput, pointsInputs]);
 
   const labels = useMemo(() => {
-    if (!range) {
-      return [];
-    }
-
     const xs = getSimpleAxisValues(range.minimum.x, range.maximum.x, capacity);
 
     return xs.map((x) => ({
@@ -25,10 +21,6 @@ export function SimpleXAxis({ className, capacity }: Props) {
       text: `${x}`,
     }));
   }, [capacity, range]);
-
-  if (!range) {
-    return <></>;
-  }
 
   return <XAxis className={className} y={range.minimum.y} labels={labels} />;
 }

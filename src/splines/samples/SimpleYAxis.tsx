@@ -14,10 +14,6 @@ export function SimpleYAxis({ className, capacity }: Props) {
   }, [coordinateInput, pointsInputs]);
 
   const labels = useMemo(() => {
-    if (!range) {
-      return [];
-    }
-
     const ys = getSimpleAxisValues(range.minimum.y, range.maximum.y, capacity);
 
     if (ys[0] === 0 && ys.length > 1) {
@@ -29,10 +25,6 @@ export function SimpleYAxis({ className, capacity }: Props) {
       text: `${y}`,
     }));
   }, [capacity, range]);
-
-  if (!range) {
-    return <></>;
-  }
 
   return <YAxis className={className} x={range.minimum.x} labels={labels} />;
 }

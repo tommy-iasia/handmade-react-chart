@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import "./Chart.css";
 import { ChartContext } from "./ChartContext";
 import { ValueInput } from "./valueInput";
@@ -37,28 +37,17 @@ export function Chart({
       ref={divRef}
     >
       <ChartContext.Provider
-        value={useMemo(
-          () => ({
-            chartWidth,
-            chartHeight,
-            centerX: outputCenterX,
-            centerY: outputCenterY,
-            innerRadius: outputInnerRadius,
-            outerRadius: outputOuterRadius,
-            valueInputs,
-            setValueInputs,
-            divRef,
-          }),
-          [
-            chartHeight,
-            chartWidth,
-            outputCenterX,
-            outputCenterY,
-            outputInnerRadius,
-            outputOuterRadius,
-            valueInputs,
-          ]
-        )}
+        value={{
+          chartWidth,
+          chartHeight,
+          centerX: outputCenterX,
+          centerY: outputCenterY,
+          innerRadius: outputInnerRadius,
+          outerRadius: outputOuterRadius,
+          valueInputs,
+          setValueInputs,
+          divRef,
+        }}
       >
         {children}
       </ChartContext.Provider>

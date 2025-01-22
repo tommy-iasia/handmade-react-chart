@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
 import { useRange } from "./useRange";
@@ -7,52 +7,54 @@ import "./YAxis.css";
 export function YAxis({ className, x, labels }: Props) {
   useChartInput(
     "axis",
-    labels.map((label) => ({ x, y: label.y }))
+    useMemo(() => labels.map((label) => ({ x, y: label.y })), [labels, x])
   );
-
-  const range = useRange();
 
   const draw = useDraw();
 
-  if (!range) {
-    return <></>;
-  }
+  const range = useRange();
+  const minimumDraw = useMemo(
+    () => draw({ x, y: range.minimum.y }),
+    [draw, range.minimum.y, x]
+  );
+  const maximumDraw = useMemo(
+    () => draw({ x, y: range.maximum.y }),
+    [draw, range.maximum.y, x]
+  );
 
-  if (!draw) {
-    return <></>;
-  }
-
-  const minimumPoint = draw({ x, y: range.minimum.y });
-  const maximumPoint = draw({ x, y: range.maximum.y });
+  const labelDraws = useMemo(
+    () =>
+      labels.map((label) => ({
+        label,
+        draw: draw({ x, y: label.y }),
+      })),
+    [draw, labels, x]
+  );
 
   return (
     <div
       className={`handmadeReactChart-splines-cores-YAxis ${className ?? ""}`}
       style={{
-        left: minimumPoint.x,
-        top: maximumPoint.y,
-        height: minimumPoint.y - maximumPoint.y,
+        left: minimumDraw.x,
+        top: maximumDraw.y,
+        height: minimumDraw.y - maximumDraw.y,
       }}
     >
-      {labels.map((label, i) => {
-        const drawPoint = draw({ x, y: label.y });
+      {labelDraws.map((labelDraw, i) => (
+        <Fragment key={i}>
+          <div
+            className="line"
+            style={{ top: labelDraw.draw.y - maximumDraw.y }}
+          />
 
-        return (
-          <Fragment key={i}>
-            <div
-              className="line"
-              style={{ top: drawPoint.y - maximumPoint.y }}
-            />
-
-            <div
-              className="label"
-              style={{ top: drawPoint.y - maximumPoint.y }}
-            >
-              {label.text}
-            </div>
-          </Fragment>
-        );
-      })}
+          <div
+            className="label"
+            style={{ top: labelDraw.draw.y - maximumDraw.y }}
+          >
+            {labelDraw.label.text}
+          </div>
+        </Fragment>
+      ))}
     </div>
   );
 }

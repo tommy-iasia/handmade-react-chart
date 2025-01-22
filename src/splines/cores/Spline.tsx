@@ -6,30 +6,26 @@ import { Point } from "./point";
 import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
 
-export function Spline({ className, points: inputPoints, smoothness }: Props) {
+export function Spline({ className, points, smoothness }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
-  const chartInput = useChartInput("spline", inputPoints);
+  const input = useChartInput("spline", points);
 
   const draw = useDraw();
 
   const path = useMemo(() => {
-    if (!chartInput) {
+    if (!input) {
       return undefined;
     }
 
-    if (chartInput.points.length < 2) {
+    if (input.points.length < 2) {
       return undefined;
     }
 
-    if (!draw) {
-      return undefined;
-    }
-
-    const drawPoints = chartInput.points.map((point) => draw(point));
+    const drawPoints = input.points.map((point) => draw(point));
 
     return getSplinePath(drawPoints, smoothness ?? 0.3);
-  }, [chartInput, draw, smoothness]);
+  }, [input, draw, smoothness]);
 
   return (
     <svg

@@ -3,9 +3,12 @@ import { useStable } from "../../utilities/useStable";
 import { Point } from "./point";
 import { PointsInput } from "./pointsInput";
 
-export function useStableInput(type: PointsInput["type"], points: Point[]) {
+export function useStableInput(
+  type: PointsInput["type"],
+  inputPoints: Point[]
+) {
   const stablePoints = useStable(
-    points,
+    inputPoints,
     (oldPoint, newPoint) =>
       oldPoint.x === newPoint.x && oldPoint.y === newPoint.y
   );

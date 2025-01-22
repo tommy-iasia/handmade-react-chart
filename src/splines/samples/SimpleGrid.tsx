@@ -6,21 +6,15 @@ import { getSimpleAxisValues } from "./getSimpleAxisValues";
 export function SimpleGrid({ className, xCapacity, yCapacity }: Props) {
   const range = useRange();
 
-  const xs = useMemo(() => {
-    if (!range) {
-      return [];
-    }
+  const xs = useMemo(
+    () => getSimpleAxisValues(range.minimum.x, range.maximum.x, xCapacity),
+    [range, xCapacity]
+  );
 
-    return getSimpleAxisValues(range.minimum.x, range.maximum.x, xCapacity);
-  }, [range, xCapacity]);
-
-  const ys = useMemo(() => {
-    if (!range) {
-      return [];
-    }
-
-    return getSimpleAxisValues(range.minimum.y, range.maximum.y, yCapacity);
-  }, [range, yCapacity]);
+  const ys = useMemo(
+    () => getSimpleAxisValues(range.minimum.y, range.maximum.y, yCapacity),
+    [range, yCapacity]
+  );
 
   return <Grid className={className} xs={xs} ys={ys} />;
 }
