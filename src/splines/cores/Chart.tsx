@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import "./Chart.css";
 import { ChartContext } from "./ChartContext";
 import { CoordinateInput } from "./coordinateInput";
@@ -25,43 +25,33 @@ export function Chart({
 
   const divRef = useRef<HTMLDivElement>(null);
 
-  const context = useMemo(
-    () => ({
-      chartWidth,
-      chartHeight,
-      contentLeft: contentLeft ?? 0,
-      contentTop: contentTop ?? 0,
-      contentWidth:
-        contentWidth ?? chartWidth - (contentLeft ?? 0) - (contentRight ?? 0),
-      contentHeight:
-        contentHeight ?? chartHeight - (contentTop ?? 0) - (contentBottom ?? 0),
-      coordinateInput,
-      setCoordinateInput,
-      pointsInputs,
-      setPointsInputs,
-      divRef,
-    }),
-    [
-      chartHeight,
-      chartWidth,
-      contentBottom,
-      contentHeight,
-      contentLeft,
-      contentRight,
-      contentTop,
-      contentWidth,
-      coordinateInput,
-      pointsInputs,
-    ]
-  );
-
   return (
     <div
       className={`handmadeReactChart-splines-cores-Chart ${className ?? ""}`}
       style={{ width: chartWidth, height: chartHeight }}
       ref={divRef}
     >
-      <ChartContext.Provider value={context}>{children}</ChartContext.Provider>
+      <ChartContext.Provider
+        value={{
+          chartWidth,
+          chartHeight,
+          contentLeft: contentLeft ?? 0,
+          contentTop: contentTop ?? 0,
+          contentWidth:
+            contentWidth ??
+            chartWidth - (contentLeft ?? 0) - (contentRight ?? 0),
+          contentHeight:
+            contentHeight ??
+            chartHeight - (contentTop ?? 0) - (contentBottom ?? 0),
+          coordinateInput,
+          setCoordinateInput,
+          pointsInputs,
+          setPointsInputs,
+          divRef,
+        }}
+      >
+        {children}
+      </ChartContext.Provider>
     </div>
   );
 }

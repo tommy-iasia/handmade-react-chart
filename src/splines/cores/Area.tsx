@@ -6,46 +6,39 @@ import { Point } from "./point";
 import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
 
-export function Area({
-  className,
-  points: splinePoints,
-  baseY,
-  smoothness,
-}: Props) {
+export function Area({ className, points, baseY, smoothness }: Props) {
   const { chartWidth, chartHeight } = useContext(ChartContext);
 
-  const chartInput = useChartInput(
+  const input = useChartInput(
     "area",
     useMemo(() => {
-      if (splinePoints.length < 2) {
+      if (points.length < 2) {
         return [];
       }
 
-      const firstPoint = splinePoints[0];
-      const lastPoint = splinePoints[splinePoints.length - 1];
+      const firstPoint = points[0];
+      const lastPoint = points[points.length - 1];
 
       return [
-        ...splinePoints,
+        ...points,
         { x: lastPoint.x, y: baseY },
         { x: firstPoint.x, y: baseY },
       ];
-    }, [baseY, splinePoints])
+    }, [baseY, points])
   );
 
   const draw = useDraw();
 
   const path = useMemo(() => {
-    if (!chartInput) {
+    if (!input) {
       return undefined;
     }
 
-    const { points: inputPoints } = chartInput;
-
-    if (inputPoints.length < 4) {
+    if (input.points.length < 4) {
       return undefined;
     }
 
-    const drawPoints = inputPoints.map((point) => draw(point));
+    const drawPoints = input.points.map((point) => draw(point));
 
     const splinePoints = drawPoints.slice(0, -2);
     const splinePath = getSplinePath(splinePoints, smoothness ?? 0.3);
@@ -55,7 +48,7 @@ export function Area({
     const basePath = `L ${baseStartPoint.x} ${baseStartPoint.y} L ${baseEndPoint.x} ${baseEndPoint.y} Z`;
 
     return `${splinePath} ${basePath}`;
-  }, [chartInput, draw, smoothness]);
+  }, [input, draw, smoothness]);
 
   return (
     <svg
