@@ -11,7 +11,7 @@ export function useChartInput(type: PointsInput["type"], points: Point[]) {
 
   useEffect(() => {
     if (input) {
-      setPointsInputs((oldInputs) => [...oldInputs, input]);
+      setPointsInputs((inputs) => [...inputs, input]);
 
       return () =>
         setPointsInputs((inputs) => inputs.filter((t) => t !== input));

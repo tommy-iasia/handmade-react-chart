@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SimpleDonutChart } from "../components";
 import { Card } from "./Card";
+import { useResponsive } from "./useResponsive";
 
 const items = [
   [1, 2, 3],
@@ -10,37 +11,39 @@ const items = [
 
 export function SimpleDonutCard() {
   const [index, setIndex] = useState(0);
-
   const values = items[index];
 
+  const responsive = useResponsive();
+
   return (
-    <div onPointerLeave={() => setIndex((index + 1) % items.length)}>
-      <Card>
-        <SimpleDonutChart className="chart" radius={100} values={values} />
+    <Card
+      next={(next) => setIndex((index + next + items.length) % items.length)}
+    >
+      <SimpleDonutChart className="chart" radius={100} values={values} />
 
-        <div className="code">
-          {"<"}
-          <span className="name">SimpleDonutChart</span>
-          <span className="property">radius</span>={"{"}
-          <span className="value">100</span>
-          {"}"}
-          <br />
-          <span className="property">values</span>={"{"}
-          <span className="value">[{values.join(",")}]</span>
-          {"}"}
-          {" />"}
-        </div>
+      <div className="code">
+        {"<"}
+        <span className="name">SimpleDonutChart</span>
+        {responsive && <br />}
+        <span className="property">radius</span>={"{"}
+        <span className="value">100</span>
+        {"}"}
+        <br />
+        <span className="property">values</span>={"{"}
+        <span className="value">[{values.join(",")}]</span>
+        {"}"}
+        {" />"}
+      </div>
 
-        <div className="text">
-          Draw a chart so easily.
-          <a
-            className="more"
-            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#simple-donut-chart"
-          >
-            Read more...
-          </a>
-        </div>
-      </Card>
-    </div>
+      <div className="text">
+        Draw a chart so easily.
+        <a
+          className="more"
+          href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/donuts/README.md#simple-donut-chart"
+        >
+          Read more...
+        </a>
+      </div>
+    </Card>
   );
 }

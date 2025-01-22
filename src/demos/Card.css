@@ -1,29 +1,74 @@
 .handmadeReactChart-demos-Card {
   border: 2px solid #f8f8f8;
   border-radius: 20px;
-  padding: 30px 40px;
   display: grid;
   grid-template:
-    "chart ." 1fr
-    "chart code" auto
-    "chart text" auto
-    "chart ." 1fr
-    / auto 1fr;
-  align-items: center;
-  transition: all 0.3s;
+    "left chart . right" 1fr
+    "left chart code right" auto
+    "left chart text right" auto
+    "left chart . right" 1fr
+    / auto auto 1fr auto;
+  transition: 0.3s;
+}
+
+@media (max-width: 900px) {
+  .handmadeReactChart-demos-Card {
+    padding: 20px;
+    grid-template:
+      "left chart right" auto
+      "left code right" 1fr
+      "left text right" auto
+      / auto 1fr auto;
+    justify-items: center;
+  }
 }
 
 .handmadeReactChart-demos-Card:not(:hover) {
   background-color: #f8f8f8;
 }
 
+@media (min-width: 900px) {
+  .handmadeReactChart-demos-Card > .left,
+  .handmadeReactChart-demos-Card > .right {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .handmadeReactChart-demos-Card > .left {
+    grid-area: left;
+    margin-right: 20px;
+  }
+
+  .handmadeReactChart-demos-Card > .left::after,
+  .handmadeReactChart-demos-Card > .right::after {
+    display: block;
+    border: 8px solid;
+    border-color: transparent;
+    content: "";
+  }
+
+  .handmadeReactChart-demos-Card > .left::after {
+    border-right-color: #f8f8f8;
+  }
+}
+
 .handmadeReactChart-demos-Card > .chart {
   grid-area: chart;
-  margin-right: 40px;
+  margin-top: 30px;
+}
+
+@media (min-width: 900px) {
+  .handmadeReactChart-demos-Card > .chart {
+    margin-right: 40px;
+    margin-bottom: 30px;
+  }
 }
 
 .handmadeReactChart-demos-Card > .code {
   grid-area: code;
+  margin-top: 30px;
   font-family: monospace;
   font-size: 18px;
   color: #888;
@@ -43,6 +88,7 @@
 .handmadeReactChart-demos-Card > .code .value {
   color: #e6d800;
   font-weight: 700;
+  word-break: break-all;
 }
 
 .handmadeReactChart-demos-Card > .code .indent {
@@ -55,9 +101,15 @@
 
 .handmadeReactChart-demos-Card > .text {
   grid-area: text;
-  margin-left: 20px;
   margin-top: 25px;
+  margin-bottom: 30px;
   color: #888;
+}
+
+@media (min-width: 900px) {
+  .handmadeReactChart-demos-Card > .text {
+    margin-left: 20px;
+  }
 }
 
 .handmadeReactChart-demos-Card > .text .more {
@@ -72,4 +124,15 @@
 .handmadeReactChart-demos-Card > .text .more:hover {
   background-color: #0099bf;
   color: #fff;
+}
+
+@media (min-width: 900px) {
+  .handmadeReactChart-demos-Card > .right {
+    grid-area: right;
+    margin-left: 20px;
+  }
+
+  .handmadeReactChart-demos-Card > .right::after {
+    border-left-color: #f8f8f8;
+  }
 }

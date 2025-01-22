@@ -1,15 +1,12 @@
-import { useMemo } from "react";
+import { useCallback } from "react";
 import { useAnimated } from "../../utilities/useAnimated";
 
 export function useAnimatedValue(inputValue: number, transition: number) {
-  const calculate = useMemo(
-    () =>
-      ({ from, to, ratio }: State) =>
-        (to - from) * ratio + from,
-    []
+  return useAnimated(
+    inputValue,
+    transition,
+    useCallback(({ from, to, ratio }: State) => (to - from) * ratio + from, [])
   );
-
-  return useAnimated(inputValue, transition, calculate);
 }
 
 interface State {

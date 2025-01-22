@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Area } from "../cores/Area";
 import { Chart } from "../cores/Chart";
-import { Point } from "../cores/point";
 import { Spline } from "../cores/Spline";
+import { Point } from "../cores/point";
 import { SimpleGrid } from "./SimpleGrid";
 import { SimpleXAxis } from "./SimpleXAxis";
 import { SimpleYAxis } from "./SimpleYAxis";

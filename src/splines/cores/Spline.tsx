@@ -1,8 +1,8 @@
 import { useContext, useMemo } from "react";
 import { ChartContext } from "./ChartContext";
+import "./Spline.css";
 import { getSplinePath } from "./getSplinePath";
 import { Point } from "./point";
-import "./Spline.css";
 import { useChartInput } from "./useChartInput";
 import { useDraw } from "./useDraw";
 

@@ -26,31 +26,9 @@ export function Chart({
       chartWidth - outputCenterX,
       chartHeight - outputCenterY
     );
+  const outputInnerRadius = innerRadius ?? outputOuterRadius * 0.6;
 
   const [valueInputs, setValueInputs] = useState<ValueInput[]>([]);
-
-  const context = useMemo(
-    () => ({
-      chartWidth,
-      chartHeight,
-      centerX: outputCenterX,
-      centerY: outputCenterY,
-      innerRadius: innerRadius ?? outputOuterRadius * 0.6,
-      outerRadius: outputOuterRadius,
-      valueInputs,
-      setValueInputs,
-      divRef,
-    }),
-    [
-      chartHeight,
-      chartWidth,
-      innerRadius,
-      outputCenterX,
-      outputCenterY,
-      outputOuterRadius,
-      valueInputs,
-    ]
-  );
 
   return (
     <div
@@ -58,7 +36,32 @@ export function Chart({
       style={{ width: chartWidth, height: chartHeight }}
       ref={divRef}
     >
-      <ChartContext.Provider value={context}>{children}</ChartContext.Provider>
+      <ChartContext.Provider
+        value={useMemo(
+          () => ({
+            chartWidth,
+            chartHeight,
+            centerX: outputCenterX,
+            centerY: outputCenterY,
+            innerRadius: outputInnerRadius,
+            outerRadius: outputOuterRadius,
+            valueInputs,
+            setValueInputs,
+            divRef,
+          }),
+          [
+            chartHeight,
+            chartWidth,
+            outputCenterX,
+            outputCenterY,
+            outputInnerRadius,
+            outputOuterRadius,
+            valueInputs,
+          ]
+        )}
+      >
+        {children}
+      </ChartContext.Provider>
     </div>
   );
 }

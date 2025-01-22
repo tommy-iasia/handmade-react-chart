@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { AdvancedSplineChart } from "../components";
 import { Card } from "./Card";
 import { useAnimatedSplineItems } from "./useAnimatedSplineItems";
+import { useResponsive } from "./useResponsive";
 
 export const data1 = [
   {
@@ -50,89 +51,94 @@ export function AdvancedSplineCard() {
   const animatedItems = useAnimatedSplineItems(indexItems);
 
   const [shortCode, setShortCode] = useState(true);
+  const responsive = useResponsive();
 
   return (
-    <div onPointerLeave={() => setIndex((index + 1) % allItems.length)}>
-      <Card>
-        <AdvancedSplineChart
-          className="chart"
-          width={250}
-          height={200}
-          items={animatedItems}
-          getLabel={({ x, y }) => `${x}, ${y}`}
-        />
+    <Card
+      next={(next) => {
+        setIndex((index + next + allItems.length) % allItems.length);
+        setShortCode(true);
+      }}
+    >
+      <AdvancedSplineChart
+        className="chart"
+        width={250}
+        height={200}
+        items={animatedItems}
+        getLabel={({ x, y }) => `${x}, ${y}`}
+      />
 
-        <div className="code">
-          {"<"}
-          <span className="name">AdvancedSplineChart</span>
-          <br />
-          <span className="property">width</span>={"{"}
-          <span className="value">250</span>
-          {"}"}
-          <span className="property">height</span>={"{"}
-          <span className="value">200</span>
-          {"}"}
-          <br />
-          <span className="property">items</span>={"{"}
-          {shortCode ? (
-            <span className="value" onClick={() => setShortCode(false)}>
-              [
-              {indexItems.map((item, i) => (
-                <Fragment key={i}>
-                  <br />
-                  {"{"}
-                  points: [{"{"}x:{item.points[0].x}, y:{item.points[0].y}
-                  {"}"}
-                  <span className="more">...</span>]{"}"}
-                  {i < indexItems.length - 1 && ","}
-                </Fragment>
-              ))}
-              ]
-            </span>
-          ) : (
-            <span className="value" onDoubleClick={() => setShortCode(true)}>
-              [
-              {indexItems.map((item, i) => (
-                <Fragment key={i}>
-                  <br />
-                  {"{"}
-                  points: [
-                  {item.points.map((point, i) => (
-                    <>
-                      <br />
-                      <span className="indent">
-                        {"{"}x:{point.x}, y:{point.y}
-                        {"}"}
-                        {i < item.points.length - 1 && ","}
-                      </span>
-                    </>
-                  ))}
-                  ]{"}"}
-                  {i < indexItems.length - 1 && ","}
-                </Fragment>
-              ))}
-              <br />]
-            </span>
-          )}
-          {"}"}
-          <br />
-          <span className="property">getLabel</span>=
-          <span className="value">
-            {"{"}({"{"}x, y{"}"}) {"=>"} `${"{"}x{"}"}, ${"{"}y{"}"}`{"}"}
+      <div className="code">
+        {"<"}
+        <span className="name">AdvancedSplineChart</span>
+        <br />
+        <span className="property">width</span>={"{"}
+        <span className="value">250</span>
+        {"}"}
+        <span className="property">height</span>={"{"}
+        <span className="value">200</span>
+        {"}"}
+        <br />
+        <span className="property">items</span>={"{"}
+        {shortCode ? (
+          <span className="value" onClick={() => setShortCode(false)}>
+            [
+            {indexItems.map((item, i) => (
+              <Fragment key={i}>
+                <br />
+                {"{"}
+                points:{!responsive && " "}[{"{"}x:{item.points[0].x}, y:
+                {item.points[0].y}
+                {"}"}
+                <span className="more">...</span>]{"}"}
+                {i < indexItems.length - 1 && ","}
+              </Fragment>
+            ))}
+            ]
           </span>
-          {" />"}
-        </div>
+        ) : (
+          <span className="value" onDoubleClick={() => setShortCode(true)}>
+            [
+            {indexItems.map((item, i) => (
+              <Fragment key={i}>
+                <br />
+                {"{"}
+                points: [
+                {item.points.map((point, i) => (
+                  <Fragment key={i}>
+                    <br />
+                    <span className="indent">
+                      {"{"}x:{point.x}, y:{point.y}
+                      {"}"}
+                      {i < item.points.length - 1 && ","}
+                    </span>
+                  </Fragment>
+                ))}
+                ]{"}"}
+                {i < indexItems.length - 1 && ","}
+              </Fragment>
+            ))}
+            <br />]
+          </span>
+        )}
+        {"}"}
+        <br />
+        <span className="property">getLabel</span>=
+        <span className="value">
+          {"{"}({"{"}x, y{"}"}) {"=>"} `${"{"}x{"}"}, ${"{"}y{"}"}`{"}"}
+        </span>
+        {" />"}
+      </div>
 
-        <div className="text">
-          Interact with user easily.
-          <a
-            className="more"
-            href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#advanced-spline-chart"
-          >
-            Read more...
-          </a>
-        </div>
-      </Card>
-    </div>
+      <div className="text">
+        Interact with user easily.
+        <a
+          className="more"
+          href="https://github.com/tommyinb/handmade-react-chart/blob/master/src/splines/README.md#advanced-spline-chart"
+        >
+          Read more...
+        </a>
+      </div>
+    </Card>
   );
 }
