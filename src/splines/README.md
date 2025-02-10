@@ -4,7 +4,7 @@ A spline chart is created by mapping data points and rendering them as a smooth 
 
 ## Coordinate
 
-As following, mapping is as simple as proportionally scaling the _x_ value to the chart's _width_, in [useDraw.ts](cores/useDraw.ts).
+First, mapping is as simple as proportionally scaling the _x_ value to the chart's _width_, in [useDraw.ts](cores/useDraw.ts).
 
 ```ts
 const drawX = (x: number) =>

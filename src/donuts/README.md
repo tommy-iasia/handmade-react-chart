@@ -4,8 +4,8 @@ Creating slices 🍰 using SVG `<path/>` elements is quite straightforward.
 
 ## SVG Path
 
-According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), path `A` are for drawing arc. 🌈  
-Take a look of [DrawSlice.tsx](cores/DrawSlice.tsx). It is just **two arcs** and **two straight lines**.
+According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), the SVG path command `A` is used to draw arcs. 🌈  
+Refer to [DrawSlice.tsx](cores/DrawSlice.tsx). A slice is composed of **two arcs** and **two straight lines**.
 
 ```tsx
 const outerFromX = centerX + outerRadius * Math.cos(fromAngle);
@@ -46,7 +46,7 @@ return (
 
 ## Chart Context
 
-The [above section](#svg-path) draws one slice. In practice, a chart consists of multiple slices. Therefore, we need a [ChartContext](cores/ChartContext.ts) for sibling slices to share their values.
+The [above section](#svg-path) explained how to draw a single slice. In practice, a chart consists of multiple slices. Therefore, we need a [ChartContext](cores/ChartContext.ts) to allow sibling slices to share their values.
 
 ```ts
 export const ChartContext = createContext<{
@@ -64,7 +64,7 @@ export interface ValueInput {
 }
 ```
 
-Thus, in [useAngle.ts](cores/useAngle.ts), a slice can calculate its angle relative to the entire chart.
+Therefore, in [useAngle.ts](cores/useAngle.ts), a slice can determine its angle relative to the entire chart.
 
 ```ts
 const { valueInputs } = useContext(ChartContext);
@@ -88,11 +88,11 @@ return {
 
 ## Raw Donut
 
-Learning the above [two concepts](#svg-path), we can now draw [RawDonut.tsx](samples/RawDonut.tsx).
+By understanding the [two concepts](#svg-path) discussed above, we can now create a [RawDonut.tsx](samples/RawDonut.tsx).
 
 ## User Interaction
 
-We now understand that a slice is defined by its starting and ending angles. It is possible to select a slice by converting the mouse position into an angle, as demonstrated in [Selector.tsx](samples/Selector.tsx).
+We now know that a slice is defined by its starting and ending angles. It is possible to select a slice by converting the mouse position into an angle, as shown in [Selector.tsx](samples/Selector.tsx).
 
 ```ts
 const listener = (event: PointerEvent) => {
