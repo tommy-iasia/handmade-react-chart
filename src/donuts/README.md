@@ -1,10 +1,11 @@
 # Donut Chart
 
-It is fairly easy to use SVG `<path/>` to draw the slices.
+Creating slices 🍰 using SVG `<path/>` elements is quite straightforward.
 
 ## SVG Path
 
-According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), SVG path `A` are for drawing arc. Take a look of [DrawSlice.tsx](cores/DrawSlice.tsx).
+According to [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths), the SVG path command `A` is used to draw arcs. 🌈  
+Refer to [DrawSlice.tsx](cores/DrawSlice.tsx). A slice is composed of **two arcs** and **two straight lines**.
 
 ```tsx
 const outerFromX = centerX + outerRadius * Math.cos(fromAngle);
@@ -38,15 +39,14 @@ return (
 );
 ```
 
-1. Drawing a slice from `fromAngle` to `toAngle`, the first point is at `fromAngle` with `outerRadius`.
-2. Then draw the outer arc of `outerRadius` until the second point at `toAngle` with `outerRadius`.
-3. Draw a line to third point at `toAngle` with `innerRadius`
-4. Then draw the inner arc of `innerRadius` until the forth point at `fromAngle` to `toAngle`
-5. Finally close the path. Then we will have the slice enclosed by the outer and inner arcs.
+1. Draw the outer arc from `outerFrom` to `outerTo` with `outerRadius`.
+2. Draw a line to `innerTo`.
+3. Draw the inner arc from `innerTo` to `innerFrom` with `innerRadius`.
+4. Close the path.
 
 ## Chart Context
 
-The [above section](#svg-path) draws one slice. However, a chart consists of multiple slices. Therefore, we need a context for sibling slices to share their value inputs.
+The [above section](#svg-path) explained how to draw a single slice. In practice, a chart consists of multiple slices. Therefore, we need a [ChartContext](cores/ChartContext.ts) to allow sibling slices to share their values.
 
 ```ts
 export const ChartContext = createContext<{
@@ -64,30 +64,19 @@ export interface ValueInput {
 }
 ```
 
-In [ValueSlice](cores/ValueSlice.tsx), each `ValueSlice` in `Chart` register its data into the context, for their sibling slices.
-
-```ts
-useEffect(() => {
-  const input = { index, value };
-  setValueInputs((inputs) => [...inputs, input]);
-
-  return () => setValueInputs((inputs) => inputs.filter((t) => t !== input));
-}, [index, setValueInputs, value]);
-```
-
-So that, for example, a slice can calculate out its angle in [useAngle.ts](cores/useAngle.ts).
+Therefore, in [useAngle.ts](cores/useAngle.ts), a slice can determine its angle relative to the entire chart.
 
 ```ts
 const { valueInputs } = useContext(ChartContext);
 
 const currentInput = valueInputs.find((input) => input.index === index);
 
-const totalValue = valueInputs
+const beforeValue = valueInputs
+  .filter((input) => input.index < index)
   .map((input) => input.value)
   .reduce((s, t) => s + t, 0);
 
-const beforeValue = valueInputs
-  .filter((input) => input.index < index)
+const totalValue = valueInputs
   .map((input) => input.value)
   .reduce((s, t) => s + t, 0);
 
@@ -99,11 +88,11 @@ return {
 
 ## Raw Donut
 
-Learning the above [two things](#svg-path), you can now draw donut chart in [SVG](#svg-path) like [RawDonut.tsx](samples/RawDonut.tsx).
+By understanding the [two concepts](#svg-path) discussed above, we can now create a [RawDonut.tsx](samples/RawDonut.tsx).
 
-## Select Slice
+## User Interaction
 
-We now know that a slice is defined by its from angle and to angle. With the help of all `valueInputs` in [ChartContext](#chart-context), it is possible to select an slice by (x, y) in [Selector.tsx](samples/Selector.tsx).
+We now know that a slice is defined by its starting and ending angles. It is possible to select a slice by converting the mouse position into an angle, as shown in [Selector.tsx](samples/Selector.tsx).
 
 ```ts
 const listener = (event: PointerEvent) => {
@@ -118,7 +107,7 @@ const listener = (event: PointerEvent) => {
 };
 ```
 
-Then adjust the `outerRadius`, you can let user select slice by mouse and finger, like in [SimpleChart.tsx](samples/SimpleChart.tsx).
+Then adjust the `outerRadius`, you can animate slices, like in [SimpleChart.tsx](samples/SimpleChart.tsx).
 
 ```tsx
 <AnimatedSlice
@@ -130,28 +119,14 @@ Then adjust the `outerRadius`, you can let user select slice by mouse and finger
 
 ## Simple Donut Chart
 
-Learning the above technique, drawing a [SimpleDonutChart](samples/SimpleChart.tsx) should be a piece of cake.
-
-## Animations
-
-If it is easy to make, why not add animation when chart values change? Take a look of [AnimatedSlice.tsx](samples/AnimatedSlice.tsx) and [useAnimatedValue.ts](samples/useAnimatedValue.ts).
-
-```ts
-const outputOuterRadius = useAnimatedValue(propsOuterRadius, transition / 2);
-const fromAngle = useAnimatedValue(angle.from, transition / 2);
-const toAngle = useAnimatedValue(angle.to, transition / 2);
-```
+Learning the [above technique](#svg-path), drawing a [SimpleDonutChart](samples/SimpleChart.tsx) should be a piece of cake.
 
 ## Slice Labels
 
-Finally, let's label the slices. And the work is so easy too, in [SliceLabel](samples/SliceLabel.tsx).
+Finally, let's label the slices, in [SliceLabel.ts](samples/SliceLabel.tsx).
 
 ```tsx
 const angle = useAngle(index);
-if (!angle) {
-  return <></>;
-}
-
 const pointAngle = (angle.from + angle.to) / 2;
 
 const pointX = Math.cos(pointAngle) * pointRadius;
@@ -179,9 +154,7 @@ return (
 
 ## Advanced Donut Chart
 
-With the [above knowledge](#svg-path), you can draw any [AdvancedDonutChart](samples/AdvancedChart.tsx) without difficulty.
-
-In fact, a chart is just layers of [SVG](#svg-path) for slices and a bunch of DIV for labels stacking together.
+Stacking layers of [SVG](#svg-path) and DIV elements, you can create any [Donut Chart](samples/AdvancedChart.tsx) you desire.
 
 ```html
 <div class="handmadeReactChart-donuts-cores-Chart chart">
@@ -196,10 +169,12 @@ In fact, a chart is just layers of [SVG](#svg-path) for slices and a bunch of DI
 
 ## CSS
 
-Finally, if you want to brush up your donut, just override the [CSS](cores/DrawSlice.css) with your own rules.
+Finally, to customize your donut's appearance, override the default styles in [DrawSlice.css](cores/DrawSlice.css) with your own CSS rules. 🎨
 
 ```css
 .handmadeReactChart-donuts-cores-DrawSlice:nth-of-type(6n + 1) {
-  fill: #eb44e8;
+  fill: #44eb98;
 }
 ```
+
+Happy chart programming! 😚
